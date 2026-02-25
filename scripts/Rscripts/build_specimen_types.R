@@ -1,8 +1,5 @@
-rm(list= ls())
-library(openxlsx)
 library(tidyverse)
 library(janitor)
-getwd()
 xl = 'data/meta_info_2026.csv'
 MICs = read.csv(xl) %>% clean_names()
 
