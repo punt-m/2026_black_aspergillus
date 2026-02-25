@@ -4,7 +4,7 @@ pkgs = c('openxlsx','dplyr','tidyr','janitor','readr','ggplot2')
 lapply(pkgs, require, character.only = TRUE)
 
 base_loc = '~/my_scratch_dir/2026_black_aspergillus/'
-data = openxlsx::read.xlsx(paste0(base_loc,'data/meta_info_2026.xlsx'))
+data = openxlsx::read.csv(paste0(base_loc,'data/meta_info_2026.xlsx'))
 
 mic_levels <- c("0.031", "0.062", "0.125", "0.25", "0.5", "1", "2", "4", "8", "16","32")
 
