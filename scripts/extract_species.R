@@ -12,10 +12,10 @@ library(ggtree)
 library(ggplot2)
 library(treeio)
 library(tidyverse)
-setwd("/rivm/s/puntm/tree_projects/")
-t= read.newick(file = 'input_data/tree_info/UFCG_243_plusRefs.nwk')
-md = read.csv(file = 'input_data/meta_info_2026.csv') %>% rename(file_name = strain)
-strain_names = read.csv(file = 'input_data/study_samples_2026.csv') %>% 
+
+t= read.newick(file = 'data/concatenated.nwk')
+md = read.csv(file = 'data/meta_info_2026.csv') %>% rename(file_name = strain)
+strain_names = read.csv(file = 'data/study_samples_2026.csv') %>% 
   select(strain, file_name) %>% distinct()
 meta_data <- left_join(md, strain_names) %>% mutate(strain = case_when(is.na(strain) ~ file_name, T ~ strain ))
 
@@ -64,7 +64,7 @@ atub_strains = offspring(p2,atub_node, tiponly = T) %>%
 
 all_strains = rbind(aniger_strains,atub_strains) %>% rename(strain  = label)
 #write strain ID labels to file
-write.csv(all_strains,'output_data/species_id.csv')
+write.csv(all_strains,'data/species_id.csv')
 
 t = left_join(meta_data, all_strains, by = 'strain') %>% mutate(species = case_when(species.x == 'no data' | is.na(species.x) ~ species.y , T ~species.x)) %>% 
   select(strain, species, flu,itc,pos,vrc,teb,pro,dif,pth,origin,azole_history,year_of_isolation,location,source,specimen_types,mating_type) %>% 
@@ -73,7 +73,7 @@ t = left_join(meta_data, all_strains, by = 'strain') %>% mutate(species = case_w
                              T ~ species))
 
 ggsave(plot = p2, 'plots/UFCG_tree.svg', height = 30, width = 20)
-write.csv(t, 'output_data/2026_meta_info.csv')
+write.csv(t, 'data/2026_meta_info.csv')
 
 
 
