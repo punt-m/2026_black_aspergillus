@@ -23,7 +23,7 @@ for (col in mic_columns) {
   }
 }
 
-df = data
+df = data %>% filter(species %in% c("aspergillus niger",'aspergillus tubingensis'))
 
 # Optional: sort dataframe by one or more MIC columns
 # Example: sort by ITC first, then POS
@@ -44,7 +44,7 @@ color_set = c('#8fcae7','#777b00')
 
 ITC = ggplot(df, aes(x = itc)) +
   geom_histogram(stat = "count", aes(fill = origin)) +
-  #facet_grid(species~.) + 
+  #facet_grid(species~.) +  Uncomment this line to produce per species overview
   geom_vline(xintercept = '2',linetype = 'dotted',color = 'black') + 
   scale_x_discrete(limits = mic_levels, labels = mic_levels) +
   scale_fill_manual(values= color_set)+
@@ -53,7 +53,7 @@ ITC = ggplot(df, aes(x = itc)) +
 
 POS = ggplot(df, aes(x = pos)) +
   geom_histogram(stat = "count", aes(fill = origin)) + 
-  #facet_grid(species~.) + 
+  #facet_grid(species~.) + Uncomment this line to produce per species overview
   scale_x_discrete(limits = mic_levels, labels = mic_levels) +
   geom_vline(xintercept = '0.5',linetype = 'dotted',color = 'black') + 
   
@@ -62,7 +62,7 @@ POS = ggplot(df, aes(x = pos)) +
 
 VRC = ggplot(df, aes(x = vrc)) +
   geom_histogram(stat = "count", aes(fill = origin)) +
-  #facet_grid(species~.) + 
+  #facet_grid(species~.) + Uncomment this line to produce per species overview
   geom_vline(xintercept = '2',linetype = 'dotted',color = 'black') + 
   
   scale_x_discrete(limits = mic_levels, labels = mic_levels) +
