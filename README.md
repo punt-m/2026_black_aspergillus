@@ -8,3 +8,13 @@
 
 ##  UFCG 
 - Genome assemblies are not provided, but an example for the meta_info.tsv and the final tree are kept in the /data folder. With UFCG.sh script and a set of genome assemblies the tree can be rebuild.
+
+
+## Download data from NCBI (PRJNA1253755) 
+  Wang. Triazole Resistance and Misidentification of Aspergillus tubingensis in Southern
+  California. JAMA Netw Open. Published December 05, 2025.
+  doi:10.1001/jamanetworkopen.2025.43630
+
+<pre>
+while read srr; esearch -db sra -query "PRJNA1253755" | efetch -format runinfo | awk -F',' '$29 == "Aspergillus tubingensis" {print $1}' > tubingensis_srrs.txt
+</pre>
