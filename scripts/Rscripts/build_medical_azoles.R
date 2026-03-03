@@ -23,7 +23,7 @@ for (col in mic_columns) {
   }
 }
 
-df = data %>% filter(species %in% c("aspergillus niger",'aspergillus tubingensis'))
+df = data # %>% filter(species %in% c("aspergillus niger",'aspergillus tubingensis')) Uncomment this when building the Aspni vs Asptu plots
 
 # Optional: sort dataframe by one or more MIC columns
 # Example: sort by ITC first, then POS
