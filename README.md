@@ -7,7 +7,7 @@
 - Scripts to build MIC overview or the specimen table are listed in <code>/scripts/Rscripts/</code>
 
 ##  UFCG 
-- Genome assemblies are not provided, but an example for the meta_info.tsv and the final tree are kept in the /data folder. With UFCG.sh script and a set of genome assemblies the tree can be rebuild.
+- Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With UFCG.sh script and a set of genome assemblies the tree can be rebuild.
 
 
 ## Download data from NCBI (PRJNA1253755) 
