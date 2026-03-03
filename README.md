@@ -1,3 +1,5 @@
+
+
 ##  Overview
 - This repo is contains the scripts used in the black aspergillus paper (DOI:XX)
 - For R, part of the packages required must be installed separatly 
@@ -7,10 +9,12 @@
 - Scripts to build MIC overview or the specimen table are listed in <code>/scripts/Rscripts/</code>
 
 ##  UFCG 
-- Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With UFCG.sh script and a set of genome assemblies the tree can be rebuild.
+- Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
 
 
 ## Download data from NCBI (PRJNA1253755) 
+
+ Data from:
   Wang. Triazole Resistance and Misidentification of Aspergillus tubingensis in Southern
   California. JAMA Netw Open. Published December 05, 2025.
   doi:10.1001/jamanetworkopen.2025.43630
