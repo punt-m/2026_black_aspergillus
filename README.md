@@ -11,7 +11,8 @@
 ##  UFCG 
 - Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
 
-## Determine SNP sites in .vcf.gz <code>bcftools query -i 'MAC>=1 && MAF>0' -f '%CHROM\n' all_scaffolds.filteredSNPs.vcf.gz | wc -l </code>
+## Determine SNP sites
+<code>bcftools query -i 'MAC>=1 && MAF>0' -f '%CHROM\n' all_scaffolds.filteredSNPs.vcf.gz | wc -l </code>
 
 
 ## Download data from NCBI (PRJNA1253755) 
