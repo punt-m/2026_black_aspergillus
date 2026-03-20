@@ -17,7 +17,7 @@ We used bcftools to count total variants:
 bcftools query -i 'MAC>=1 && MAF>0' -f '%CHROM\n' all_scaffolds.filteredSNPs.vcf.gz | wc -l
 bcftools view -f PASS -Oz -o high_qual.snps.vcf.gz all_scaffolds.filteredSNPs.vcf.gz
 bcftools view -i 'F_MISSING == 0' high_qual.snps.vcf.gz -Oz -o no_missing_HQ.vcf.gz
-bcftools view no_missing_HQ.vcf.gz | wc -l === 2115268 
+bcftools query -f '%CHROM\n' no_missing_HQ.vcf.gz  | wc -l === 2317870
 </pre>
 
 
