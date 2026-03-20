@@ -12,8 +12,9 @@
 - Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
 
 ## Determine SNP sites
-<code>bcftools query -i 'MAC>=1 && MAF>0' -f '%CHROM\n' all_scaffolds.filteredSNPs.vcf.gz | wc -l </code>
-
+We used bcftools to count total variants:
+ <code>bcftools query -i 'MAC>=1 && MAF>0' -f '%CHROM\n' all_scaffolds.filteredSNPs.vcf.gz | wc -l </code>
+Next, snp-dists to perform pairwise comparisons: <code>snp-dists all_scaffolds.filteredSNPS.vcf.gz >  matrix.tsv </code>
 
 ## Download data from NCBI (PRJNA1253755) 
 
