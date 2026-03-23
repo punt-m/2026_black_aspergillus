@@ -32,9 +32,9 @@ plink \
 </pre>
 
 ## Cyp51 analysis
-#Cyp51A BLWE01000008	582526	584493	locus_tag=AtWU_06533
-    #Insertion site: BLWE01000008  583109
-#Cyp51B BLWE01000010	91551	93312	locus_tag=AtWU_09124
+Cyp51A BLWE01000008	582526	584493	locus_tag=AtWU_06533
+    Insertion site: BLWE01000008  583109
+Cyp51B BLWE01000010	91551	93312	locus_tag=AtWU_09124
 
 Here I look at SNPs and other variant types in the regions encoding for cyp51a and cyp51b +1000 bp flanks.
 
