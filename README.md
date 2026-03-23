@@ -2,14 +2,15 @@
 
 ##  Overview
 - This repo is contains the scripts used in the black aspergillus paper (DOI:XX)
-- For R, part of the packages required must be installed separatly 
+- For R, part of the packages required must be installed separately
+- Programs like [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) must be installed separately
 - Most required data is supplied via the <code>/data</code> folder here, sequencing data can be downloaded fron NCBI (PRJNA:XXX), a dummy data set is supplied in <code>/data</code>
 
 ## Scripts
 - Scripts to build MIC overview or the specimen table are listed in <code>/scripts/Rscripts/</code>
 
 ##  UFCG 
-- Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
+- Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data/tree_data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
 
 ## Determine SNP sites
 We used bcftools to filter core SNPs and exclude non-tubingensis strains:
