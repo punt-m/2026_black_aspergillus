@@ -38,8 +38,8 @@ Cyp51B BLWE01000010	91551	93312	locus_tag=AtWU_09124
 
 Here I look at SNPs and other variant types in the regions encoding for cyp51a and cyp51b +1000 bp flanks.
 
+CYP51A:
 <pre>
-    #!/bin/bash
 bcftools view -r BLWE01000008:581899-585491 data/seq_data/BLWE01000008_581899_585491.filteredSNPs.vcf.gz > cyp51A_region.vcf
 snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 cyp51A_region.vcf > cyp51A_annotated.vcf
 bgzip cyp51A_annotated.vcf
@@ -47,9 +47,17 @@ bcftools index cyp51A_annotated.vcf
 bcftools query -i 'ANN ~ "intron_variant" && ANN ~ "insC" && GT="alt"'  -f '[%SAMPLE\t%GT\n]' cyp51A_annotated.vcf.gz
 </pre>
 
+CYP51B
+<pre>
+bcftools view -r BLWE01000010:90551-94312 ../all_scaffolds.filteredSNPs.vcf.gz > cyp51B_region.vcf
+snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 cyp51B_region.vcf > cyp51B_annotated.vcf
+</pre>
+
 Use extract_AA.py to extract the variants. In snpEff database Cyp51A (AtWU_06533) has two additional exons compared to MH781351. To account for this, all substitutions are subtracted by 52 AAs, which results in the same mutations as found in MH781351. 
 <pre>    
 python3 extract_AA.py cyp51A_annotated.vcf.gz AtWU_06533 52 > cyp51a.mutations
+python3 extract_AA.py cyp51B_annotated.vcf.gz AtWU_09124 0 > cyp51b.mutations
+
 </pre>
 
 
