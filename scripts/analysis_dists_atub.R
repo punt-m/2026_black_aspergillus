@@ -44,4 +44,4 @@ clonal_groups <- data.frame(
     final_clusters <- merge(clonal_groups, group_sizes, by = "group_id")
     final_clusters <- final_clusters[order(-final_clusters$strains_count), ] %>% left_join(t)
     
-write.csv(final_clusters,'output_data/cluster_data.csv')
+write.csv(final_clusters,'data/clonal_groups/cluster_data.csv')
