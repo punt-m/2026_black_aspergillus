@@ -40,7 +40,7 @@ Here I look at SNPs and other variant types in the regions encoding for cyp51a a
 
 <pre>
     #!/bin/bash
-bcftools view -r BLWE01000008:581899-585491 ../custom/BLWE01000008_581899_585491.filteredSNPs.vcf.gz > cyp51A_region.vcf
+bcftools view -r BLWE01000008:581899-585491 data/seq_data/BLWE01000008_581899_585491.filteredSNPs.vcf.gz > cyp51A_region.vcf
 snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 cyp51A_region.vcf > cyp51A_annotated.vcf
 bgzip cyp51A_annotated.vcf
 bcftools index cyp51A_annotated.vcf
