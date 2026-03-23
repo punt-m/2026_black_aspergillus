@@ -45,8 +45,12 @@ snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 cyp51A_region.vcf > 
 bgzip cyp51A_annotated.vcf
 bcftools index cyp51A_annotated.vcf
 bcftools query -i 'ANN ~ "intron_variant" && ANN ~ "insC" && GT="alt"'  -f '[%SAMPLE\t%GT\n]' cyp51A_annotated.vcf.gz
+</pre>
 
+Use extract_AA.py to extract the variants. In snpEff database Cyp51A (AtWU_06533) has two additional exons compared to MH781351. To account for this, all substitutions are subtracted by 52 AAs, which results in the same mutations as found in MH781351. 
+<pre>    
 python3 extract_AA.py cyp51A_annotated.vcf.gz AtWU_06533 52 > cyp51a.mutations
+</pre>
 
 
 ## Download data from NCBI (PRJNA1253755) 
