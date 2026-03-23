@@ -12,7 +12,7 @@
 - Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
 
 ## Determine SNP sites
-We used bcftools filter core SNPs and exclude non-tubingensis strains:
+We used bcftools to filter core SNPs and exclude non-tubingensis strains:
 <pre>
 bcftools view -S ^no_atubingensis.list \
     -f PASS \
