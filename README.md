@@ -12,12 +12,13 @@
 - Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
 
 ## Determine SNP sites
-We used bcftools to count total variants:
+We used bcftools filter core SNPs and exclude non-tubingensis strains:
 <pre>
-bcftools query -i 'MAC>=1 && MAF>0' -f '%CHROM\n' all_scaffolds.filteredSNPs.vcf.gz | wc -l
-bcftools view -f PASS -Oz -o high_qual.snps.vcf.gz all_scaffolds.filteredSNPs.vcf.gz
-bcftools view -i 'F_MISSING == 0' high_qual.snps.vcf.gz -Oz -o no_missing_HQ.vcf.gz
-bcftools query -f '%CHROM\n' no_missing_HQ.vcf.gz  | wc -l === 2317870
+bcftools view -S ^no_atubingensis.list \
+    -f PASS \
+    -i 'F_MISSING == 0' \
+    ../all_scaffolds.filteredSNPs.vcf.gz \
+    -Oz -o atubingensis_core_sensu_stricto.vcf.gz
 </pre>
 
 
