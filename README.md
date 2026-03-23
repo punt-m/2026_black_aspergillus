@@ -36,7 +36,7 @@ Cyp51A BLWE01000008	582526	584493	locus_tag=AtWU_06533
     Insertion site: BLWE01000008  583109
 Cyp51B BLWE01000010	91551	93312	locus_tag=AtWU_09124
 
-Here I look at SNPs and other variant types in the regions encoding for cyp51a and cyp51b +1000 bp flanks.
+Here I look at SNPs and INDELs variant types in the regions encoding for cyp51a and cyp51b +1000 bp flanks.
 
 CYP51A:
 <pre>
@@ -47,9 +47,9 @@ bcftools index cyp51A_annotated.vcf
 bcftools query -i 'ANN ~ "intron_variant" && ANN ~ "insC" && GT="alt"'  -f '[%SAMPLE\t%GT\n]' cyp51A_annotated.vcf.gz
 </pre>
 
-CYP51B
+CYP51B:
 <pre>
-bcftools view -r BLWE01000010:90551-94312 ../all_scaffolds.filteredSNPs.vcf.gz > cyp51B_region.vcf
+bcftools view -r BLWE01000010:90551-94312 data/seq_data/BLWE01000010_90551_94312.filteredSNPs.vcf.gz > cyp51B_region.vcf
 snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 cyp51B_region.vcf > cyp51B_annotated.vcf
 </pre>
 
