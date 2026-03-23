@@ -2,14 +2,14 @@ getwd()
 rm(list = ls())
 library(tidyverse)
 # 1. Load the data
-plink_df = read.table('raw_data/atubingensis_dists/highQual/atub_197iso.genome', header = T)  %>% 
+plink_df = read.table('data/clonal_groups/atub_197iso.genome', header = T)  %>% 
   #select(FID1,FID2,IBS0,IBS1,IBS2,HOMHOM) %>% 
   mutate(SNP_dif = IBS0+IBS1) #%>% 
   #filter(FID1 %in% c(1:2000) & FID2 %in% c(1:2000))
 
-variant_info = read.csv('raw_data/2026_variant_info.csv') %>% select(isolate,variant) %>% rename(strain = isolate)
-info_df = read.csv('raw_data/2026_meta_info.csv')  %>% select(-1)
-calif_df =read.table('raw_data/calif_MIC_data.txt', header = T) %>% 
+variant_info = read.csv('data/clonal_groups/2026_variant_info.csv') %>% select(isolate,variant) %>% rename(strain = isolate)
+info_df = read.csv('data/2026_meta_info.csv')  %>% select(-1)
+calif_df =read.table('data/clonal_groups/calif_MIC_data.txt', header = T) %>% 
   mutate_at(c('ITC','VOR','POS'),~ gsub('>','',.)) %>% 
   mutate_at(c('ITC','VOR','POS'),~ as.numeric(.)) %>% select(Species,ID,ITC,VOR,POS) %>% 
   rename(strain = ID, itc = ITC, pos =POS, vrc= VOR,species = Species) %>% mutate(origin = 'Clinical', location = 'California', strain = as.character(strain)) %>% 
