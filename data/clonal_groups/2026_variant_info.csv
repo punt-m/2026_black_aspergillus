@@ -155,9 +155,9 @@
 "154","V188-09","v1","A9V,L21F,T321A,I503V","yes","REFERENCE",2,0.5,2,"Clinical","Nail"
 "155","V280-46","v1","A9V,L21F,T321A,I503V","yes","REFERENCE",16,0.5,4,"Clinical","Ear"
 "156","V288-71","v1","A9V,L21F,T321A,I503V","yes","REFERENCE",2,0.125,2,"Clinical","Sputum"
-"157","226","v1.2","L21F,T321A,I503V","yes","REFERENCE",0.5,1,1,"Clinical",NA
-"158","V294-47","v1.2","L21F,T321A,I503V","yes","REFERENCE",2,0.25,2,"Clinical","Bronchial lavage"
-"159","ASFU-7154","v1.3","A9V,L21F,I503V","no","REFERENCE",4,0.25,4,"Clinical","Bronchial lavage"
+"157","226","v1.1","L21F,T321A,I503V","yes","REFERENCE",0.5,1,1,"Clinical",NA
+"158","V294-47","v1.1","L21F,T321A,I503V","yes","REFERENCE",2,0.25,2,"Clinical","Bronchial lavage"
+"159","ASFU-7154","v1.2","A9V,L21F,I503V","no","REFERENCE",4,0.25,4,"Clinical","Bronchial lavage"
 "160","338","v2","M218I","no","REFERENCE",32,1.5,0.75,"Clinical",NA
 "161","354","v3","L4F,A185G","no","REFERENCE",4,1,1,"Clinical",NA
 "162","1744","v4","V17A","no","REFERENCE",6,0.5,0.38,"Clinical",NA
@@ -198,17 +198,17 @@
 "197","602","v15","REFERENCE","no","S524P",4,0.75,0.75,"Clinical",NA
 "198","G5-4","v16","A185G,T321A,N327S,V422I","no","Q309H",32,1,32,"Environmental","Environmental (hotspot)"
 "199","10-03-03-77","v17","A185G,T321A,N327S,L468M,L492M,I496V,I503F,Q504P","yes","REFERENCE",0.5,0.125,1,"Clinical","Other nonrespiratory"
-"200","1449","v17.2","A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V",3,0.38,0.38,"Clinical",NA
-"201","754","v17.2","A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V",4,0.5,0.5,"Clinical",NA
-"202","230-D1","v18.1","S61F,A185G,T321A,N327S,V422I,G441S","yes","Q309H",32,1,32,"Environmental","Environmental"
-"203","M071-32","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","REFERENCE",32,2,32,"Clinical","Ear"
-"204","G1","v18.3","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,1,32,"Environmental","Environmental (hotspot)"
-"205","G1A","v18.3","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,0.5,32,"Environmental","Environmental (hotspot)"
-"206","G1C","v18.3","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,1,32,"Environmental","Environmental (hotspot)"
-"207","G5-3","v18.3","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,1,32,"Environmental","Environmental (hotspot)"
-"208","G5-P","v18.3","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,2,32,"Environmental","Environmental (hotspot)"
-"209","G5A","v18.3","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,2,32,"Environmental","Environmental (hotspot)"
-"210","G5C","v18.3","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,2,32,"Environmental","Environmental (hotspot)"
+"200","1449","v17.1","A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V",3,0.38,0.38,"Clinical",NA
+"201","754","v17.1","A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V",4,0.5,0.5,"Clinical",NA
+"202","M071-32","v18","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","REFERENCE",32,2,32,"Clinical","Ear"
+"203","230-D1","v18.1","S61F,A185G,T321A,N327S,V422I,G441S","yes","Q309H",32,1,32,"Environmental","Environmental"
+"204","G1","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,1,32,"Environmental","Environmental (hotspot)"
+"205","G1A","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,0.5,32,"Environmental","Environmental (hotspot)"
+"206","G1C","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,1,32,"Environmental","Environmental (hotspot)"
+"207","G5-3","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,1,32,"Environmental","Environmental (hotspot)"
+"208","G5-P","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,2,32,"Environmental","Environmental (hotspot)"
+"209","G5A","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,2,32,"Environmental","Environmental (hotspot)"
+"210","G5C","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H",32,2,32,"Environmental","Environmental (hotspot)"
 "211","895","v19","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","REFERENCE",4,0.5,0.75,"Clinical",NA
 "212","987","v19","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","REFERENCE",4,0.38,1,"Clinical",NA
 "213","29","v19.1","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","P49L",6,0.75,1,"Clinical",NA
