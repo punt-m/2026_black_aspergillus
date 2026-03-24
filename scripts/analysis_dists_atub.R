@@ -18,7 +18,7 @@ calif_df =read.table('data/clonal_groups/calif_MIC_data.txt', header = T) %>%
 t = full_join(info_df,calif_df) %>% left_join(variant_info)
 rm(variant_info,info_df,calif_df)
 
-matching_df = t %>% select(strain,origin) %>% rename(match = strain, origin_match = origin)
+mmatching_df = t %>% select(strain,origin) %>% rename(match = strain, origin_match = origin)
 
 df <- plink_df %>% filter(DST > 0.998) %>% rename(strain = FID1, match = FID2 ) %>%  left_join(t) %>% 
   select(strain, match, DST,origin,source,year_of_isolation,location) %>% left_join(matching_df)
@@ -43,5 +43,16 @@ clonal_groups <- data.frame(
 # 5. Merge everything back to see your clusters
     final_clusters <- merge(clonal_groups, group_sizes, by = "group_id")
     final_clusters <- final_clusters[order(-final_clusters$strains_count), ] %>% left_join(t)
-    
-write.csv(final_clusters,'data/clonal_groups/cluster_data.csv')
+
+df_final <- final_clusters %>% select(group_id,strains_count,strain,location,origin,variant, itc,pos,vrc) %>% 
+  mutate(group_id = paste0('CG',group_id))
+write.csv(df_final,'data/clonal_groups/clonalgroups.csv')
+
+cluster_info_location <- final_clusters %>% group_by(group_id) %>%
+  filter(any(location == "California") & any(location != "California"))
+
+cluster_info_origin <- final_clusters %>% group_by(group_id) %>%
+  filter(any(origin == "Clinical") & any(origin == "Environmental"))
+
+sort(unique(cluster_info_origin$group_id))
+sort(unique(cluster_info_location$group_id))
