@@ -1,15 +1,13 @@
 # Acquired azole resistance in series _Nigri_
 
-[![CC BY 4.0][cc-by-shield]][cc-by]
-[cc-by]: http://creativecommons.org/licenses/by/4.0/
-[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 _Authors_: Maarten Punt <a href="https://orcid.org/0000-0001-6053-9073" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
 _Contact_: maarten.punt@rivm.nl
 _Date_: 01-08-2024
 
 This code accompanies the manuscript 'Acquired azole resistance in series _Nigri_'. 
-How to cite this material: 10.5281/zenodo.10854139
+How to cite this material: LINK ZENODO HERE
 
 ## Description
 This repository contains the Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) used to generate results ([`results/`](results/)). The code below was ran in R (v4.3.1).
