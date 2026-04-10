@@ -19,6 +19,7 @@ library(tidyverse)
 library(janitor)
 library(here)
 library(igraph)
+library(ggplot2)
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
@@ -79,7 +80,7 @@ df <- plink_df %>%
   left_join(matching_df)
 
 # Cleanup temporary objects
-rm(variant_info, info_df, calif_df, matching_df, plink_df)
+rm(variant_info, info_df, calif_df, matching_df)
 ```
 
 # Network analysis (clustering)
@@ -120,13 +121,19 @@ write.csv(df_final, here('results', 'clonal_groups.csv'), row.names = FALSE)
 ```
 
 # Cluster exploration
-Finally, we identify "Shared Clusters"—those containing isolates from different locations or different origins (Clinical vs. Environmental).
-```{r clustering, echo =F}
+We identify "Shared Clusters"—those containing isolates from different locations or different origins (Clinical vs. Environmental).
+```{r clustering, echo =T}
 # Clusters spanning California and other locations
 cluster_info_location <- final_clusters %>% 
   group_by(group_id) %>%
   filter(any(location == "California") & any(location != "California"))
 
+cat("\nClonal Groups with mixed locations (California vs Others):\n")
+sort(unique(cluster_info_location$group_id))
+
+```
+
+```{r clustering2, echo =T}
 # Clusters spanning Clinical and Environmental origins
 cluster_info_origin <- final_clusters %>% 
   group_by(group_id) %>%
@@ -136,9 +143,32 @@ cluster_info_origin <- final_clusters %>%
 cat("Clonal Groups with mixed origins:\n")
 sort(unique(cluster_info_origin$group_id))
 
-cat("\nClonal Groups with mixed locations (California vs Others):\n")
-sort(unique(cluster_info_location$group_id))
 ```
+
+# Cluster plots
+Finally, an overview of three plots is made with various x-axes to view cluster data
+
+```{r plotting, echo = F, warning=F}
+
+ggplot(plink_df) +
+  geom_histogram(aes(x=DST),bins=400) +
+  theme_classic() +
+  labs(x="Genetic Distance",y="Pairs")
+
+#now make plots
+ggplot(plink_df) +
+  geom_histogram(aes(x=DST),bins=400) + xlim(0.88,1) +
+  theme_classic() +
+  labs(x="Genetic Distance",y="Pairs")
+
+ggplot(plink_df) +
+  geom_histogram(aes(x=DST),bins=400) + xlim(0.995,1) +
+  theme_classic() +
+  geom_vline(aes(xintercept=0.998),lty=2)+
+  labs(x="Genetic Distance",y="")
+
+```
+
 
 
 ```{r sessionInfo}
