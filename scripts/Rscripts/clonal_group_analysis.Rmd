@@ -1,0 +1,142 @@
+---
+title: "clonal_group_analysis"
+author: "Maarten Punt"
+date: "`r Sys.time()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/clonal_group_analysis"
+library(tidyverse)
+library(janitor)
+library(here)
+library(igraph)
+```
+
+```{r knit, echo = F,eval=F,warning=F,include=F}
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = here("results"))
+```
+
+## Project overview
+This script performs a clonal group analysis on Aspergillus isolates. It merges PLINK genomic distance data with metadata (origin, location, and variants) and uses network analysis to identify clusters of highly related strains (DST > 0.998).
+
+#1. Environment Setup and Data Loading
+First, we clear the environment, load the necessary tidyverse libraries, and import the genomic and metadata files.
+
+```{r environmental, echo= F}
+library(tidyverse)
+# Load genomic distance data (PLINK)
+plink_df <- read.table('/rivm/s/puntm/2026_black_aspergillus/data/clonal_groups/atub_197iso.genome', header = TRUE) %>% 
+  mutate(SNP_dif = IBS0 + IBS1)
+
+# Load variant and metadata info
+variant_info <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/clonal_groups/2026_variant_info.csv') %>% 
+  select(isolate, variant) %>% 
+  rename(strain = isolate)
+
+info_df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %>% 
+  select(-1)
+
+# Load California MIC data and clean species names
+calif_df <- read.table('/rivm/s/puntm/2026_black_aspergillus/data/clonal_groups/calif_MIC_data.txt', header = TRUE) %>% 
+  mutate_at(c('ITC', 'VOR', 'POS'), ~ gsub('>', '', .)) %>% 
+  mutate_at(c('ITC', 'VOR', 'POS'), ~ as.numeric(.)) %>% 
+  select(Species, ID, ITC, VOR, POS) %>% 
+  rename(strain = ID, itc = ITC, pos = POS, vrc = VOR, species = Species) %>% 
+  mutate(origin = 'Clinical', location = 'California', strain = as.character(strain)) %>% 
+  mutate(across(c(species), ~ gsub('A.', 'aspergillus ', .x)))
+
+# Combine all metadata
+t <- full_join(info_df, calif_df) %>% 
+  left_join(variant_info)
+
+```
+
+## Combine datasets
+
+We combine the California clinical data with the primary metadata and link it to the genomic pairs.
+
+```{r pressure, echo=FALSE}
+
+# Create a matching table for join operations
+matching_df <- t %>% 
+  select(strain, origin) %>% 
+  rename(match = strain, origin_match = origin)
+
+# Filter for high-similarity pairs (Clonal threshold: DST > 0.998)
+df <- plink_df %>% 
+  filter(DST > 0.998) %>% 
+  rename(strain = FID1, match = FID2) %>% 
+  left_join(t) %>% 
+  select(strain, match, DST, origin, source, year_of_isolation, location) %>% 
+  left_join(matching_df)
+
+# Cleanup temporary objects
+rm(variant_info, info_df, calif_df, matching_df, plink_df)
+```
+
+# Network analysis (clustering)
+Using the igraph package, we treat isolates as nodes and high-similarity pairs as edges to identify connected components (Clonal Groups).
+
+```{r networking}
+# 1. Create the graph object
+edges <- df[, c("strain", "match")]
+g <- graph_from_data_frame(edges, directed = FALSE)
+
+# 2. Find connected components
+clusters <- components(g)
+
+# 3. Create a lookup table for groups
+clonal_groups <- data.frame(
+    strain = names(clusters$membership),
+    group_id = as.vector(clusters$membership)
+)
+
+# 4. Calculate group sizes
+group_sizes <- as.data.frame(table(clonal_groups$group_id))
+colnames(group_sizes) <- c("group_id", "strains_count")
+
+# 5. Merge and format final cluster table
+final_clusters <- merge(clonal_groups, group_sizes, by = "group_id")
+final_clusters <- final_clusters[order(-final_clusters$strains_count), ] %>% 
+  left_join(t)
+
+df_final <- final_clusters %>% 
+  select(group_id, strains_count, strain, location, origin, variant, itc, pos, vrc) %>% 
+  mutate(group_id = paste0('CG', group_id))
+
+# Export results
+
+write.csv(df_final, here('results', 'clonal_groups.csv'), row.names = FALSE)
+
+
+```
+
+# Cluster exploration
+Finally, we identify "Shared Clusters"—those containing isolates from different locations or different origins (Clinical vs. Environmental).
+```{r clustering}
+# Clusters spanning California and other locations
+cluster_info_location <- final_clusters %>% 
+  group_by(group_id) %>%
+  filter(any(location == "California") & any(location != "California"))
+
+# Clusters spanning Clinical and Environmental origins
+cluster_info_origin <- final_clusters %>% 
+  group_by(group_id) %>%
+  filter(any(origin == "Clinical") & any(origin == "Environmental"))
+
+# View IDs of interesting clusters
+cat("Clonal Groups with mixed origins:\n")
+sort(unique(cluster_info_origin$group_id))
+
+cat("\nClonal Groups with mixed locations (California vs Others):\n")
+sort(unique(cluster_info_location$group_id))
+```
