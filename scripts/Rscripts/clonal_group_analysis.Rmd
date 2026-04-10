@@ -25,14 +25,13 @@ library(igraph)
 rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = here("results"))
 ```
 
-## Project overview
+# Project overview
 This script performs a clonal group analysis on Aspergillus isolates. It merges PLINK genomic distance data with metadata (origin, location, and variants) and uses network analysis to identify clusters of highly related strains (DST > 0.998).
 
-#1. Environment Setup and Data Loading
+## Set-up
 First, we clear the environment, load the necessary tidyverse libraries, and import the genomic and metadata files.
 
 ```{r environmental, echo= F}
-library(tidyverse)
 # Load genomic distance data (PLINK)
 plink_df <- read.table('/rivm/s/puntm/2026_black_aspergillus/data/clonal_groups/atub_197iso.genome', header = TRUE) %>% 
   mutate(SNP_dif = IBS0 + IBS1)
@@ -60,11 +59,11 @@ t <- full_join(info_df, calif_df) %>%
 
 ```
 
-## Combine datasets
+# Combine datasets
 
 We combine the California clinical data with the primary metadata and link it to the genomic pairs.
 
-```{r pressure, echo=FALSE}
+```{r pressure, echo=T}
 
 # Create a matching table for join operations
 matching_df <- t %>% 
@@ -122,7 +121,7 @@ write.csv(df_final, here('results', 'clonal_groups.csv'), row.names = FALSE)
 
 # Cluster exploration
 Finally, we identify "Shared Clusters"—those containing isolates from different locations or different origins (Clinical vs. Environmental).
-```{r clustering}
+```{r clustering, echo =F}
 # Clusters spanning California and other locations
 cluster_info_location <- final_clusters %>% 
   group_by(group_id) %>%
@@ -139,4 +138,9 @@ sort(unique(cluster_info_origin$group_id))
 
 cat("\nClonal Groups with mixed locations (California vs Others):\n")
 sort(unique(cluster_info_location$group_id))
+```
+
+
+```{r sessionInfo}
+sessionInfo()
 ```
