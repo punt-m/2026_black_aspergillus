@@ -2,11 +2,9 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
-_Authors_: Maarten Punt <a href="https://orcid.org/0000-0001-6053-9073" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
-
-_Contact_: maarten.punt@rivm.nl
-
-_Date_: 10-Apr-2026
+_Authors_: Maarten Punt <a href="https://orcid.org/0000-0001-6053-9073" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a></n>
+_Contact_: maarten.punt@rivm.nl</n>
+_Date_: 10-Apr-2026</n>
 
 This code accompanies the manuscript 'Acquired azole resistance in series _Nigri_'. 
 How to cite this material: LINK ZENODO HERE
