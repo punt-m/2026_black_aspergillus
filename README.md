@@ -6,21 +6,20 @@ _Authors_: Maarten Punt <a href="https://orcid.org/0000-0001-6053-9073" target="
 _Contact_: maarten.punt@rivm.nl<br>
 _Date_: 10-Apr-2026<br>
 
-This code accompanies the manuscript 'Acquired azole resistance in series _Nigri_'. 
+This code accompanies the manuscript 'Acquired azole resistance in series _Nigri_'. DOI:XXX
 How to cite this material: LINK ZENODO HERE
 
 ## Description
-This repository contains the Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) used to generate results ([`results/`](results/)). The code below was ran in R (v4.3.1).
+This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) used to generate results ([`results/`](results/)). The code below was ran in R (vXXX). Programs like [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) must be installed separately
 
 ## Scripts for data analysis
 
 ### Data preprocessing
 
 
-##  Overview
-- This repo is contains the scripts used in the black aspergillus paper (DOI:XX)
+
 - For R, part of the packages required must be installed separately
-- Programs like [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) must be installed separately
+- 
 - Most required data is supplied via the <code>/data</code> folder here, sequencing data can be downloaded fron NCBI (PRJNA:XXX), a dummy data set is supplied in <code>/data</code>
 
 ## Scripts
