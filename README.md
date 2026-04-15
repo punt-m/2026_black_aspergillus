@@ -10,17 +10,16 @@ This code accompanies the manuscript 'Acquired azole resistance in series _Nigri
 How to cite this material: LINK ZENODO HERE
 
 ## Description
-This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) used to generate results ([`results/`](results/)). The code below was ran in R (vXXX). Programs like [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) must be installed separately
+This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) that use files from ([`data/`](data/)) to generate results ([`results/`](results/)). 
+The R-code  was ran in R (v4.5.0). 
+
+Programs like [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) must be installed separately
 
 ## Scripts for data analysis
 
 ### Data preprocessing
 - For R, part of the packages required must be installed separately
-- 
 - Most required data is supplied via the <code>/data</code> folder here, sequencing data can be downloaded fron NCBI (PRJNA:XXX), a dummy data set is supplied in <code>/data</code>
-
-## Scripts
-- Scripts to build MIC overview or the specimen table are listed in <code>/scripts/Rscripts/</code>
 
 ##  UFCG 
 - Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data/tree_data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
