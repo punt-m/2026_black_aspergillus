@@ -1,0 +1,113 @@
+---
+title: "MIC_distributions"
+author: "Maarten Punt"
+date: "`r Sys.time()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+This script generates the MIC distribution plots 
+
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/1_MIC_distributions"
+library(here)
+library(tidyverse)
+library(janitor)
+library(ggplot2)
+library(patchwork)
+```
+
+```{r knit, echo = F,eval=F,warning=F,include=F}
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = here("results"))
+```
+
+# Load data
+```{r environmental, echo= F}
+df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %>% 
+  select(-1) %>%
+  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ gsub('32','>16',.x)))
+```
+
+# Set-up parameters
+```{r functions}
+source(here("src", "theme.R"))
+source(here("src", "MIC_plot_functions.R"))
+```
+
+# Organize the MIC levels
+```{r process}
+mic_levels  <- c("0.031", "0.062", "0.125", "0.25", "0.5", "1", "2", "4", "8", "16", ">16")
+mic_columns <- c("itc", "pos", "vrc", "vor", "teb", "pro", "dif", "pth")
+# Function to apply this order to a column
+reorder_column_fixed <- function(x) {
+  factor(x, levels = mic_levels, ordered = TRUE)
+}
+# List of MIC columns in your dataframe
+# Apply to all MIC columns
+for (col in mic_columns) {
+  if (col %in% names(df)) {
+    df[[col]] <- reorder_column_fixed(df[[col]])
+  }
+}
+df_sp <- df %>% filter(species %in% c('aspergillus niger','aspergillus tubingensis'))
+```
+
+# Build plots
+First we generate plots of the total population:
+```{r plots_1}
+p1 <- make_mic_plot(df,"itc",clin_env_set, "Itraconazole", mic_levels, "2",show_legend=T)
+p2 <- make_mic_plot(df,"pos",clin_env_set, "Posaconazole", mic_levels, "0.5",show_legend=T)
+p3 <- make_mic_plot(df,"vrc",clin_env_set, "Voriconazole", mic_levels, "4",show_legend=T)
+
+azole_plots <- (p1 + p2 + p3) + 
+  plot_layout(ncol = 2, guides = "collect")&
+  theme(legend.position='bottom')
+azole_plots
+```
+
+Now separate by species. 
+```{r plots_2_species,fig.width=10, fig.height=12, out.width="100%"}
+
+p1_sep <- make_mic_plot(df_sp,"itc",clin_env_set, "Itraconazole", mic_levels, "2",show_legend=T, facet_by = 'species')
+p2_sep <- make_mic_plot(df_sp,"pos",clin_env_set, "Posaconazole", mic_levels, "0.5",show_legend=T, facet_by = 'species')
+p3_sep <- make_mic_plot(df_sp,"vrc",clin_env_set, "Voriconazole", mic_levels, "4",show_legend=T, facet_by = 'species')
+
+azole_species_plots <-(p1_sep + p2_sep + p3_sep) + 
+  plot_layout(ncol = 2, guides = "collect")&
+  theme(legend.position='bottom')
+azole_species_plots
+```
+
+Now we do the same for the agricultural fungicides
+
+```{r plots_3_agri,fig.width=10, fig.height=12, out.width="100%"}
+p4 <- make_mic_plot(df_sp,"pro",clin_env_set, "Prochloraz", mic_levels, "8",show_legend=T, facet_by = 'species')
+p5 <- make_mic_plot(df_sp,"pth",clin_env_set, "Prothioconazole", mic_levels, "4",show_legend=T, facet_by = 'species')
+p6 <- make_mic_plot(df_sp,"dif",clin_env_set, "Difenoconazole", mic_levels, "16",show_legend=T, facet_by = 'species')
+p7 <- make_mic_plot(df_sp,"teb",clin_env_set, "Tebuconazole", mic_levels, "16",show_legend=T, facet_by = 'species')
+
+azole_agri_plots <- (p4 + p5 + p6 + p7) + 
+  plot_layout(ncol = 2, guides = "collect")&
+  theme(legend.position='bottom')
+azole_agri_plots
+```
+
+Saving the plots:
+
+```{r}
+dir_path = here::here("plots")
+ggsave(filename = glue::glue("{dir_path}/1_suppl_fig_mic_agri_plots.svg"), plot = azole_agri_plots,  width = 12,  height = 12,   bg = "white")
+ggsave(filename = glue::glue("{dir_path}/1_suppl_fig_mic_species_plots.svg"), plot = azole_species_plots,  width = 12,  height = 12,   bg = "white")
+ggsave(filename = glue::glue("{dir_path}/1_figure_mic_azoles.svg"), plot = azole_plots, width = 12, height = 10,   bg = "white")
+```
+
+```{r}
+sessionInfo()
+```

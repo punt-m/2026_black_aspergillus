@@ -15,9 +15,6 @@ This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/
 ## Scripts for data analysis
 
 ### Data preprocessing
-
-
-
 - For R, part of the packages required must be installed separately
 - 
 - Most required data is supplied via the <code>/data</code> folder here, sequencing data can be downloaded fron NCBI (PRJNA:XXX), a dummy data set is supplied in <code>/data</code>
