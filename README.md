@@ -13,16 +13,16 @@ How to cite this material: LINK ZENODO HERE
 This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) that use files from ([`data/`](data/)) to generate results ([`results/`](results/)). 
 The R-code  was ran in R (v4.5.0). 
 
-Programs like [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) must be installed separately
+Some of the markdown scripts require input that is generated with bash scripts and the following programs: [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) they must be installed separately and the code required is provided at the bottom of this page.
 
-## Data analysis
-- For R, part of the packages required must be installed separately
-- Most required data is supplied via the <code>/data</code> folder here, sequencing data can be downloaded fron NCBI (PRJNA:XXX), a dummy data set is supplied in <code>/data</code>
 
-### **B**
+### **The markdown scripts to generate the figures presented in the article and the supplementary data**
 - [`1_MIC_distributions.Rmd`](scripts/Rscripts/1_MIC_distributions.Rmd) : Build MIC distribution plots.
 - [`2_Phylogenetic_tree.Rmd`](scripts/Rscripts/2_Phylogenetic_tree.Rmd): Use the UFCG data to build phylogenetic tree.
 - [`3_SNP_based_phylogenetic_tree.Rmd`](scripts/Rscripts/3_SNP_based_phylogenetic_tree.Rmd): Build a SNP-based phylogenetic tree, annotated with MIC data and Cyp51 variant info.
+- [`4_clonal_group_analysis.Rmd`](scripts/Rscripts/4_clonal_group_analysis.Rmd): Identifying clonal groups within the _A. tubingensis_ isolates using the PLINK data.
+
+The .html-output of all the scripts can be found the [`results`](results/)-folder.
 
 
 
