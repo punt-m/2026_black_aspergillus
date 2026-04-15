@@ -1,0 +1,174 @@
+---
+title: "SNP_based_phylogenetic_tree"
+author: "Maarten Punt"
+date: "2026-04-15"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+---
+This script generates a phylogenetic tree from the SNP data that was build using RAxML (GTR+G model of evolution was used with Lewis’s ascertainment bias correction [GTR+G+ASC_LEWIS]).
+
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/3_SNP_based_phylogenetic_tree"
+library(ape)
+library(ggtree)
+library(ggplot2)
+library(treeio)
+library(tidyverse)
+library(ggnewscale)
+library(janitor)
+library(phytools)
+library(openxlsx)
+
+library(here)
+```
+
+# Project Overview
+```{r knit, echo = F,eval=F,warning=F,include=F}
+results_path = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
+```
+
+## Load and Root Phylogenetic Tree
+```{r environmental, echo= T}
+# Import the Newick file and apply midpoint rooting
+data = here::here("data")
+ctree= read.newick(file = glue::glue('{data}/tree_data/asptu.raxml.tree'))
+tree_mp <- midpoint.root(ctree)
+```
+
+## Data Import and Cleaning
+```{r data import}
+variant_info <- read.csv(glue::glue('{data}/2026_variant_info.csv')) %>% select(-1)
+info_df <- read.csv(glue::glue('{data}/2026_meta_info.csv')) %>% select(-1) %>% rename(isolate = strain)
+wang_etal_MIC <- read.table(glue::glue('{data}/1.Wang_etal_MIC.txt'), header =T) %>% 
+   mutate_at(c('ITC', 'VOR', 'POS'), ~ gsub('>', '', .)) %>% 
+  mutate_at(c('ITC', 'VOR', 'POS'), ~ as.numeric(.)) %>% 
+  select(Species, ID, ITC, VOR, POS) %>% 
+  rename(isolate = ID, itc = ITC, pos = POS, vrc = VOR, species = Species) %>% 
+  mutate(
+    origin = 'Clinical', 
+    location = 'California', 
+    isolate = as.character(isolate),
+    species = gsub('A.', 'aspergillus ', species)
+  )
+# Merge all datasets
+t <- full_join(info_df, wang_etal_MIC) %>% 
+  left_join(variant_info)
+```
+
+## MIC Normalization (ECOFF Distances)
+```{r ECOFF}
+# Define Epidemiological Cutoff Values (ECOFF)
+ecoffs <- data.frame(
+  antifungal = c('flu', 'itc', 'pos', 'vrc', 'teb', 'pro', 'dif', 'pth'),
+  ecoff      = c(NA, 2, 0.5, 4, 16, 8, 16, 4),
+  log2ecoff  = log2(c(NA, 2, 0.5, 2, 16, 8, 16, 4))
+)
+
+# Calculate log2 distance from ECOFF
+fd <- t %>%
+  pivot_longer(cols = c(itc, pos, vrc, teb, pro, dif, pth), names_to = 'antifungal', values_to = 'value') %>% 
+  mutate(value = round(log2(value), digits = 0)) %>% 
+  left_join(ecoffs, by = 'antifungal') %>% 
+  mutate(ecoff_adj_log2 = value - log2ecoff) %>% 
+  filter(antifungal != 'flu') %>% 
+  select(isolate, antifungal, ecoff_adj_log2)
+
+# Create matrix for gheatmap
+fd_long <- fd %>% pivot_wider(names_from = 'antifungal', values_from = 'ecoff_adj_log2')
+meta    <- as.matrix(fd_long[2:8])
+rownames(meta) <- fd_long$isolate
+```
+
+## Phylogenetic Visualization
+```{R phylo_tree}
+# Base tree plot (Fan layout)
+open_angle <- 30
+quick_tree <- ggtree(tree_mp, layout = 'fan', open.angle = open_angle) + 
+  geom_tiplab(size = 1, align = FALSE, offset = max(ctree$edge.length) / 20)
+
+# Attach species data to tree
+t_tmp     <- t %>% mutate(species = case_when(location == 'California' ~ species, TRUE ~ 'this study')) 
+tree_data <- quick_tree %<+% t_tmp + geom_tippoint(aes(color = species))
+
+# Heatmap 1: MIC Distances
+tmp <- gheatmap(
+    tree_data, 
+    as.matrix(meta), 
+    color          = 'white',
+    colnames_angle = -90,
+    hjust          = 0,
+    width          = 0.05 * ncol(meta),
+    offset         = max(quick_tree$data$x) / 5,
+    colnames       = TRUE,
+    font.size      = 1.5
+  ) +
+  scale_fill_gradient2(
+    low      = "blue", 
+    mid      = "white", 
+    high     = "red", 
+    midpoint = 0, 
+    name     = expression(atop(Log[2]~"(MIC) distance", "from ECOFF", "   "))
+  )
+
+# Prepare Source/Origin data
+tmp1     <- tmp + new_scale_fill()
+origins  <- select(t, isolate, origin, location) %>% distinct()
+row.names(origins) <- origins$isolate
+org      <- origins %>% select(-c(isolate, location))
+branches <- length(unique(quick_tree$data$label)) - 1
+
+# Heatmap 2: Origin/Source
+tmp <- gheatmap(
+    tmp1, 
+    org, 
+    colnames_angle = -90, 
+    hjust          = 0,
+    font.size      = 1.5,
+    width          = 0.05,
+    offset         = max(quick_tree$data$x) * 0.6
+  ) + 
+  scale_fill_manual(name = 'Source', values = c('#8fcae7', '#777b00')) + 
+  geom_treescale(
+    x      = max(quick_tree$data$x) / 6, 
+    y      = branches + 5,
+    width  = 0.3, 
+    color  = "black", 
+    offset = 1
+  )
+
+# Add Variant Labels to Tips
+variants <- select(t, isolate, variant)
+row.names(variants) <- variants$isolate
+vars <- variants %>% 
+  select(-isolate) %>% 
+  mutate(variant = factor(variant, levels = c('WT', paste0('v', 1:26)), ordered = TRUE)) 
+
+tmp1 <- tmp + new_scale_fill()
+```
+## View Plot
+```{r visualize}
+tmp
+```
+
+## Save Plot
+```{r}
+dir_path = here::here("plots")
+ggsave(plot = tmp, glue::glue('{dir_path}/Fig_3_tree.svg'), height = 8, width = 10)
+
+```
+
+
+## SessionInfo
+```{r}
+sessionInfo()
+``` 

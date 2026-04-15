@@ -14,16 +14,18 @@ output:
 
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
-subdir_name <- "Rscripts/clonal_group_analysis"
+subdir_name <- "Rscripts/4_Clonal_group_analysis"
 library(tidyverse)
 library(janitor)
 library(here)
 library(igraph)
 library(ggplot2)
+library(patchwork)
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
-rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = here("results"))
+results_path = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = glue::glue('{results_path}'))
 ```
 
 # Project overview
@@ -114,8 +116,8 @@ df_final <- final_clusters %>%
   mutate(group_id = paste0('CG', group_id))
 
 # Export results
-
-write.csv(df_final, here('results', 'clonal_groups.csv'), row.names = FALSE)
+dir_path = here::here("results")
+write.csv(df_final, glue::glue('{dir_path}/clonal_groups.csv'), row.names = FALSE)
 
 
 ```
@@ -150,27 +152,36 @@ Finally, an overview of three plots is made with various x-axes to view cluster 
 
 ```{r plotting, echo = F, warning=F}
 
-ggplot(plink_df) +
+p1 =ggplot(plink_df) +
   geom_histogram(aes(x=DST),bins=400) +
   theme_classic() +
   labs(x="Genetic Distance",y="Pairs")
 
 #now make plots
-ggplot(plink_df) +
+p2 =ggplot(plink_df) +
   geom_histogram(aes(x=DST),bins=400) + xlim(0.88,1) +
   theme_classic() +
   labs(x="Genetic Distance",y="Pairs")
 
-ggplot(plink_df) +
+p3 = ggplot(plink_df) +
   geom_histogram(aes(x=DST),bins=400) + xlim(0.995,1) +
   theme_classic() +
   geom_vline(aes(xintercept=0.998),lty=2)+
-  labs(x="Genetic Distance",y="")
+  labs(x="Genetic Distance",y="Pairs")
+
+plots <- (p1 + p2 + p3 ) + plot_layout(ncol = 1)
+plots
+```
+
+Saving plots:
+```{r save plots}
+dir_path = here::here("plots")
+ggsave(filename = glue::glue("{dir_path}/S4_genetic_distances.svg"), plot = plots,  width = 8,  height = 12,   bg = "white")
 
 ```
 
 
-
+# SessionInfo
 ```{r sessionInfo}
 sessionInfo()
 ```

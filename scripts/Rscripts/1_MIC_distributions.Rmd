@@ -25,7 +25,8 @@ library(patchwork)
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
-rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = here("results"))
+results_path = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
 ```
 
 # Load data
@@ -85,13 +86,13 @@ azole_species_plots <-(p1_sep + p2_sep + p3_sep) +
 azole_species_plots
 ```
 
-Now we do the same for the agricultural fungicides
+Now we do the same for the agricultural fungicides:
 
 ```{r plots_3_agri,fig.width=10, fig.height=12, out.width="100%"}
-p4 <- make_mic_plot(df_sp,"pro",clin_env_set, "Prochloraz", mic_levels, "8",show_legend=T, facet_by = 'species')
+p4 <- make_mic_plot(df_sp,"pro",clin_env_set, "Prochloraz",      mic_levels, "8",show_legend=T, facet_by = 'species')
 p5 <- make_mic_plot(df_sp,"pth",clin_env_set, "Prothioconazole", mic_levels, "4",show_legend=T, facet_by = 'species')
-p6 <- make_mic_plot(df_sp,"dif",clin_env_set, "Difenoconazole", mic_levels, "16",show_legend=T, facet_by = 'species')
-p7 <- make_mic_plot(df_sp,"teb",clin_env_set, "Tebuconazole", mic_levels, "16",show_legend=T, facet_by = 'species')
+p6 <- make_mic_plot(df_sp,"dif",clin_env_set, "Difenoconazole",  mic_levels, "16",show_legend=T, facet_by = 'species')
+p7 <- make_mic_plot(df_sp,"teb",clin_env_set, "Tebuconazole",    mic_levels, "16",show_legend=T, facet_by = 'species')
 
 azole_agri_plots <- (p4 + p5 + p6 + p7) + 
   plot_layout(ncol = 2, guides = "collect")&
@@ -99,15 +100,15 @@ azole_agri_plots <- (p4 + p5 + p6 + p7) +
 azole_agri_plots
 ```
 
-Saving the plots:
+# Save the plots
 
 ```{r}
 dir_path = here::here("plots")
-ggsave(filename = glue::glue("{dir_path}/1_suppl_fig_mic_agri_plots.svg"), plot = azole_agri_plots,  width = 12,  height = 12,   bg = "white")
-ggsave(filename = glue::glue("{dir_path}/1_suppl_fig_mic_species_plots.svg"), plot = azole_species_plots,  width = 12,  height = 12,   bg = "white")
-ggsave(filename = glue::glue("{dir_path}/1_figure_mic_azoles.svg"), plot = azole_plots, width = 12, height = 10,   bg = "white")
+ggsave(filename = glue::glue("{dir_path}/S1_mic_agri_plots.svg"), plot = azole_agri_plots,  width = 12,  height = 12,   bg = "white")
+ggsave(filename = glue::glue("{dir_path}/S1_mic_species_plots.svg"), plot = azole_species_plots,  width = 12,  height = 12,   bg = "white")
+ggsave(filename = glue::glue("{dir_path}/Fig_1_mic_azoles.svg"), plot = azole_plots, width = 12, height = 10,   bg = "white")
 ```
-
+# SessionInfo
 ```{r}
 sessionInfo()
 ```

@@ -1,0 +1,144 @@
+---
+title: "Phylogenetic_tree"
+author: "Maarten Punt"
+date: "2026-04-15"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+---
+This script generates the phylogenetic tree from the UFCG output
+
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/2_Phylogenetic_tree"
+library(ape)
+library(ggtree)
+library(ggplot2)
+library(treeio)
+library(tidyverse)
+library(ggnewscale)
+library(here)
+```
+
+```{r knit, echo = F,eval=F,warning=F,include=F}
+results_path = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
+```
+
+# Load data
+```{r environmental, echo= F}
+meta_data = here::here("data")
+t= read.newick(file = glue::glue('{meta_data}/tree_data/UFCG_tree.nwk'))
+df <- read.csv(glue::glue('{meta_data}/2026_meta_info.csv')) %>% 
+  select(-1) 
+
+strain_names = read.csv(file = glue::glue('{meta_data}/seq_data/study_samples_2026.csv')) %>% 
+  select(strain, file_name) %>% distinct()
+meta_data <- left_join(df, strain_names) %>% mutate(strain = case_when(is.na(strain) ~ file_name, T ~ strain ))
+
+
+```
+
+# Set-up parameters
+```{r functions}
+source(here("src", "theme.R"))
+```
+
+# Organize the data
+```{r process}
+## --- 1. Tree Rooting & Tip Label Cleaning ---
+# Root the tree and split the tip labels to extract species and strain info
+t1 = root(t, outgroup = c('Aspergillus_homomorphus|none'))
+
+labels = data.frame(label = t1$tip.label) %>% 
+  tidyr::separate(label, sep = '\\|', into = c("species", "file_name")) %>% 
+  left_join(strain_names) %>% 
+  # Clean up strain names and handle missing values
+  mutate(strain = case_when(is.na(strain) ~ file_name, TRUE ~ strain)) %>% 
+  mutate(strain = case_when(
+    strain %in% c('none', 'CBS141172', 'CBS_134.48', 'CBS_513.88') ~ species, 
+    TRUE ~ strain
+  )) %>% 
+  # Formatting strings: fix typos and abbreviations
+  mutate(
+    strain = gsub('_', ' ', strain),
+    strain = gsub('DTO-', 'DTO', strain),
+    strain = gsub('tubingenesis', 'tubingensis', strain)
+  )
+
+# Update the tree object with finalized labels
+t1$tip.label <- labels$strain
+t1$tip.label <- gsub('Aspergillus', 'A.', t1$tip.label)
+
+
+## --- 2. Metadata Processing ---
+# Select columns and format for compatibility with ggtree/heatmaps
+meta <- meta_data[c(2, 4:11)] %>% mutate_at(2:4, as.numeric)
+
+colnames(meta) <- c(
+  'Species','Itraconazole', 'Posaconazole', 'Voriconazole', 'Tebuconazole', 
+  'Prochloraz', 'Difenoconazole', 'Prothioconazole', 'Origin'
+)
+
+# Categorize resistance based on Itraconazole levels
+meta <- meta %>% 
+  mutate(resistance = case_when(
+    Itraconazole > 1  ~ 'NWT',
+    Itraconazole < 2  ~ 'WT',
+    is.na(Itraconazole) ~ NA, 
+    TRUE ~ ''
+  ))
+
+
+## --- 3. Tree Annotation & Visualization ---
+# Group the tree by Origin metadata
+p = groupOTU(t1, split(meta[1], meta$Origin), group_name = 'Origin') 
+p1 = ggtree(t1)
+
+# Identify the Most Recent Common Ancestor (MRCA) for the two main species
+shared_node = MRCA(p1, c("A. tubingensis", "A. niger"))
+groups = offspring(p1, shared_node, tiponly = FALSE) %>% 
+  filter(parent == shared_node)
+
+# Identify specific nodes for Niger and Tubingensis clades
+aniger_node = groups$node[which(groups$node %in% ancestor(p, p1$data$node[p1$data$label == 'A. niger']))]
+atub_node   = groups$node[which(groups$node %in% ancestor(p, p1$data$node[p1$data$label == 'A. tubingensis']))]
+
+# Final Plot: Assign highlight blocks and labels
+tree_df = data.frame(
+  node = c(aniger_node, atub_node), 
+  species = c('A. niger', 'A. tubingensis')
+)
+
+p2 = p1 + 
+  geom_highlight(data = tree_df, aes(node = node, fill = species)) + 
+  new_scale_fill() + 
+  geom_tiplab(align = FALSE)
+
+```
+
+# View Tree
+UFCG Species Tree:
+```{r plot_tree, echo =F,fig.width=10, fig.height=15, out.width="100%"}
+p2
+```
+
+Saving the plots:
+```{r}
+dir_path = here::here("plots")
+ggsave(plot = p2, glue::glue('{dir_path}/S2_tree.svg'), height = 30, width = 20)
+
+```
+
+# SessionInfo
+
+```{r}
+sessionInfo()
+```
