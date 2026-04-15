@@ -19,10 +19,17 @@ Programs like [bcftools](https://github.com/samtools/bcftools), [plink](https://
 - For R, part of the packages required must be installed separately
 - Most required data is supplied via the <code>/data</code> folder here, sequencing data can be downloaded fron NCBI (PRJNA:XXX), a dummy data set is supplied in <code>/data</code>
 
-### Universal Fungal Core Genome
+### **B**
+- [`1_MIC_distributions.Rmd`](scripts/Rscripts/1_MIC_distributions.Rmd) : Build MIC distribution plots.
+- [`2_Phylogenetic_tree.Rmd`](scripts/Rscripts/2_Phylogenetic_tree.Rmd): Use the UFCG data to build phylogenetic tree.
+- [`3_SNP_based_phylogenetic_tree.Rmd`](scripts/Rscripts/3_SNP_based_phylogenetic_tree.Rmd): Build a SNP-based phylogenetic tree, annotated with MIC data and Cyp51 variant info.
+
+
+
+### **Universal Fungal Core Genome**
 - Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data/tree_data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
 
-### Determine SNP sites
+### **Determine SNP sites**
 We used bcftools to filter core SNPs and exclude non-tubingensis strains:
 <pre>
 bcftools view -S ^no_atubingensis.list \
@@ -42,7 +49,7 @@ plink \
    --out output/atub_197iso
 </pre>
 
-## Cyp51 analysis
+## **Cyp51 analysis**
 - Cyp51A BLWE01000008	582526	584493	locus_tag=AtWU_06533
     - Insertion site: BLWE01000008  583109
 - Cyp51B BLWE01000010	91551	93312	locus_tag=AtWU_09124
