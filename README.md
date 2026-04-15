@@ -16,7 +16,8 @@ The R-code  was ran in R (v4.5.0).
 Some of the markdown scripts require input that is generated with bash scripts and the following programs: [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) they must be installed separately and the code required is provided at the bottom of this page.
 
 
-### **The markdown scripts to generate the figures presented in the article and the supplementary data**
+### **Markdown scripts**
+The markdown scripts to generate the figures presented in the article and the supplementary data
 - [`1_MIC_distributions.Rmd`](scripts/Rscripts/1_MIC_distributions.Rmd) : Build MIC distribution plots.
 - [`2_Phylogenetic_tree.Rmd`](scripts/Rscripts/2_Phylogenetic_tree.Rmd): Use the UFCG data to build phylogenetic tree.
 - [`3_SNP_based_phylogenetic_tree.Rmd`](scripts/Rscripts/3_SNP_based_phylogenetic_tree.Rmd): Build a SNP-based phylogenetic tree, annotated with MIC data and Cyp51 variant info.
