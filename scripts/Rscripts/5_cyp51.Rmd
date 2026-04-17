@@ -24,7 +24,7 @@ library(here)
 seq_data = here::here("data/seq_data")
 scripts = here::here("scripts")
 results = here::here("results")
-rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = glue::glue('{results}')))
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = glue::glue('{results}'))
 ```
 
 # Cyp51 analysis
