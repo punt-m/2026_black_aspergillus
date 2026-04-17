@@ -2,7 +2,6 @@
 OUTNAME="atubingensis"
 THREADS=22
 
-
 mkdir -p output
 
 #prune variants:

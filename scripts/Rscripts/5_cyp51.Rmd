@@ -1,0 +1,68 @@
+---
+title: "Cyp51 analysis"
+author: "Maarten Punt"
+date: "2026-04-17"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+---
+This script performs the cyp51 analysis. Make sure to install the required programs separately
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/5_cyp51"
+library(here)
+```
+
+```{r knit, echo = F,eval=F,warning=F,include=F}
+seq_data = here::here("data/seq_data")
+scripts = here::here("scripts")
+results = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
+```
+
+# Cyp51 analysis
+
+Here we look at SNPs and INDELs variant types in the regions encoding for cyp51a and cyp51b +1000 bp flanks.
+
+
+The locations of the Cyp51 genes within the _A. tubingensis_ reference:
+
+| Scaffold | Start | End | Locus Tag | Gene |
+|:---|:---|:---|:---|:---|
+| BLWE01000008 | 582526 | 584493 | AtWU_06533 | *cyp51A* |
+| BLWE01000010 | 91551 | 93312 | AtWU_09124 | *cyp51B* |
+
+The Cyp51A Insertion site is BLWE01000008:583109 
+
+## Cyp51A
+```{bash cyp51A,eval=FALSE}
+bcftools view -r BLWE01000008:581899-585491 "$seq_data"/BLWE01000008_581899_585491.filteredSNPs.vcf.gz > "$results"/cyp51A_region.vcf
+snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 "$results"/cyp51A_region.vcf > "$results"/cyp51A_annotated.vcf
+bgzip "$results"/cyp51A_annotated.vcf -c > "$results"/cyp51A_annotated.vcf.gz
+bcftools index "$results"/cyp51A_annotated.vcf.gz 
+bcftools query -i 'ANN ~ "intron_variant" && ANN ~ "insC" && GT="alt"'  -f '[%SAMPLE\t%GT\n]' "$results"/cyp51A_annotated.vcf.gz
+```
+
+## Cyp51B
+```{bash cyp51B,eval=FALSE}
+bcftools view -r BLWE01000010:90551-94312 "$seq_data"/BLWE01000010_90551_94312.filteredSNPs.vcf.gz > "$results"/cyp51B_region.vcf
+snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 "$results"/cyp51B_region.vcf > "$results"/cyp51B_annotated.vcf
+bgzip "$results"/cyp51B_annotated.vcf -c > "$results"/cyp51B_annotated.vcf.gz
+bcftools index "$results"/cyp51B_annotated.vcf.gz 
+```
+
+## Build substitution table
+Use [3_extract_AA.py](scripts/3_extract_AA.py) to extract the variants. In snpEff database Cyp51A (AtWU_06533) has two additional exons compared to MH781351. To account for this, all substitutions are subtracted by 52 AAs, which results in the same mutations as found in MH781351. 
+```{bash, eval=FALSE}
+python3 "$scripts"/3_extract_aa.py cyp51A_annotated.vcf.gz AtWU_06533 52 > "$results"/cyp51a.mutations
+python3 "$scripts"/3_extract_aa.py cyp51B_annotated.vcf.gz AtWU_09124 0  > "$results"/cyp51b.mutations
+```
+
+

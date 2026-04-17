@@ -13,70 +13,27 @@ How to cite this material: LINK ZENODO HERE
 This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) that use files from ([`data/`](data/)) to generate results ([`results/`](results/)). 
 The R-code  was ran in R (v4.5.0). 
 
-Some of the markdown scripts require input that is generated with bash scripts and the following programs: [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/) and [SnpEff](https://github.com/pcingola/SnpEff.git) they must be installed separately and the code required is provided at the bottom of this page.
+Some of the markdown scripts require input that is generated with bash scripts and the following programs: [bcftools](https://github.com/samtools/bcftools), [plink](https://www.cog-genomics.org/plink2/),[UFCG](https://github.com/steineggerlab/ufcg) and [SnpEff](https://github.com/pcingola/SnpEff.git). They must be installed separately.
+
+### Data Generation
+The below scripts were used to generate a phylogenetic trees and mutations profiles from the sequence data. The multi-sample VCF file for the _A. tubingensis_ isolates can be generated as described in the manuscript with [GATK](https://gatk.broadinstitute.org/hc/en-us).
+
+ - [`1_UFCG.sh`](scripts/1_UFCG.sh): LSF bash script build a phylogeny using whole genome assemblies (.fasta). Genome assemblies are not included, but the tree can be found here:[`UFCG_tree.nwk`](data/tree_data/UFCG_tree.nwk). 
+ - [`2_Plink2RAxML.sh`](scripts/2_Plink2RAxML.sh): Bash script that prunes a VCF file for linkage disequilibrium using PLINK and generates a maximum likelihood phylogenetic tree via RAxML-NG. Output found here: [`UFCG_tree.nwk`](data/tree_data/asptu.raxml.tree). 
+ - [`3_extract_AA.py`](scripts/3_extract_AA.py): Use VCF data to identify unique missense mutation profiles per sample for a specific gene and assigning them variant labels (like WT, v1, v2). 
+ - [`4_SNP_sites.sh`](scripts/4_SNP_sites.sh): Filter VCF data for core SNPs and use PLINK to calculate a pairwise identity-by-descent (IBD) genomic relationship matrix.
 
 
-### **Markdown scripts**
+### Visualization scripts
 The markdown scripts to generate the figures presented in the article and the supplementary data
-- [`1_MIC_distributions.Rmd`](scripts/Rscripts/1_MIC_distributions.Rmd) : Build MIC distribution plots.
-- [`2_Phylogenetic_tree.Rmd`](scripts/Rscripts/2_Phylogenetic_tree.Rmd): Use the UFCG data to build phylogenetic tree.
-- [`3_SNP_based_phylogenetic_tree.Rmd`](scripts/Rscripts/3_SNP_based_phylogenetic_tree.Rmd): Build a SNP-based phylogenetic tree, annotated with MIC data and Cyp51 variant info.
-- [`4_clonal_group_analysis.Rmd`](scripts/Rscripts/4_clonal_group_analysis.Rmd): Identifying clonal groups within the _A. tubingensis_ isolates using the PLINK data.
+
+ - [`1_MIC_distributions.Rmd`](scripts/Rscripts/1_MIC_distributions.Rmd): Used to generate the MIC distribution overviews.
+ - [`2_Phylogenetic_tree.Rmd`](scripts/Rscripts/2_Phylogenetic_tree.Rmd): Visualizes the phylogenetic tree generated with the UFCG data. 
+ - [`3_SNP_based_phylogenetic_tree.Rmd`](scripts/Rscripts/3_SNP_based_phylogenetic_tree.Rmd): Build a SNP-based phylogenetic tree, annotated with MIC data and Cyp51 variant info.
+ - [`4_clonal_group_analysis.Rmd`](scripts/Rscripts/4_clonal_group_analysis.Rmd): Identifying clonal groups within the _A. tubingensis_ isolates using the PLINK data.
 
 The .html-output of all the scripts can be found the [`results`](results/)-folder.
 
-
-
-### **Universal Fungal Core Genome**
-- Genome assemblies are not provided, but an example for the <code>meta_info.tsv</code> and the final tree are kept in the <code>/data/tree_data</code> folder. With <code>UFCG.sh</code> script and a set of genome assemblies the tree can be rebuild.
-
-### **Determine SNP sites**
-We used bcftools to filter core SNPs and exclude non-tubingensis strains:
-<pre>
-bcftools view -S ^no_atubingensis.list \
-    -f PASS \
-    -i 'F_MISSING == 0' \
-    ../all_scaffolds.filteredSNPs.vcf.gz \
-    -Oz -o atubingensis_core_sensu_stricto.vcf.gz
-</pre>
-Next use plink to create table with pairwise comparisons:
-<pre>
-INPUT="atubingensis_core_sensu_stricto.vcf.gz"
-
-plink \
-  --allow-extra-chr \
-   --vcf $INPUT \
-   --genome full \
-   --out output/atub_197iso
-</pre>
-
-## **Cyp51 analysis**
-- Cyp51A BLWE01000008	582526	584493	locus_tag=AtWU_06533
-    - Insertion site: BLWE01000008  583109
-- Cyp51B BLWE01000010	91551	93312	locus_tag=AtWU_09124
-
-Here I look at SNPs and INDELs variant types in the regions encoding for cyp51a and cyp51b +1000 bp flanks.
-
-### Cyp51A:
-<pre>
-bcftools view -r BLWE01000008:581899-585491 data/seq_data/BLWE01000008_581899_585491.filteredSNPs.vcf.gz > cyp51A_region.vcf
-snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 cyp51A_region.vcf > cyp51A_annotated.vcf
-bgzip cyp51A_annotated.vcf
-bcftools index cyp51A_annotated.vcf
-bcftools query -i 'ANN ~ "intron_variant" && ANN ~ "insC" && GT="alt"'  -f '[%SAMPLE\t%GT\n]' cyp51A_annotated.vcf.gz
-</pre>
-
-### Cyp51B:
-<pre>
-bcftools view -r BLWE01000010:90551-94312 data/seq_data/BLWE01000010_90551_94312.filteredSNPs.vcf.gz > cyp51B_region.vcf
-snpEff -hgvs1LetterAa Aspergillus_tubingensis_gca_013340325 cyp51B_region.vcf > cyp51B_annotated.vcf
-</pre>
-
-Use extract_AA.py to extract the variants. In snpEff database Cyp51A (AtWU_06533) has two additional exons compared to MH781351. To account for this, all substitutions are subtracted by 52 AAs, which results in the same mutations as found in MH781351. 
-<pre>    
-python3 extract_AA.py cyp51A_annotated.vcf.gz AtWU_06533 52 > cyp51a.mutations
-python3 extract_AA.py cyp51B_annotated.vcf.gz AtWU_09124 0 > cyp51b.mutations
-</pre>
 
 
 ## Download data from NCBI (PRJNA1253755) 

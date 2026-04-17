@@ -58,7 +58,7 @@ source(here("src", "theme.R"))
 t1 = root(t, outgroup = c('Aspergillus_homomorphus|none'))
 
 labels = data.frame(label = t1$tip.label) %>% 
-  tidyr::separate(label, sep = '\\|', into = c("species", "file_name")) %>% 
+  tidyr::separate(label, sep = '\\|', into = c("species", "file_name"), fill = 'left') %>% 
   left_join(strain_names) %>% 
   # Clean up strain names and handle missing values
   mutate(strain = case_when(is.na(strain) ~ file_name, TRUE ~ strain)) %>% 
