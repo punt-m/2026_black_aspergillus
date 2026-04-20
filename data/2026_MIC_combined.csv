@@ -1,0 +1,324 @@
+"","isolate","species","flu","itc","pos","vrc","teb","pro","dif","pth","origin","azole_history","year_of_isolation","location","source","specimen_types","mating_type","variant","cyp51a","cyp51a_insert","cyp51b"
+"1","V273-64","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2018,"The Netherlands","STAM","Other respiratory","MAT1-1",NA,NA,NA,NA
+"2","M039-56","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","organic compost","Environmental","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"3","M039-58","aspergillus niger",256,1,2,0.25,NA,NA,NA,NA,"Environmental","n/a",2021,"The Netherlands","bulb waste","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"4","V080-81","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2009,"The Netherlands","feces","Other nonrespiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"5","V072-57","aspergillus tubingensis",256,32,2,0.25,8,0.5,4,1,"Clinical",NA,NA,"The Netherlands","sputum","Sputum","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"6","V081-46","aspergillus tubingensis",256,8,2,0.125,8,0.5,2,1,"Clinical",NA,2009,"The Netherlands","STAM","Other respiratory","MAT1-1","WT_ins","REFERENCE","yes","REFERENCE"
+"7","M039-51","aspergillus tubingensis",256,2,1,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","wood","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"8","M039-53","aspergillus tubingensis",256,2,0.5,2,8,1,2,1,"Environmental",NA,2021,"The Netherlands","organic compost","Environmental","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"9","M039-54","aspergillus tubingensis",256,2,0.25,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","grass","Environmental","CONFLICT/BOTH","WT","REFERENCE","no","REFERENCE"
+"10","M039-55","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","grass","Environmental","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"11","V133-32","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2012,"The Netherlands","STAM","Other respiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"12","V141-45","aspergillus tubingensis",256,32,2,0.25,8,0.5,2,1,"Clinical",NA,2012,"The Netherlands","BAL","Bronchial lavage","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"13","M057-50","aspergillus tubingensis",256,32,1,4,1,1,8,2,"Clinical",NA,2022,"The Netherlands","ear","Ear","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"14","M065-42","aspergillus tubingensis",256,4,1,2,8,1,4,2,"Clinical",NA,2022,"The Netherlands","sputum","Sputum","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"15","M068-41","aspergillus tubingensis",256,2,1,2,NA,NA,NA,NA,"Clinical",NA,2022,"The Netherlands","sputum","Sputum","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"16","M001-45","aspergillus tubingensis",256,4,1,4,8,0.5,4,4,"Clinical",NA,2020,"The Netherlands","aortic valve","Other nonrespiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"17","M012-6","aspergillus tubingensis",256,2,0.25,2,NA,NA,NA,NA,"Clinical",NA,2020,"The Netherlands","sputum","Sputum","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"18","M039-45","aspergillus niger",256,1,0.25,0.5,NA,NA,NA,NA,"Environmental","n/a",2021,"The Netherlands","bulb waste","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"19","M039-46","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Environmental","n/a",2021,"The Netherlands","bulb waste","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"20","M039-47","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Environmental","n/a",2021,"The Netherlands","bulb waste","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"21","M039-48","aspergillus tubingensis",256,2,0.25,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","forest soil","Environmental","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"22","M039-49","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","Strawberry","Environmental","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"23","M039-50","aspergillus tubingensis",256,0.25,2,0.125,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","wood","Environmental","MAT1-1","v7","REFERENCE","no","A179V"
+"24","M039-52","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","organic compost","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"25","M039-57","aspergillus tubingensis",256,2,0.25,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","organic compost","Environmental","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"26","M039-59","aspergillus niger",256,0.5,2,0.125,NA,NA,NA,NA,"Environmental","n/a",2021,"The Netherlands","bulb waste","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"27","M039-60","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","compost","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"28","M039-61","aspergillus tubingensis",256,2,0.25,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","compost","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"29","M043-15","aspergillus tubingensis",256,2,0.5,4,8,1,8,2,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-2","v11.1","A140V,T321A,P413S,L492M,I503F,Q504P","yes","REFERENCE"
+"30","M043-16","aspergillus niger",256,2,0.5,0.5,4,0.5,4,1,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-2",NA,NA,NA,NA
+"31","M043-17","aspergillus japonicus",256,0.25,0.062,0.25,0.125,0.125,0.25,0.25,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-1",NA,NA,NA,NA
+"32","M043-18","aspergillus niger",256,2,0.5,1,4,0.5,4,2,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-1",NA,NA,NA,NA
+"33","M043-19","aspergillus niger",256,2,0.5,1,NA,NA,NA,NA,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-2",NA,NA,NA,NA
+"34","M043-20","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-1",NA,NA,NA,NA
+"35","M043-21","aspergillus niger",256,1,0.25,0.5,NA,NA,NA,NA,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-2",NA,NA,NA,NA
+"36","M045-72","aspergillus tubingensis",256,8,1,2,1,1,4,8,"Clinical",NA,2021,"The Netherlands","ear","Ear","MAT1-2","v13","A9V,V23I,T321A,A442V,I503V,S507Y","no","H176Q,A335T"
+"37","V085-63","aspergillus tubingensis",256,2,0.25,2,8,1,2,2,"Clinical",NA,2009,"The Netherlands","sputum","Sputum","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"38","V095-70","aspergillus tubingensis",256,2,0.5,1,16,0.5,4,1,"Clinical",NA,2010,"The Netherlands","n/a","Other nonrespiratory","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"39","V113-51","aspergillus tubingensis",256,2,0.5,4,NA,NA,NA,NA,"Clinical",NA,2001,"The Netherlands","STAM","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"40","V123-37","aspergillus tubingensis",256,1,0.5,2,NA,NA,NA,NA,"Clinical",NA,2011,"The Netherlands","STAM","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"41","V138-48","aspergillus tubingensis",256,1,1,2,NA,NA,NA,NA,"Clinical",NA,2012,"The Netherlands","STAM","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"42","V147-11","aspergillus tubingensis",256,1,0.5,2,8,0.5,2,1,"Clinical",NA,2013,"The Netherlands","STAM","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"43","V154-65","aspergillus tubingensis",256,32,1,4,16,1,8,16,"Clinical",NA,2013,"The Netherlands","BAL","Bronchial lavage","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"44","V155-06","aspergillus tubingensis",256,32,1,8,16,2,8,16,"Clinical",NA,2013,"The Netherlands","STAM","Other respiratory","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"45","V155-13","aspergillus tubingensis",256,4,1,4,16,2,8,32,"Clinical",NA,2013,"The Netherlands","sputum","Sputum","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"46","V162-72","aspergillus tubingensis",256,2,1,4,8,1,4,4,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"47","V169-15","aspergillus tubingensis",256,4,0.5,4,16,2,8,8,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"48","V170-61","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"49","V170-80","aspergillus tubingensis",256,2,0.5,4,NA,NA,NA,NA,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-2","v7","REFERENCE","no","A179V"
+"50","V172-61","aspergillus tubingensis",256,16,0.5,4,16,2,16,16,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"51","V188-09","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Clinical",NA,2015,"The Netherlands","nail","Nail","MAT1-2","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"52","V276-36","aspergillus tubingensis",256,1,0.25,2,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands","sputum","Sputum","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"53","V287-77","aspergillus niger",256,2,0.25,2,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands","ear","Ear","MAT1-1",NA,NA,NA,NA
+"54","V288-71","aspergillus tubingensis",256,2,0.125,2,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands","sputum","Sputum","MAT1-2","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"55","V294-47","aspergillus tubingensis",256,2,0.25,2,16,2,8,16,"Clinical",NA,2019,"The Netherlands","BAL","Bronchial lavage","MAT1-1","v1.1","L21F,T321A,I503V","yes","REFERENCE"
+"56","08-46-04-49","aspergillus tubingensis",256,0.5,0.25,1,NA,NA,NA,NA,"Clinical",NA,2017,"The Netherlands","sputum","Sputum","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"57","10-06-09-44","aspergillus tubingensis",256,0.5,0.25,1,NA,NA,NA,NA,"Clinical",NA,2017,"The Netherlands","sputum","Sputum","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"58","10-11-09-69","aspergillus tubingensis",256,1,0.25,1,16,1,4,2,"Clinical",NA,2018,"The Netherlands","ear","Ear","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"59","10-11-10-52","aspergillus tubingensis",256,0.5,0.25,0.5,NA,NA,NA,NA,"Clinical",NA,2018,"The Netherlands","ear","Ear","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"60","10-11-11-03","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands","ear","Ear","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"61","10-11-12-95","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands","n/a","Other nonrespiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"62","10-11-20-99","aspergillus tubingensis",256,1,0.25,0.5,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands","sputum","Sputum","MAT1-1","v7","REFERENCE","no","A179V"
+"63","10-12-11-40","aspergillus tubingensis",256,8,0.5,1,16,2,16,32,"Clinical",NA,2019,"The Netherlands","sputum","Sputum","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"64","10-12-19-19","aspergillus tubingensis",256,1,0.5,1,2,1,8,16,"Clinical",NA,2020,"The Netherlands","ear","Ear","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"65","6551","aspergillus tubingensis",256,1,0.125,1,4,0.5,4,1,"Clinical",NA,1997,"The Netherlands","uitstrijk oor","Ear","MAT1-1","WT_ins","REFERENCE","yes","REFERENCE"
+"66","8329","aspergillus tubingensis",256,0.5,0.062,0.25,NA,NA,NA,NA,"Clinical",NA,1998,"The Netherlands","uitstrijk oor","Ear","MAT1-2","v6.1","E32K,T321A","no","REFERENCE"
+"67","9143","aspergillus niger",256,1,0.125,2,NA,NA,NA,NA,"Clinical",NA,1999,"The Netherlands","uitstrijk oor","Ear","MAT1-1",NA,NA,NA,NA
+"68","D444","aspergillus tubingensis",256,0.5,0.25,1,NA,NA,NA,NA,"Environmental",NA,2019,"The Netherlands","air sampling","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"69","D538-16","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Environmental",NA,2019,"The Netherlands","air sampling","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"70","D644","aspergillus tubingensis",256,1,0.25,1,4,1,4,2,"Environmental",NA,2019,"The Netherlands","air sampling","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"71","DTO086-F5","aspergillus niger",256,2,0.5,1,NA,NA,NA,NA,"Environmental",NA,2008,"The Netherlands","Filter flowkast CBS, 8-1","Environmental","MAT1-1",NA,NA,NA,NA
+"72","DTO087-G7","aspergillus niger",256,4,0.5,2,NA,NA,NA,NA,"Environmental",NA,2008,"The Netherlands","Air in warehouse","Environmental","MAT1-1",NA,NA,NA,NA
+"73","DTO089-E7","aspergillus niger",256,2,1,2,NA,NA,NA,NA,"Environmental",NA,2009,"The Netherlands","Luchtmonster kruipruimte","Environmental","MAT1-1",NA,NA,NA,NA
+"74","M004-62","aspergillus tubingensis",256,1,0.25,2,2,1,8,8,"Clinical",NA,2020,"The Netherlands","MK","Other respiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"75","M016-3","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2021,"The Netherlands","oor","Ear","MAT1-2",NA,NA,NA,NA
+"76","M024-58","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2021,"The Netherlands","oor","Ear","MAT1-1","WT_ins","REFERENCE","yes","REFERENCE"
+"77","M044-36","aspergillus tubingensis",256,1,0.125,2,NA,NA,NA,NA,"Clinical",NA,2021,"The Netherlands","schimmel","Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"78","M057-72","aspergillus tubingensis",256,1,0.125,2,NA,NA,NA,NA,"Clinical",NA,2022,"The Netherlands","schimmel","Other nonrespiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"79","M066-3","aspergillus tubingensis",256,0.25,0.125,0.25,2,0.25,1,0.5,"Clinical",NA,2022,"The Netherlands","ROK","Lung","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"80","M074-80","aspergillus tubingensis",256,2,0.5,4,NA,NA,NA,NA,"Clinical",NA,2023,"The Netherlands","ear","Ear","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"81","M075-46","aspergillus tubingensis",256,32,4,32,32,32,4,32,"Clinical",NA,2023,"The Netherlands","ear","Ear","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"82","M080-14","aspergillus niger",256,0.5,0.062,0.25,NA,NA,NA,NA,"Clinical",NA,2023,"The Netherlands","schimmel","Other nonrespiratory","MAT1-2",NA,NA,NA,NA
+"83","M083-46","aspergillus tubingensis",256,2,1,4,NA,NA,NA,NA,"Clinical",NA,2023,"The Netherlands","ear","Ear","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"84","M086-29","aspergillus tubingensis",256,8,1,4,2,1,4,16,"Clinical",NA,2023,"The Netherlands","BAL","Bronchial lavage","MAT1-2","v7","REFERENCE","no","A179V"
+"85","M096-4","aspergillus tubingensis",256,4,1,4,4,1,4,1,"Clinical",NA,2023,"The Netherlands","BAL","Bronchial lavage","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"86","M107-53","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2024,"The Netherlands","schimmel","Other nonrespiratory","MAT1-2",NA,NA,NA,NA
+"87","M123-24","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2024,"The Netherlands","MK","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"88","M132-2","aspergillus niger",256,1,0.125,0.5,2,1,4,1,"Clinical",NA,2024,"The Netherlands","schimmel","Other nonrespiratory","MAT1-2",NA,NA,NA,NA
+"89","V001-39","aspergillus niger",256,0.5,0.125,1,4,0.25,2,0.5,"Clinical",NA,2000,"The Netherlands","UI/WD","Wound","MAT1-2",NA,NA,NA,NA
+"90","V006-53","aspergillus tubingensis",256,0.5,0.125,1,4,0.25,2,0.5,"Clinical",NA,2001,"The Netherlands","uitstrijk oor","Ear","MAT1-1","v9","T321A","no","REFERENCE"
+"91","V016-53","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2002,"The Netherlands","VI/P","Other nonrespiratory","MAT1-1",NA,NA,NA,NA
+"92","V028-64","aspergillus tubingensis",256,0.5,0.125,1,NA,NA,NA,NA,"Clinical",NA,2004,"The Netherlands","BA","Bronchial wash","MAT1-1","v19.2","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","A335V"
+"93","V043-78","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2005,"The Netherlands","UI","Skin","MAT1-2",NA,NA,NA,NA
+"94","V051-12","aspergillus tubingensis",256,1,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2006,"The Netherlands","S","Sputum","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"95","V063-18","aspergillus niger",256,0.5,0.125,0.5,1,0.5,4,1,"Clinical",NA,2007,"The Netherlands","S","Sputum","MAT1-1",NA,NA,NA,NA
+"96","V088-20","aspergillus tubingensis",256,1,0.125,1,NA,NA,NA,NA,"Clinical",NA,2009,"The Netherlands","STAM","Other respiratory","MAT1-1","v10.1","K65R,T321A","no","REFERENCE"
+"97","V107-30","aspergillus niger",256,1,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2010,"The Netherlands","STAM","Other respiratory","MAT1-1",NA,NA,NA,NA
+"98","V126-47","aspergillus niger",256,1,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2011,"The Netherlands","STAM","Other respiratory","MAT1-2",NA,NA,NA,NA
+"99","V127-67","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2011,"The Netherlands","STAM","Other respiratory","MAT1-1",NA,NA,NA,NA
+"100","V129-53","aspergillus niger",256,0.5,0.125,0.5,1,0.5,4,1,"Clinical",NA,2011,"The Netherlands","UI","Skin","MAT1-1",NA,NA,NA,NA
+"101","V138-79","aspergillus tubingensis",256,1,0.25,1,4,0.25,2,1,"Clinical",NA,2012,"The Netherlands","F","Other nonrespiratory","MAT1-1","v9","T321A","no","REFERENCE"
+"102","V143-69","aspergillus niger",256,1,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2012,"The Netherlands","BL","Bronchial lavage","MAT1-1",NA,NA,NA,NA
+"103","V153-35","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2013,"The Netherlands",NA,"Other nonrespiratory","MAT1-2",NA,NA,NA,NA
+"104","V174-80","aspergillus tubingensis",128,0.125,0.125,0.062,0.5,0.031,0.25,0.062,"Clinical",NA,2015,"The Netherlands",NA,"Other nonrespiratory","MAT1-1","v8","S167C","yes","REFERENCE"
+"105","V156-30","aspergillus tubingensis",256,0.5,0.125,1,1,0.5,4,0.5,"Clinical",NA,2013,"The Netherlands","STAM","Other respiratory","CONFLICT/BOTH","v9","T321A","no","REFERENCE"
+"106","V166-69","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2014,"The Netherlands","uitstrijk oor","Ear","MAT1-1",NA,NA,NA,NA
+"107","V168-17","aspergillus tubingensis",256,1,0.25,2,NA,NA,NA,NA,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-1","v7","REFERENCE","no","A179V"
+"108","V171-40","aspergillus tubingensis",256,1,0.25,0.5,NA,NA,NA,NA,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-2","v10","L4F,T321A","no","REFERENCE"
+"109","V171-52","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2014,"The Netherlands","STAM","Other respiratory","MAT1-2",NA,NA,NA,NA
+"110","V186-01","aspergillus niger",256,1,0.25,2,NA,NA,NA,NA,"Clinical",NA,2015,"The Netherlands","sputum","Sputum","MAT1-1",NA,NA,NA,NA
+"111","V193-77","aspergillus tubingensis",256,1,0.25,2,4,0.5,2,1,"Clinical",NA,2016,"The Netherlands",NA,"Other nonrespiratory","MAT1-1","v9","T321A","no","REFERENCE"
+"112","V210-31","aspergillus niger",256,1,0.125,1,NA,NA,NA,NA,"Clinical",NA,2016,"The Netherlands","uitstrijk oor","Ear","MAT1-1",NA,NA,NA,NA
+"113","V211-52","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2016,"The Netherlands","BR","Bronchial wash","MAT1-1",NA,NA,NA,NA
+"114","V217-61","aspergillus tubingensis",256,1,0.25,2,NA,NA,NA,NA,"Clinical",NA,2017,"The Netherlands","BAL rok","Bronchial lavage","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"115","V229-15","aspergillus niger",256,0.5,0.25,0.5,NA,NA,NA,NA,"Clinical",NA,2017,"The Netherlands",NA,"Other nonrespiratory","MAT1-1",NA,NA,NA,NA
+"116","V231-69","aspergillus tubingensis",256,1,0.125,1,NA,NA,NA,NA,"Clinical",NA,2017,"The Netherlands","uitstrijk oor","Ear","MAT1-1","v9","T321A","no","REFERENCE"
+"117","V235-66","aspergillus niger",256,1,0.125,1,NA,NA,NA,NA,"Clinical",NA,2017,"The Netherlands","BAL","Bronchial lavage","MAT1-1",NA,NA,NA,NA
+"118","V250-58","aspergillus niger",256,0.5,0.125,1,NA,NA,NA,NA,"Clinical",NA,2018,"The Netherlands","uitstrijk oor","Ear","MAT1-2",NA,NA,NA,NA
+"119","V257-28","aspergillus niger",256,0.5,0.062,1,1,0.5,4,1,"Clinical",NA,2018,"The Netherlands","sputum","Sputum","MAT1-2",NA,NA,NA,NA
+"120","V285-27","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands",NA,"Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"121","V290-66","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands",NA,"Other nonrespiratory","MAT1-2",NA,NA,NA,NA
+"122","V319-26","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2020,"The Netherlands",NA,"Other nonrespiratory","MAT1-2",NA,NA,NA,NA
+"123","DTO260-C2","aspergillus niger",256,2,1,2,NA,NA,NA,NA,"Environmental",NA,2013,"Turkey","School, Indoor","Environmental","MAT1-2",NA,NA,NA,NA
+"124","DTO266-D8","aspergillus niger",256,2,0.25,2,NA,NA,NA,NA,"Environmental",NA,2010,"Mexico","House dust","Environmental","MAT1-2",NA,NA,NA,NA
+"125","DTO267-G1","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2010,"South Africa","House Dust","Environmental","MAT1-1",NA,NA,NA,NA
+"126","DTO267-G9","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2010,"Thailand","House Dust","Environmental","MAT1-1","v14","K64E,T321A,H467Q,I503F,Q504P","yes","A432T"
+"127","DTO422-A1","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2019,"Nigeria","Groundnut","Environmental","MAT1-1",NA,NA,NA,NA
+"128","10-03-03-70","aspergillus niger",256,0.5,0.125,0.25,NA,NA,NA,NA,"Clinical",NA,NA,"The Netherlands","CBS119557","Other nonrespiratory","MAT1-1",NA,NA,NA,NA
+"129","10-03-03-77","aspergillus tubingensis",256,0.5,0.125,1,2,2,4,8,"Clinical",NA,NA,"The Netherlands","CBS122588","Other nonrespiratory","MAT1-1","v17","A185G,T321A,N327S,L468M,L492M,I496V,I503F,Q504P","yes","REFERENCE"
+"130","10-08-17-92","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2017,"The Netherlands","ear","Ear","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"131","10-11-09-35","aspergillus tubingensis",256,2,0.25,1,16,2,16,32,"Clinical",NA,2018,"The Netherlands","ear","Ear","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"132","10-12-14-94","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2019,"The Netherlands","n/a","Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"133","DTO008-E1","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,NA,"The Netherlands","Hyacint","Environmental","MAT1-1",NA,NA,NA,NA
+"134","DTO039-F9","aspergillus tubingensis",256,2,1,1,NA,NA,NA,NA,"Environmental",NA,NA,"Germany","Air sample (indoor air) ","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"135","DTO072-D2","aspergillus niger",256,2,1,2,NA,NA,NA,NA,"Environmental",NA,2008,"The Netherlands","Indoor air, archive","Environmental","MAT1-1",NA,NA,NA,NA
+"136","DTO106-F9","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2009,"The Netherlands","Pinguïns/Indoor Artis","Environmental","MAT1-2",NA,NA,NA,NA
+"137","DTO108-H8","aspergillus japonicus",128,0.5,0.125,0.125,NA,NA,NA,NA,"Environmental",NA,2009,"Thailand","Indoor project","Environmental","MAT1-1",NA,NA,NA,NA
+"138","DTO109-B4","aspergillus niger",256,4,0.5,2,NA,NA,NA,NA,"Environmental",NA,2009,"Thailand","Indoor","Environmental","MAT1-2",NA,NA,NA,NA
+"139","DTO134-H3","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2010,"Algeria","Indoor ","Environmental","MAT1-1",NA,NA,NA,NA
+"140","DTO241-E5","aspergillus tubingensis",256,4,1,2,NA,NA,NA,NA,"Environmental",NA,2013,"Turkey","Library indoor","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"141","DTO260-H1","aspergillus niger",256,2,0.5,1,NA,NA,NA,NA,"Environmental",NA,2013,"Turkey","Home, Indoor","Environmental","MAT1-1",NA,NA,NA,NA
+"142","DTO267-D1","aspergillus tubingensis",256,4,1,4,NA,NA,NA,NA,"Environmental",NA,2010,"Micronesia","House Dust","Environmental","MAT1-2","v11","A140V,T321A,P413S","yes","REFERENCE"
+"143","DTO270-C8","aspergillus japonicus",256,0.25,0.25,0.25,NA,NA,NA,NA,"Environmental",NA,2010,"Mexico","House dust","Environmental","MAT1-2",NA,NA,NA,NA
+"144","DTO404-G7","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2018,"The Netherlands","dried unions","Environmental","MAT1-1",NA,NA,NA,NA
+"145","DTO415-D1","aspergillus niger",256,2,0.5,1,NA,NA,NA,NA,"Environmental",NA,2019,"Saudi Arabia","hotel, room, air","Environmental","MAT1-1",NA,NA,NA,NA
+"146","DTO421-I7","aspergillus niger",256,2,0.5,1,NA,NA,NA,NA,"Environmental",NA,2019,"Nigeria","Groundnut","Environmental","MAT1-1",NA,NA,NA,NA
+"147","DTO421-I8","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2019,"Nigeria","Cowpea","Environmental","MAT1-2",NA,NA,NA,NA
+"148","DTO457-H1","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2021,"The Netherlands","Grinded black pepper","Environmental","MAT1-1","v12","T321A,I503F,I503T,Q504P","yes","REFERENCE"
+"149","M012-16","aspergillus tubingensis",256,2,0.25,2,NA,NA,NA,NA,"Clinical",NA,2020,"The Netherlands","abscess lymphnode","Other nonrespiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"150","M043-14","aspergillus niger",256,2,0.5,2,NA,NA,NA,NA,"Environmental",NA,2021,"Indonesia","soil","Environmental","MAT1-2",NA,NA,NA,NA
+"151","V027-40","aspergillus niger",256,0.5,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2003,"The Netherlands","F","Other nonrespiratory","MAT1-1",NA,NA,NA,NA
+"152","V075-24","aspergillus tubingensis",256,0.5,0.062,1,NA,NA,NA,NA,"Clinical",NA,2008,"The Netherlands","BL","Bronchial lavage","MAT1-1","v19.2","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","A335V"
+"153","V096-23","aspergillus niger",256,1,0.5,0.5,NA,NA,NA,NA,"Clinical",NA,2010,"The Netherlands","STAM","Other respiratory","MAT1-1",NA,NA,NA,NA
+"154","V118-67","aspergillus tubingensis",256,2,0.5,4,4,1,2,2,"Clinical",NA,2011,"The Netherlands","STAM","Other respiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"155","V134-52","aspergillus niger",256,1,0.5,4,NA,NA,NA,NA,"Clinical",NA,2012,"The Netherlands","ear","Ear","MAT1-2",NA,NA,NA,NA
+"156","V138-67","aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2012,"The Netherlands","STAM","Other respiratory","MAT1-2","v7","REFERENCE","no","A179V"
+"157","V139-52","aspergillus tubingensis",256,1,1,2,NA,NA,NA,NA,"Clinical",NA,2012,"The Netherlands","BAL","Bronchial lavage","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"158","V155-50","aspergillus tubingensis",256,2,0.5,2,NA,NA,NA,NA,"Clinical",NA,2013,"The Netherlands","STAM","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"159","V177-56","aspergillus tubingensis",256,0.5,0.125,1,NA,NA,NA,NA,"Clinical",NA,2015,"The Netherlands","glasvocht","Fluid","MAT1-1","v19.2","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","A335V"
+"160","V208-68","aspergillus niger",256,1,0.125,0.5,NA,NA,NA,NA,"Clinical",NA,2016,"The Netherlands","sputum","Sputum","MAT1-2",NA,NA,NA,NA
+"161","V275-24","aspergillus tubingensis",256,1,0.25,2,NA,NA,NA,NA,"Clinical",NA,2018,"The Netherlands",NA,"Other nonrespiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"162","V280-46","aspergillus tubingensis",256,16,0.5,4,4,2,8,4,"Clinical",NA,2019,"The Netherlands","ear","Ear","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"163","V306-41","aspergillus tubingensis",256,1,0.25,2,2,2,8,2,"Clinical",NA,2019,"The Netherlands",NA,"Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"164","230-D1","aspergillus tubingensis",256,32,1,32,32,16,16,32,"Environmental",NA,2019,"The Netherlands","filter 230D1","Environmental","MAT1-2","v18.1","S61F,A185G,T321A,N327S,V422I,G441S","yes","Q309H"
+"165","2516","aspergillus tubingensis",256,1,0.25,2,4,1,4,1,"Clinical",NA,1994,"The Netherlands","uitstrijk oor","Ear","MAT1-1","v9","T321A","no","REFERENCE"
+"166","3478","aspergillus niger",256,0.5,0.125,2,2,0.5,2,1,"Clinical",NA,1995,"The Netherlands","uitstrijk oor","Ear","MAT1-2",NA,NA,NA,NA
+"167","5685","aspergillus tubingensis",256,0.5,0.125,0.5,2,0.5,4,1,"Clinical",NA,1996,"The Netherlands","F","Other nonrespiratory","MAT1-2","v9","T321A","no","REFERENCE"
+"168","ASFU-10212","aspergillus niger",256,2,0.125,2,1,1,2,0.5,"Clinical",NA,2024,"Belgium","oor","Ear","MAT1-1",NA,NA,NA,NA
+"169","ASFU-10235","aspergillus niger",256,2,0.5,2,2,0.5,8,4,"Clinical",NA,2024,"Belgium","sputum","Sputum","MAT1-1",NA,NA,NA,NA
+"170","ASFU-10696","aspergillus tubingensis",256,0.25,0.25,1,2,2,4,16,"Clinical",NA,2025,"Belgium","biopsie/weefsel","Tissue","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"171","ASFU-10732","aspergillus tubingensis",256,0.25,0.5,2,4,2,4,16,"Clinical",NA,2025,"Belgium","bal","Bronchial lavage","MAT1-1","v7","REFERENCE","no","A179V"
+"172","ASFU-10751","aspergillus tubingensis",256,1,0.5,4,8,4,8,32,"Clinical",NA,2025,"Belgium","bal","Bronchial lavage","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"173","ASFU-10768","aspergillus tubingensis",256,0.25,0.5,4,4,2,16,32,"Clinical",NA,2025,"Belgium","BAL","Bronchial lavage","MAT1-2","v8","S167C","yes","REFERENCE"
+"174","ASFU-10917","aspergillus niger",256,0.125,0.25,1,1,0.5,1,4,"Clinical",NA,2025,"Belgium","bal","Bronchial lavage","MAT1-1",NA,NA,NA,NA
+"175","ASFU-3898","aspergillus niger",256,0.5,0.25,0.25,2,0.5,4,8,"Clinical",NA,2015,"Belgium","sputum","Sputum","MAT1-2",NA,NA,NA,NA
+"176","ASFU-4167","aspergillus tubingensis",256,1,0.25,1,4,2,4,16,"Clinical",NA,2016,"Belgium","muco","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"177","ASFU-4189","aspergillus tubingensis",256,2,0.125,2,2,2,2,8,"Clinical",NA,2016,"Belgium","biopsie/weefsel","Tissue","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"178","ASFU-4191","aspergillus tubingensis",256,0.5,0.125,1,4,1,8,16,"Clinical",NA,2016,"Belgium","punctievocht","Fluid","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"179","ASFU-4192","aspergillus tubingensis",256,2,0.125,2,1,2,2,16,"Clinical",NA,2016,"Belgium","biopsie/weefsel","Tissue","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"180","ASFU-4437","aspergillus niger",256,0.5,0.125,0.5,1,0.5,4,4,"Clinical",NA,2016,"Belgium","sputum","Sputum","MAT1-2",NA,NA,NA,NA
+"181","ASFU-4593","aspergillus tubingensis",256,0.5,0.5,1,4,8,16,16,"Clinical",NA,2017,"Belgium","sputum","Sputum","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"182","ASFU-4617","aspergillus tubingensis",256,0.25,0.5,1,4,4,8,16,"Clinical",NA,2017,"Belgium","muco","Other respiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"183","ASFU-4873","aspergillus tubingensis",256,1,0.25,1,8,0.5,4,8,"Clinical",NA,2017,"Belgium","bloedproduct","Fluid","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"184","ASFU-4887","aspergillus tubingensis",256,1,0.5,1,4,2,8,16,"Clinical",NA,2017,"Belgium","muco","Other respiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"185","ASFU-4983","aspergillus tubingensis",256,1,0.5,1,4,2,8,16,"Clinical",NA,2017,"Belgium","BAL","Bronchial lavage","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"186","ASFU-4985","aspergillus tubingensis",256,1,0.125,0.5,4,2,8,16,"Clinical",NA,2017,"Belgium","BAL","Bronchial lavage","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"187","ASFU-5027","aspergillus tubingensis",256,1,0.5,1,4,8,16,16,"Clinical",NA,2017,"Belgium","muco","Other respiratory","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"188","ASFU-5028","aspergillus tubingensis",256,1,0.5,1,4,8,16,32,"Clinical",NA,2017,"Belgium","sputum","Sputum","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"189","ASFU-5335","aspergillus tubingensis",256,1,0.25,1,8,0.25,4,16,"Clinical",NA,2018,"Belgium","BAL","Bronchial lavage","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"190","ASFU-5337","aspergillus tubingensis",256,0.5,0.5,0.5,4,2,8,16,"Clinical",NA,2018,"Belgium","BAL","Bronchial lavage","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"191","ASFU-5456","aspergillus tubingensis",256,2,0.25,2,2,2,2,16,"Clinical",NA,2018,"Belgium","oog","Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"192","ASFU-6060","aspergillus tubingensis",256,2,0.125,2,4,1,8,8,"Clinical",NA,2019,"Belgium","BAL","Bronchial lavage","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"193","ASFU-6087","aspergillus tubingensis",256,2,0.125,2,4,1,8,8,"Clinical",NA,2019,"Belgium","BAL","Bronchial lavage","MAT1-1","v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"194","ASFU-7117","aspergillus tubingensis",256,0.5,0.5,0.5,4,2,8,16,"Clinical",NA,2021,"Belgium","BAL","Bronchial lavage","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"195","ASFU-7154","aspergillus tubingensis",256,4,0.25,4,4,8,8,32,"Clinical",NA,2021,"Belgium","BAL","Bronchial lavage",NA,"v1.2","A9V,L21F,I503V","no","REFERENCE"
+"196","ASFU-7528","aspergillus tubingensis",256,0.25,0.5,2,2,4,4,16,"Clinical",NA,2021,"Belgium","biopsie/weefsel","Tissue","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"197","ASFU-8202","aspergillus tubingensis",256,0.5,0.5,0.5,2,4,4,1,"Clinical",NA,2022,"Belgium","bronchusaspiraat","Bronchial wash","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"198","ASFU-8336","aspergillus tubingensis",256,2,0.5,2,4,1,8,16,"Clinical",NA,2022,"Belgium","biopsie/weefsel","Tissue","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"199","ASFU-8362","aspergillus brasiliensis",256,2,0.25,2,4,2,4,2,"Clinical",NA,2022,"Belgium","bronchusaspiraat","Bronchial wash","MAT1-2",NA,NA,NA,NA
+"200","ASFU-8372","aspergillus niger",256,0.5,0.5,0.25,2,2,4,4,"Clinical",NA,2022,"Belgium","BAL","Bronchial lavage","MAT1-1",NA,NA,NA,NA
+"201","ASFU-8389","aspergillus tubingensis",256,1,0.25,1,8,2,4,32,"Clinical",NA,2022,"Belgium","BAL","Bronchial lavage","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"202","ASFU-8469","aspergillus niger",256,2,0.25,1,4,0.5,8,2,"Clinical",NA,2022,"Belgium","bronchusaspiraat","Bronchial wash","MAT1-2",NA,NA,NA,NA
+"203","ASFU-8577","aspergillus tubingensis",256,2,0.125,2,4,2,4,0.5,"Clinical",NA,2022,"Belgium","BAL","Bronchial lavage","MAT1-2","v7","REFERENCE","no","A179V"
+"204","ASFU-8783","aspergillus tubingensis",256,0.5,0.5,0.5,4,4,8,32,"Clinical",NA,2022,"Belgium","oor","Ear","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"205","ASFU-8926","aspergillus niger",256,0.125,0.25,1,4,0.25,4,32,"Clinical",NA,2023,"Belgium","BAL","Bronchial lavage","MAT1-2",NA,NA,NA,NA
+"206","ASFU-9200","aspergillus tubingensis",256,0.25,0.5,0.5,2,4,4,8,"Clinical",NA,2023,"Belgium","peritoneaalvocht","Fluid","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"207","ASFU-9237","aspergillus tubingensis",256,2,0.25,4,2,2,4,0.25,"Clinical",NA,2023,"Belgium","bronchusaspiraat","Bronchial wash","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"208","ASFU-9938","aspergillus tubingensis",256,0.5,0.25,1,4,4,4,32,"Clinical",NA,2024,"Belgium","bal","Bronchial lavage","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"209","ASFU-9954","aspergillus tubingensis",256,0.25,0.5,2,4,2,4,16,"Clinical",NA,2024,"Belgium","biopsie/weefsel","Tissue","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"210","D538-21","aspergillus tubingensis",256,0.5,0.5,0.5,NA,NA,NA,NA,"Environmental",NA,2019,"The Netherlands","air sampling","Environmental","MAT1-1","WT","REFERENCE","no","REFERENCE"
+"211","DTO084-D9","aspergillus tubingensis",256,4,1,4,NA,NA,NA,NA,"Environmental",NA,2008,"Germany","Indoor environment","Environmental","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"212","DTO108-I7","aspergillus niger",256,4,1,2,NA,NA,NA,NA,"Environmental",NA,2009,"Thailand","Indoor project","Environmental","MAT1-1",NA,NA,NA,NA
+"213","DTO146-C1","aspergillus niger",256,2,0.25,2,NA,NA,NA,NA,"Environmental",NA,NA,"Canada","Carpet dust from school ","Environmental","MAT1-2",NA,NA,NA,NA
+"214","DTO146-E9","aspergillus niger",256,4,0.5,4,NA,NA,NA,NA,"Environmental",NA,2009,"Hungary","Indoor","Environmental","MAT1-2",NA,NA,NA,NA
+"215","DTO321-E1","aspergillus tubingensis",256,4,0.5,4,NA,NA,NA,NA,"Clinical",NA,2014,"The Netherlands","CF patient material","Other respiratory","MAT1-2","v11.1","A140V,T321A,P413S,L492M,I503F,Q504P","yes","REFERENCE"
+"216","G1A","aspergillus tubingensis",256,32,0.5,32,32,16,8,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H"
+"217","G1C","aspergillus tubingensis",256,32,1,32,32,16,16,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H"
+"218","G1","aspergillus tubingensis",256,32,1,32,32,16,16,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H"
+"219","G3A","aspergillus niger",256,0.5,0.125,0.5,2,0.25,4,1,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"220","G3B","aspergillus niger",256,0.5,0.25,0.5,2,0.25,4,0.5,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"221","G3C","aspergillus niger",256,0.25,0.25,0.5,1,0.5,2,4,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"222","G4A","aspergillus niger",256,0.25,0.125,0.5,2,0.5,2,4,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"223","G4B","aspergillus niger",256,0.25,0.125,0.25,2,0.5,2,2,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"224","G4C","aspergillus niger",256,0.25,0.125,0.25,0.5,0.5,2,1,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"225","G4D","aspergillus niger",256,1,0.125,0.25,4,0.5,4,1,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"226","G4E","aspergillus niger",256,1,0.062,0.25,2,0.25,2,0.5,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"227","G4-T","aspergillus niger",256,0.5,0.25,0.25,1,0.5,2,0.5,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"228","G5-3","aspergillus tubingensis",256,32,1,32,32,32,32,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H"
+"229","G5-4","aspergillus tubingensis",256,32,1,32,32,8,32,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v16","A185G,T321A,N327S,V422I","no","Q309H"
+"230","G5A","aspergillus tubingensis",256,32,2,32,32,16,16,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H"
+"231","G5B","aspergillus niger",256,0.5,0.125,0.25,0.5,0.5,1,2,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"232","G5C","aspergillus tubingensis",256,32,2,32,32,32,32,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H"
+"233","G5-P","aspergillus tubingensis",256,32,2,32,32,16,32,32,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-2","v18.2","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","Q309H"
+"234","M071-32","aspergillus tubingensis",256,32,2,32,32,4,32,32,"Clinical",NA,2022,"The Netherlands","ear","Ear","MAT1-1","v18","S61F,A185G,T321A,N327S,V422I,G441S,L492M,I503F,Q504P","yes","REFERENCE"
+"235","M084-28","aspergillus tubingensis",256,2,0.125,2,4,2,8,8,"Clinical",NA,2023,"The Netherlands","abdomen","Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"236","M099-13","aspergillus niger",256,1,0.125,1,NA,NA,NA,NA,"Clinical",NA,2023,"The Netherlands","schimmel","Other nonrespiratory","MAT1-1",NA,NA,NA,NA
+"237","M152-38","aspergillus tubingensis",256,16,1,32,32,32,16,32,"Clinical",NA,2025,"The Netherlands",NA,"Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"238","V087-12","aspergillus tubingensis",256,4,1,4,2,1,8,2,"Clinical",NA,NA,"The Netherlands","air sampling","Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"239","V153-15","aspergillus tubingensis",256,1,0.5,1,NA,NA,NA,NA,"Clinical",NA,2013,"The Netherlands",NA,"Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE"
+"240","V163-42","aspergillus tubingensis",256,32,2,16,32,1,32,16,"Clinical",NA,2014,"The Netherlands","ear","Ear","MAT1-2","v4","V17A","no","REFERENCE"
+"241","V190-66","aspergillus niger",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2015,"The Netherlands","UI oor","Ear","MAT1-1",NA,NA,NA,NA
+"242","V308-55","aspergillus niger",256,1,0.25,1,2,0.5,4,1,"Clinical",NA,2020,"The Netherlands",NA,"Other nonrespiratory","MAT1-1",NA,NA,NA,NA
+"243","G3","aspergillus niger",256,0.5,0.25,0.5,2,0.125,2,0.5,"Environmental","yes",2025,"The Netherlands","bulb waste(azole-containing)","Environmental (hotspot)","MAT1-1",NA,NA,NA,NA
+"244","29","aspergillus luchuensis",NA,6,0.75,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v19.1","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","P49L"
+"245","36","aspergillus tubingensis",NA,4,1,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"246","112","aspergillus luchuensis",NA,1.5,0.38,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v20","K64R,A185G,T321A,N327S,L468M,L492M,I496V,I503F,Q504P","yes","R42K"
+"247","115","aspergillus tubingensis",NA,4,1,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"248","226","aspergillus tubingensis",NA,0.5,1,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1.1","L21F,T321A,I503V","yes","REFERENCE"
+"249","231","aspergillus tubingensis",NA,0.5,0.19,0.125,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"250","335","aspergillus tubingensis",NA,4,0.5,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"251","338","aspergillus tubingensis",NA,32,1.5,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v2","M218I","no","REFERENCE"
+"252","354","aspergillus tubingensis",NA,4,1,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v3","L4F,A185G","no","REFERENCE"
+"253","356","aspergillus tubingensis",NA,3,1,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"254","382","aspergillus tubingensis",NA,1.5,0.38,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT_ins","REFERENCE","yes","REFERENCE"
+"255","390","aspergillus niger",NA,2,0.38,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"256","535","aspergillus tubingensis",NA,3,0.5,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"257","539","aspergillus tubingensis",NA,6,0.5,2,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"258","585","aspergillus neoniger",NA,3,0.25,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"259","602","aspergillus tubingensis",NA,4,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v15","REFERENCE","no","S524P"
+"260","610","aspergillus tubingensis",NA,3,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"261","613","aspergillus niger",NA,2,0.38,0.25,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"262","636","aspergillus tubingensis",NA,6,0.75,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"263","638","aspergillus tubingensis",NA,6,0.5,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"264","693","aspergillus niger",NA,6,1.5,32,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"265","694","aspergillus tubingensis",NA,6,1,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"266","705","aspergillus niger",NA,8,2,32,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"267","706","aspergillus tubingensis",NA,6,0.5,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"268","747","aspergillus tubingensis",NA,1,1,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"269","754","aspergillus vadensis",NA,4,0.5,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v17.1","A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V"
+"270","843","aspergillus niger",NA,1.5,0.38,0.125,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"271","849","aspergillus tubingensis",NA,2,0.5,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"272","895","aspergillus luchuensis",NA,4,0.5,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v19","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","REFERENCE"
+"273","905","aspergillus tubingensis",NA,8,0.75,2,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"274","987","aspergillus luchuensis",NA,4,0.38,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v19","S61F,A185G,T321A,N327S,V422I,L492M,I503F,Q504P","yes","REFERENCE"
+"275","989","aspergillus niger",NA,8,0.75,32,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"276","999","aspergillus tubingensis",NA,6,1.5,3,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"277","1000","aspergillus tubingensis",NA,4,0.5,1.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"278","1002","aspergillus vadensis",NA,3,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v21","L15F,A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V"
+"279","1007","aspergillus tubingensis",NA,6,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v5","G509E","no","REFERENCE"
+"280","1141","aspergillus tubingensis",NA,4,0.38,0.125,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"281","1148","aspergillus tubingensis",NA,4,1,3,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"282","1181","aspergillus tubingensis",NA,16,1,2,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"283","1184","aspergillus tubingensis",NA,3,0.5,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"284","1220","aspergillus tubingensis",NA,3,0.5,1.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"285","1243","aspergillus tubingensis",NA,3,0.5,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"286","1399","aspergillus tubingensis",NA,3,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"287","1413","aspergillus tubingensis",NA,8,1,1.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"288","1417","aspergillus tubingensis",NA,6,0.38,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"289","1422","aspergillus vadensis",NA,3,0.38,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v21","L15F,A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V"
+"290","1425","aspergillus tubingensis",NA,12,0.38,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v7","REFERENCE","no","A179V"
+"291","1427","aspergillus tubingensis",NA,12,1,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v7","REFERENCE","no","A179V"
+"292","1428","aspergillus tubingensis",NA,4,0.5,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT_ins","REFERENCE","yes","REFERENCE"
+"293","1433","aspergillus tubingensis",NA,4,0.38,0.19,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v6","E32K,T321A","no","I438M"
+"294","1446","aspergillus niger",NA,3,0.75,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"295","1449","aspergillus vadensis",NA,3,0.38,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v17.1","A185G,T321A,V329A,K340R,I503F,Q504P,S507P","yes","A178P,I428V"
+"296","1454","aspergillus tubingensis",NA,32,0.75,2,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"297","1460","aspergillus tubingensis",NA,2,0.5,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"298","1467","aspergillus tubingensis",NA,8,1,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"299","1485","aspergillus tubingensis",NA,2,0.38,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"300","1496","aspergillus tubingensis",NA,6,0.75,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"301","1497","aspergillus tubingensis",NA,2,0.38,0.25,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"302","1622","aspergillus tubingensis",NA,2,0.25,0.047,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v4.1","V17A","yes","REFERENCE"
+"303","1641","aspergillus tubingensis",NA,6,0.75,1.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v15","REFERENCE","no","S524P"
+"304","1653","aspergillus tubingensis",NA,4,0.5,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"305","1662","aspergillus tubingensis",NA,3,0.38,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"306","1675","aspergillus tubingensis",NA,1.5,0.38,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"307","1728","aspergillus tubingensis",NA,6,0.75,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"308","1737","aspergillus tubingensis",NA,8,0.5,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"309","1744","aspergillus tubingensis",NA,6,0.5,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v4","V17A","no","REFERENCE"
+"310","1749","aspergillus tubingensis",NA,4,0.75,0.38,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"311","1764","aspergillus tubingensis",NA,4,1,1.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"312","1770","aspergillus tubingensis",NA,4,0.75,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"313","1779","aspergillus tubingensis",NA,6,1,0.25,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v7","REFERENCE","no","A179V"
+"314","1809","aspergillus niger",NA,2,0.38,0.125,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"315","1817","aspergillus niger",NA,3,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"316","1829","aspergillus tubingensis",NA,12,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"317","1832","aspergillus tubingensis",NA,6,0.75,0.75,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"318","1834","aspergillus niger",NA,2,0.38,0.19,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"319","1835","aspergillus niger",NA,2,0.5,0.25,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
+"320","1858","aspergillus tubingensis",NA,4,0.75,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"321","1861","aspergillus tubingensis",NA,4,0.75,0.5,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"v1","A9V,L21F,T321A,I503V","yes","REFERENCE"
+"322","1881","aspergillus tubingensis",NA,6,1,1,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,"WT","REFERENCE","no","REFERENCE"
+"323","1892","aspergillus niger",NA,2,0.25,0.19,NA,NA,NA,NA,"Clinical",NA,NA,"California",NA,NA,NA,NA,NA,NA,NA
