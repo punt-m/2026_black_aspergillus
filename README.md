@@ -19,7 +19,7 @@ Some of the markdown scripts require input that is generated with bash scripts a
 The below scripts were used to generate a phylogenetic trees and mutations profiles from the sequence data. The multi-sample VCF file for the _A. tubingensis_ isolates can be generated as described in the manuscript with [GATK](https://gatk.broadinstitute.org/hc/en-us).
 
  - [`1_UFCG.sh`](scripts/1_UFCG.sh): LSF bash script build a phylogeny using whole genome assemblies (.fasta). Genome assemblies are not included, but the tree can be found here:[`UFCG_tree.nwk`](data/tree_data/UFCG_tree.nwk). 
- - [`2_Plink2RAxML.sh`](scripts/2_Plink2RAxML.sh): Bash script that prunes a VCF file for linkage disequilibrium using PLINK and generates a maximum likelihood phylogenetic tree via RAxML-NG. Output found here: [`UFCG_tree.nwk`](data/tree_data/asptu.raxml.tree). 
+ - [`2_Plink2RAxML.sh`](scripts/2_Plink2RAxML.sh): Bash script that prunes a VCF file for linkage disequilibrium using PLINK and generates a maximum likelihood phylogenetic tree via RAxML-NG. Output found here: [`asptu.raxml.tree`](data/tree_data/asptu.raxml.tree). 
  - [`3_extract_AA.py`](scripts/3_extract_AA.py): Use VCF data to identify unique missense mutation profiles per sample for a specific gene and assigning them variant labels (like WT, v1, v2). 
  - [`4_SNP_sites.sh`](scripts/4_SNP_sites.sh): Filter VCF data for core SNPs and use PLINK to calculate a pairwise identity-by-descent (IBD) genomic relationship matrix.
 
