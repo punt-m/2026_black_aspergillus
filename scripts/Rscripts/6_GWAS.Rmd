@@ -1,0 +1,189 @@
+---
+title: "GWAS"
+author: "Maarten Punt"
+date: "2026-04-20"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+This script builds manhattan plots for all the GWAS analyses
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/6_GWAS"
+library(tidyverse)
+library(janitor)
+library(here)
+library(data.table)
+library(ggplot2)
+library(fuzzyjoin)
+library(jsonlite)
+```
+
+```{r knit, echo = F,eval=F,warning=F,include=F}
+GWAS_data = here::here("data/GWAS")
+GWAS_results = here::here("results/GWAS")
+gff_data = here::here("data/seq_data/")
+
+
+scripts = here::here("scripts")
+results = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = glue::glue('{results}'))
+```
+
+# Project overview
+This script performs visualization of the GWAS on _Aspergillus tubingensis_ isolates. 
+
+# Set-up parameters
+```{r functions}
+source(here("src", "theme.R"))
+source(here("src", "GWAS_functions.R"))
+```
+
+## Set-up
+First we load the GWAS data, this data is generated with GEMMA (see [`5_GWAS.ipynb`](scripts/5_GWAS.ipynb)). In short, first the VCF data was pruned to account for linkage disequillibrium, and with the pruned data Gemma was used to look for kinship (-gk 1). After that PLINK was used to determine 3 covariates and those were used as input in the GEMMA model (-c pc_covariates.txt). 
+
+```{r read ITC, echo= F}
+# Load genomic distance data (PLINK)
+df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_itc.assoc.txt.gz'))
+
+scaffold_lengths <- df %>%
+  group_by(chr) %>%
+  summarise(length = max(ps))
+
+# 2. Calculate the cumulative start position for each scaffold
+scaffold_offsets <- scaffold_lengths %>%
+  mutate(offset = lag(cumsum(as.numeric(length)), default = 0)) %>%
+  select(chr, offset)
+
+# 3. Join back to original data and add BP to the offset
+itc <- df %>%
+  inner_join(scaffold_offsets, by = "chr") %>%
+  mutate(BP_cum = ps + offset)%>% 
+  #filter(p_wald < 0.01 | runif(n()) < 0.01) %>% na.omit() %>% 
+  mutate(chr = as.numeric(gsub("BLWE010000", "", chr)))
+
+axis_set <- itc %>% 
+  group_by(chr) %>% 
+  summarize(center = (max(BP_cum) + min(BP_cum)) / 2)
+
+
+
+```
+
+```{r read POS, echo= F}
+# Load genomic distance data (PLINK)
+df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_pos.assoc.txt.gz'))
+# 3. Join back to original data and add BP to the offset
+pos <- df %>%
+  inner_join(scaffold_offsets, by = "chr") %>%
+  mutate(BP_cum = ps + offset)%>% 
+  #filter(p_wald < 0.01 | runif(n()) < 0.01) %>% na.omit() %>% 
+  mutate(chr = as.numeric(gsub("BLWE010000", "", chr)))
+
+```
+
+```{r read VRC, echo= F}
+# Load genomic distance data (PLINK)
+df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_vrc.assoc.txt.gz'))
+vrc <- df %>%
+  inner_join(scaffold_offsets, by = "chr") %>%
+  mutate(BP_cum = ps + offset)%>% 
+  #filter(p_wald < 0.01 | runif(n()) < 0.01) %>% na.omit() %>% 
+  mutate(chr = as.numeric(gsub("BLWE010000", "", chr)))
+
+```
+# Build plots
+```{r build Plots}
+# Build the plot
+
+itc_hits <- get_gene_snps(itc, genes)
+pos_hits <- get_gene_snps(pos, genes)
+vrc_hits <- get_gene_snps(vrc, genes)
+
+p1 <- plot_function(itc,'Itraconazole')
+p2 <- plot_function(pos,'Posaconazole')
+p3 <- plot_function(vrc,'Voriconazole')
+
+p1
+p2
+p3
+```
+
+
+The initial manhattan plots show a suspiciously high number of significant SNPs so start investigating this:
+starting off with a QQ analysis.
+```{r perform QQ analysis}
+library(qqman)
+# Generate the plot
+qq(itc$p_wald, main = "QQ plot itraconazole")
+qq(vrc$p_wald, main = "QQ plot voriconazole")
+qq(pos$p_wald, main = "QQ plot posaconazole")
+
+get_lambda(itc$p_wald)
+get_lambda(vrc$p_wald)
+get_lambda(pos$p_wald)
+
+
+```
+The lambda ideally should be between 0.9 and 1.1 
+
+
+```{r focus}
+focus_p1 <- plot_function(itc,'Itraconazole',chr_select = 8,start = 2.5e6 ,end =3.5e6)
+focus_p2 <- plot_function(pos,'Posaconazole',chr_select = 8,start = 2.5e6 ,end =3.5e6)
+focus_p3 <- plot_function(vrc,'Voriconazole',chr_select = 8,start = 2.5e6 ,end =3.5e6)
+
+focus_p1
+focus_p2
+focus_p3
+
+```
+
+# Filtering for genes of interest
+This looks for all genes of interest, signf p val
+
+
+```{r region focus}
+
+filt_itc <- itc %>% filter(p_wald < 1e-5)
+filt_pos <- pos %>% filter(p_wald < 1e-5)
+filt_vrc <- vrc %>% filter(p_wald < 1e-5)
+
+gff3 = fread(glue::glue('{gff_data}/GCA_013340325.1_ASM1334032v1_genomic.gff'),fill = 12,skip = 7,comment.char = '#') %>% 
+    mutate(chr = as.numeric(gsub("BLWE010000", "", V1))) %>% select(chr, everything()) %>% select(-V1) %>% 
+    rename(start= V4, end = V5)
+
+feature_table <- download_data()
+
+gene_annotations <- gff3 %>%
+  filter(V3 == "gene") %>%
+  mutate(
+    # Extract the Gene ID from the V9 attributes column
+    # This regex looks for 'ID=' or 'Name=' and grabs the text until the next ';'
+    gene_id = stringr::str_extract(V9, "(?<=ID=)[^;]+")
+  ) %>%
+  select(chr, start, end, gene_id)
+
+
+genes_itc <- get_genes_of_interest(itc, gene_annotations,p_threshold = 1e-5, buffer = 0) %>% mutate(azole = 'itc')
+genes_pos <- get_genes_of_interest(pos, gene_annotations,p_threshold = 1e-5, buffer = 0) %>% mutate(azole = 'pos')
+genes_vrc <- get_genes_of_interest(vrc, gene_annotations,p_threshold = 1e-5, buffer = 0) %>% mutate(azole = 'vrc')
+
+genes_of_interest = rbindlist(list(genes_itc,genes_pos,genes_vrc)) %>%
+  mutate(gene_id = gsub('gene-','',gene_id)) %>% left_join(feature_table)
+
+
+output_list <- left_join(genes_of_interest,feature_table) #%>% filter(beta > 0)
+write.csv(output_list, glue::glue('{GWAS_results}/genes_of_interest.csv'))
+hi_over <- output_list %>% select(gene_id,chr,azole,name) %>% group_by(gene_id,chr,azole,name) %>% distinct()
+
+hi_over
+```
+
+

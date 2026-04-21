@@ -63,6 +63,9 @@ wang_etal_MIC <- read.table(glue::glue('{data}/1.Wang_etal_MIC.txt'), header =T)
 # Merge all datasets
 t <- full_join(info_df, wang_etal_MIC) %>% 
   left_join(variant_info)
+
+t_new_file <- t %>% select(isolate,itc,pos,vrc)
+write.csv(x = t, file = glue::glue('{data}/2026_MIC_combined.csv'))
 ```
 
 ## MIC Normalization (ECOFF Distances)
