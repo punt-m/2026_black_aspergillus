@@ -62,6 +62,46 @@ for (col in mic_columns) {
   }
 }
 df_sp <- df %>% filter(species %in% c('aspergillus niger','aspergillus tubingensis'))
+
+
+
+```
+
+
+#Create table 
+
+```{r table}
+breakpoints <- c(itc = 2, vrc = 4, pos = 0.5, pro = 8, pth =4, dif = 16, teb =16)
+
+table_df = df %>% 
+  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ as.numeric(gsub('>16','32',.x)))) %>% 
+  mutate(groups = case_when(origin == 'Clinical' & location == 'The Netherlands' ~ 'NL Clinical',
+                            origin == 'Clinical' & location == 'Belgium'         ~ 'BE Clinical',
+                            specimen_types == 'Environmental (hotspot)'          ~ 'Hotspot',
+                            specimen_types == 'Environmental'          ~ 'Environmental',
+                            T ~ NA)) %>% 
+  select(groups, lineage, itc:pth) %>% 
+  group_by(groups,lineage) %>% 
+   summarise(
+    Total_In_Group = n(),
+    # We create two results for every column: NWT count and Total Tested count
+    across(itc:pth, list(
+      nwt = ~ sum(.x > breakpoints[cur_column()], na.rm = TRUE),
+      tested = ~ sum(!is.na(.x))
+    ), .names = "{.col}_{.fn}"),
+    
+    .groups = "drop"
+  )
+
+table_final <- table_df %>%
+  mutate(across(ends_with("_nwt"), 
+                ~ paste0(.x, "/", get(gsub("_nwt", "_tested", cur_column()))),
+                .names = "{gsub('_nwt', '_ratio', .col)}")) %>%
+  # Optionally select only the columns you want to show
+  select(groups, lineage, Total_In_Group, contains("_ratio"))
+
+head(table_final)
+
 ```
 
 # Build plots
@@ -100,9 +140,11 @@ azole_agri_plots
 
 ```{r}
 dir_path = here::here("plots")
-
+dir_res = here::here("results")
 ggsave(filename = glue::glue("{dir_path}/Fig_1_mic_species_plots.svg"), plot = azole_species_plots,  width = 12,  height =6,   bg = "white")
 ggsave(filename = glue::glue("{dir_path}/Fig_2_mic_agri_plots.svg"), plot = azole_agri_plots,  width = 8,  height = 8,   bg = "white")
+openxlsx::write.xlsx(table_final, file = glue::glue("{dir_res}/NWT_overview.xlsx"))
+
 ```
 # SessionInfo
 ```{r}
