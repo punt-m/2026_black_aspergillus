@@ -23,6 +23,8 @@ library(data.table)
 library(ggplot2)
 library(fuzzyjoin)
 library(jsonlite)
+library(zoo)
+
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
@@ -48,9 +50,11 @@ source(here("src", "GWAS_functions.R"))
 ## Set-up
 First we load the GWAS data, this data is generated with GEMMA (see [`5_GWAS.ipynb`](scripts/5_GWAS.ipynb)). In short, first the VCF data was pruned to account for linkage disequillibrium, and with the pruned data Gemma was used to look for kinship (-gk 1). After that PLINK was used to determine 3 covariates and those were used as input in the GEMMA model (-c pc_covariates.txt). 
 
+# Itraconazole
 ```{r read ITC, echo= F}
 # Load genomic distance data (PLINK)
 df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_itc.assoc.txt.gz'))
+#df = fread(glue::glue('{GWAS_results}/output/GWAS_PC1_origin.assoc.txt.gz'))
 
 scaffold_lengths <- df %>%
   group_by(chr) %>%
@@ -76,6 +80,7 @@ axis_set <- itc %>%
 
 ```
 
+# Posaconazole
 ```{r read POS, echo= F}
 # Load genomic distance data (PLINK)
 df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_pos.assoc.txt.gz'))
@@ -88,6 +93,7 @@ pos <- df %>%
 
 ```
 
+# Voriconazole
 ```{r read VRC, echo= F}
 # Load genomic distance data (PLINK)
 df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_vrc.assoc.txt.gz'))
@@ -184,6 +190,36 @@ write.csv(output_list, glue::glue('{GWAS_results}/genes_of_interest.csv'))
 hi_over <- output_list %>% select(gene_id,chr,azole,name) %>% group_by(gene_id,chr,azole,name) %>% distinct()
 
 hi_over
+```
+
+
+
+
+
+# Perform sliding window approach
+```{r sliding window}
+
+# Load GEMMA results (p_wald is the standard p-value)
+gwas_results <- itc
+
+windowed_gwas <- gwas_results %>%
+  group_by(chr) %>%
+  arrange(ps) %>%
+  mutate(
+    # Rolling mean of -log10 p-values across 50 SNPs
+    smoothed_p = rollmean(-log10(p_wald), k = 100, fill = NA)
+  ) %>% 
+  filter(!is.na(smoothed_p))
+
+# Plotting to see the 'peaks'
+ggplot(windowed_gwas, aes(x = ps, y = smoothed_p)) +
+  geom_line(color = "firebrick") + facet_wrap(~chr, nrow =1, scales = 'free_x')
+  #facet_grid(rows = 1, ~chr scales = "free_x") +
+  #labs(title = "Windowed GWAS Signal", y = "Smoothed -log10(p)")
+
+
+
+
 ```
 
 
