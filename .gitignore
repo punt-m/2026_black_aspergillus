@@ -2,3 +2,14 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# Ignore all VCF and compressed files
+*.vcf
+*.vcf.gz
+*.gz
+*.fam
+*.bed
+*.bim
+
+# Ignore the entire results directory if it gets too big
+/data/seq_data/
