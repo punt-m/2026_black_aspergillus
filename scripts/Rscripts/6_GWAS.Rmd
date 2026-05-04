@@ -21,9 +21,9 @@ library(janitor)
 library(here)
 library(data.table)
 library(ggplot2)
+library(scales) # Required for label_number
 library(fuzzyjoin)
 library(jsonlite)
-library(zoo)
 
 ```
 
@@ -31,6 +31,7 @@ library(zoo)
 GWAS_data = here::here("data/GWAS")
 GWAS_results = here::here("results/GWAS")
 gff_data = here::here("data/seq_data/")
+fst_data = here::here("results/FST/")
 
 
 scripts = here::here("scripts")
@@ -50,11 +51,10 @@ source(here("src", "GWAS_functions.R"))
 ## Set-up
 First we load the GWAS data, this data is generated with GEMMA (see [`5_GWAS.ipynb`](scripts/5_GWAS.ipynb)). In short, first the VCF data was pruned to account for linkage disequillibrium, and with the pruned data Gemma was used to look for kinship (-gk 1). After that PLINK was used to determine 3 covariates and those were used as input in the GEMMA model (-c pc_covariates.txt). 
 
-# Itraconazole
+### Itraconazole
 ```{r read ITC, echo= F}
 # Load genomic distance data (PLINK)
 df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_itc.assoc.txt.gz'))
-#df = fread(glue::glue('{GWAS_results}/output/GWAS_PC1_origin.assoc.txt.gz'))
 
 scaffold_lengths <- df %>%
   group_by(chr) %>%
@@ -80,7 +80,7 @@ axis_set <- itc %>%
 
 ```
 
-# Posaconazole
+### Posaconazole
 ```{r read POS, echo= F}
 # Load genomic distance data (PLINK)
 df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_pos.assoc.txt.gz'))
@@ -88,12 +88,11 @@ df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_pos.assoc.txt.gz'))
 pos <- df %>%
   inner_join(scaffold_offsets, by = "chr") %>%
   mutate(BP_cum = ps + offset)%>% 
-  #filter(p_wald < 0.01 | runif(n()) < 0.01) %>% na.omit() %>% 
   mutate(chr = as.numeric(gsub("BLWE010000", "", chr)))
 
 ```
 
-# Voriconazole
+### Voriconazole
 ```{r read VRC, echo= F}
 # Load genomic distance data (PLINK)
 df = fread(glue::glue('{GWAS_results}/output/GWAS_adjustedPC_vrc.assoc.txt.gz'))
@@ -104,6 +103,24 @@ vrc <- df %>%
   mutate(chr = as.numeric(gsub("BLWE010000", "", chr)))
 
 ```
+
+### Environmental & clinical divide
+```{r read clinical_and_env, echo= F}
+# Load genomic distance data (PLINK)
+df = fread(glue::glue('{GWAS_results}/output/GWAS_PC1_origin.assoc.txt.gz'))
+
+#Build env db
+env_vs_cli <- df %>%
+  inner_join(scaffold_offsets, by = "chr") %>%
+  mutate(BP_cum = ps + offset)%>% 
+  mutate(chr = as.numeric(gsub("BLWE010000", "", chr)))
+
+
+
+```
+
+
+
 # Build plots
 ```{r build Plots}
 # Build the plot
@@ -189,7 +206,7 @@ output_list <- left_join(genes_of_interest,feature_table) #%>% filter(beta > 0)
 write.csv(output_list, glue::glue('{GWAS_results}/genes_of_interest.csv'))
 hi_over <- output_list %>% select(gene_id,chr,azole,name) %>% group_by(gene_id,chr,azole,name) %>% distinct()
 
-hi_over
+head(hi_over)
 ```
 
 
@@ -197,29 +214,72 @@ hi_over
 
 
 # Perform sliding window approach
-```{r sliding window}
+```{r sliding window,fig.width=10, fig.height=5, out.width="100%"}
+fst_rest_vs_sens = fread(glue::glue('{fst_data}/all_10k.windowed.weir.fst')) %>% clean_names()
+fst_clin_vs_env = fread(glue::glue('{fst_data}/env_cli_10k.windowed.weir.fst'))%>% clean_names() %>% 
+  mutate(clinical_n_variants = n_variants, 
+         clinical_weighted_fst= weighted_fst,
+         clinical_mean_fst = mean_fst) %>% 
+  select(-c(n_variants,weighted_fst,mean_fst))
 
-# Load GEMMA results (p_wald is the standard p-value)
-gwas_results <- itc
+df_slide_window <- left_join(fst_rest_vs_sens,fst_clin_vs_env) %>% 
+  mutate(chrom = as.factor(as.numeric(gsub("BLWE010000", "", chrom))))
 
-windowed_gwas <- gwas_results %>%
-  group_by(chr) %>%
-  arrange(ps) %>%
-  mutate(
-    # Rolling mean of -log10 p-values across 50 SNPs
-    smoothed_p = rollmean(-log10(p_wald), k = 100, fill = NA)
-  ) %>% 
-  filter(!is.na(smoothed_p))
 
 # Plotting to see the 'peaks'
-ggplot(windowed_gwas, aes(x = ps, y = smoothed_p)) +
-  geom_line(color = "firebrick") + facet_wrap(~chr, nrow =1, scales = 'free_x')
-  #facet_grid(rows = 1, ~chr scales = "free_x") +
-  #labs(title = "Windowed GWAS Signal", y = "Smoothed -log10(p)")
+top <- ggplot(df_slide_window) + 
+  geom_point(aes(x=bin_start, y=clinical_weighted_fst, color=chrom), size=0.5) + 
+  facet_grid(cols=vars(chrom), scales="free", space="free") +
+  theme_classic(base_size=14) + 
+  ylim(-0.01, 0.61) +
+  geom_hline(aes(yintercept=0.3), lty=2, lwd=0.2) +
+  theme(legend.position="none",
+        panel.spacing=unit(0.01, "cm"),
+        axis.text.x=element_blank(),
+        axis.title.x=element_blank()) +
+  # Adjusted scale for Mb labels
+  #scale_x_continuous(labels = function(x) x / 1e6) + 
+  labs(y=expression(atop(Clin~vs.~Env,(Weighted~F[st])))) + 
+  scale_x_continuous(
+    # Forces a tick at every 1,000,000 bp
+    breaks = breaks_width(1e6), 
+    # Converts 1000000 to "1", 2000000 to "2", etc.
+    labels = label_number(scale = 1e-6, accuracy = 1)
+  ) +
+  theme(axis.text.x = element_blank()) # Keep blank for the top plot
+
+# 3. Bottom Plot: Resistant vs Sensitive
+bottom <- ggplot(df_slide_window) + 
+  geom_point(aes(x=bin_start, y=weighted_fst, color=chrom), size=0.5) + 
+  facet_grid(cols=vars(chrom), scales="free", space="free") +
+  theme_classic(base_size=14) + 
+  ylim(-0.01, 0.61) +
+  geom_hline(aes(yintercept=0.3), lty=2, lwd=0.2) +
+  theme(legend.position="none",
+        panel.spacing = unit(0.01, "cm"),
+        strip.background = element_blank(),
+        strip.text = element_blank()) +
+  scale_x_continuous(
+    # Forces a tick at every 1,000,000 bp
+    breaks = breaks_width(1e6), 
+    # Converts 1000000 to "1", 2000000 to "2", etc.
+    labels = label_number(scale = 1e-6, accuracy = 1)
+  ) +
+  #theme(axis.text.x = element_blank())+ 
+  labs(x="Position (Mb)", y=expression(atop(Res~vs.~Sens,(Weighted~F[st]))))
+
+library(patchwork)
+combined_plot <- (top / bottom) + 
+  plot_layout(guides = "collect") & 
+  theme(plot.margin = margin(5, 5, 5, 5))
 
 
-
-
+ggsave(glue::glue('{GWAS_results}/fst_graph.svg'),plot = combined_plot, height = 4.5, width = 10)
 ```
 
+# Session Info
+```{r session}
+sessionInfo()
+
+```
 
