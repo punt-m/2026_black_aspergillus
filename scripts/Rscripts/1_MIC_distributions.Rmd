@@ -20,6 +20,7 @@ subdir_name <- "Rscripts/1_MIC_distributions"
 library(here)
 library(tidyverse)
 library(janitor)
+library(knitr)
 library(ggplot2)
 library(patchwork)
 ```
@@ -68,8 +69,7 @@ df_sp <- df %>% filter(species %in% c('aspergillus niger','aspergillus tubingens
 ```
 
 
-#Create table 
-
+#Create tables
 ```{r table}
 breakpoints <- c(itc = 2, vrc = 4, pos = 0.5, pro = 8, pth =4, dif = 16, teb =16)
 
@@ -102,7 +102,23 @@ table_final <- table_df %>%
 
 head(table_final)
 
+
+
 ```
+
+Make an overview of the MICs of the agricultural azoles for ECOFFinder
+```{r}
+agri_overview = df %>% filter(!is.na(teb)) %>% 
+  select(strain, pro,teb,dif,pth) %>% pivot_longer(cols = c(pro,teb,dif,pth)) %>%
+  group_by(name, value) %>% count() %>% pivot_wider(id_cols = value,
+                                                    values_from = n,
+                                                    names_from = name) %>% arrange(desc(value)) %>% 
+  select(value,pro,teb,dif,pth)
+
+kable(agri_overview)
+
+```
+
 
 # Build plots
 Separate by species. 
