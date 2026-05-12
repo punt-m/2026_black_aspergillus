@@ -1,5 +1,5 @@
 ---
-title: "FST analysis"
+title: "Group analysis"
 author: "Maarten Punt"
 date: "`r Sys.time()`"
 output:
@@ -16,12 +16,16 @@ This script generates the MIC distribution plots
 
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
-subdir_name <- "Rscripts/7_FST_analysis"
+subdir_name <- "Rscripts/7_group_analysis"
 library(here)
 library(tidyverse)
 library(janitor)
 library(ggplot2)
 library(patchwork)
+
+data = here::here("data")
+results_path = here::here("results")
+
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
@@ -31,7 +35,8 @@ rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_di
 
 # Load data
 ```{r environmental, echo= F}
-df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %>% 
+
+df <- read.csv(glue::glue("{data}/2026_meta_info.csv")) %>% 
   select(-1) %>%
   mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ gsub('32','>16',.x))) %>% 
   mutate(lineage = case_when(species == 'aspergillus niger' ~ 'ANL',
@@ -123,7 +128,7 @@ vrc_sens <- df_sp %>% filter(vrc <= breakpoints['vrc'] & species =='aspergillus 
 
 # Save the files
 ```{r}
-dir_res = here::here("data/FST")
+dir_res = here::here("data/group_analysis")
 writeLines(env_sp_tub, con = glue::glue("{dir_res}/env.txt"))
 writeLines(cli_sp_tub, con = glue::glue("{dir_res}/cli.txt"))
 

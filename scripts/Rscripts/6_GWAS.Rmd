@@ -12,7 +12,7 @@ output:
     highlight: zenburn
 ---
 
-This script builds manhattan plots for all the GWAS analyses
+This script builds manhattan plots for all the GWAS and FST analyses 
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
 subdir_name <- "Rscripts/6_GWAS"
@@ -31,7 +31,7 @@ library(jsonlite)
 GWAS_data = here::here("data/GWAS")
 GWAS_results = here::here("results/GWAS")
 gff_data = here::here("data/seq_data/")
-fst_data = here::here("results/FST/")
+fst_data = here::here("data/FST/")
 
 
 scripts = here::here("scripts")
