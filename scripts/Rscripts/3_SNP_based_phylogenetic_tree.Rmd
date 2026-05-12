@@ -27,13 +27,13 @@ library(ggnewscale)
 library(janitor)
 library(phytools)
 library(openxlsx)
-
 library(here)
 ```
 
 # Project Overview
 ```{r knit, echo = F,eval=F,warning=F,include=F}
 results_path = here::here("results")
+subdir_name <- "Rscripts/3_SNP_based_phylogenetic_tree"
 rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
 ```
 
@@ -41,13 +41,13 @@ rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_di
 ```{r environmental, echo= T}
 # Import the Newick file and apply midpoint rooting
 data = here::here("data")
-ctree= read.newick(file = glue::glue('{data}/tree_data/asptu.raxml.tree'))
-tree_mp <- midpoint.root(ctree)
+tree_raw= read.newick(file = glue::glue('{data}/tree_data/asptu.raxml.tree'))
+tree_midpoint <- midpoint.root(tree_raw)
 ```
 
 ## Data Import and Cleaning
 ```{r data import}
-variant_info <- read.csv(glue::glue('{data}/2026_variant_info.csv')) %>% select(-1)
+variant_info <- read.csv(glue::glue('{data}/2026_variant_info.csv')) %>% select(isolate,variant,cyp51a,cyp51a_insert,cyp51b)
 info_df <- read.csv(glue::glue('{data}/2026_meta_info.csv')) %>% select(-1) %>% rename(isolate = strain)
 wang_etal_MIC <- read.table(glue::glue('{data}/1.Wang_etal_MIC.txt'), header =T) %>% 
    mutate_at(c('ITC', 'VOR', 'POS'), ~ gsub('>', '', .)) %>% 
@@ -61,11 +61,15 @@ wang_etal_MIC <- read.table(glue::glue('{data}/1.Wang_etal_MIC.txt'), header =T)
     species = gsub('A.', 'aspergillus ', species)
   )
 # Merge all datasets
-t <- full_join(info_df, wang_etal_MIC) %>% 
-  left_join(variant_info)
+total_dataset <- full_join(info_df, wang_etal_MIC) %>% 
+  left_join(variant_info, by = 'isolate') %>% 
+  mutate(species = gsub('aspergillus','Aspergillus',species)) %>% 
+  mutate(species = case_when(location == 'California' ~ species, TRUE ~ 'This study')) 
 
-t_new_file <- t %>% select(isolate,itc,pos,vrc)
-write.csv(x = t, file = glue::glue('{data}/2026_MIC_combined.csv'))
+rm(variant_info,info_df,wang_etal_MIC)  
+write.csv(x = total_dataset, file = glue::glue('{data}/2026_MIC_combined.csv'))
+
+
 ```
 
 ## MIC Normalization (ECOFF Distances)
@@ -78,7 +82,7 @@ ecoffs <- data.frame(
 )
 
 # Calculate log2 distance from ECOFF
-fd <- t %>%
+fd <- total_dataset %>%
   pivot_longer(cols = c(itc, pos, vrc, teb, pro, dif, pth), names_to = 'antifungal', values_to = 'value') %>% 
   mutate(value = round(log2(value), digits = 0)) %>% 
   left_join(ecoffs, by = 'antifungal') %>% 
@@ -88,52 +92,65 @@ fd <- t %>%
 
 # Create matrix for gheatmap
 fd_long <- fd %>% pivot_wider(names_from = 'antifungal', values_from = 'ecoff_adj_log2')
-meta    <- as.matrix(fd_long[2:8])
-rownames(meta) <- fd_long$isolate
+ECOFF_heatmap    <- as.matrix(fd_long[2:8])
+rownames(ECOFF_heatmap) <- fd_long$isolate
+
+rm(fd,fd_long)
 ```
 
 ## Phylogenetic Visualization
 ```{R phylo_tree}
+# Prepare Source/Origin data
+origins  <- select(total_dataset, isolate, origin, location) %>% distinct()
+row.names(origins) <- origins$isolate
+source      <- origins %>% select(-c(isolate, location))
+
 # Base tree plot (Fan layout)
 open_angle <- 30
-quick_tree <- ggtree(tree_mp, layout = 'fan', open.angle = open_angle) + 
-  geom_tiplab(size = 1, align = FALSE, offset = max(ctree$edge.length) / 20)
+quick_tree <- ggtree(tree_midpoint, layout = 'fan', open.angle = open_angle) + 
+  geom_tiplab(size = 1, align = FALSE, offset = max(tree_midpoint$edge.length) / 20)
+
+# get number of branches to adjust scale on the branchsize
+branches <- length(unique(quick_tree$data$label)) - 1
 
 # Attach species data to tree
-t_tmp     <- t %>% mutate(species = case_when(location == 'California' ~ species, TRUE ~ 'this study')) 
-tree_data <- quick_tree %<+% t_tmp + geom_tippoint(aes(color = species))
+tree_data <- quick_tree %<+% total_dataset + 
+  geom_tippoint(aes(color = species)) + 
+  scale_color_discrete(name = 'Species')
 
+Log2MICs = sort(unique(as.vector(ECOFF_heatmap)))
+res_MICs  = length(which(Log2MICs > 0)) # Counts number of values above ECOFF in total
+sens_MICs = length(Log2MICs)- res_MICs # Counts number of values above ECOFF in total
+blues = hcl.colors(sens_MICs+3, "Blues 3")[1:sens_MICs]
+reds  = rev(hcl.colors(res_MICs+3, "Reds 3")[1:res_MICs])
 # Heatmap 1: MIC Distances
-tmp <- gheatmap(
+heatmap_ecoff <- gheatmap(
     tree_data, 
-    as.matrix(meta), 
+    as.matrix(ECOFF_heatmap), 
     color          = 'white',
     colnames_angle = -90,
     hjust          = 0,
-    width          = 0.05 * ncol(meta),
+    width          = 0.05 * ncol(ECOFF_heatmap),
     offset         = max(quick_tree$data$x) / 5,
     colnames       = TRUE,
     font.size      = 1.5
   ) +
-  scale_fill_gradient2(
-    low      = "blue", 
-    mid      = "white", 
-    high     = "red", 
-    midpoint = 0, 
-    name     = expression(atop(Log[2]~"(MIC) distance", "from ECOFF", "   "))
+  scale_fill_gradientn(
+    colors = c(blues,reds),
+    name     = expression(atop(Log[2]~"(MIC) distance", "from ECOFF", "   ")),
+    breaks = c(-8,-4,-2,0,1,2,4),
+    labels = c('-8','-4','-2','0 (WT)','1 (NWT)','2','4'),
+   # guide = 'legend'
   )
 
-# Prepare Source/Origin data
-tmp1     <- tmp + new_scale_fill()
-origins  <- select(t, isolate, origin, location) %>% distinct()
-row.names(origins) <- origins$isolate
-org      <- origins %>% select(-c(isolate, location))
-branches <- length(unique(quick_tree$data$label)) - 1
+#reset scaling for colors
+tmp    <- heatmap_ecoff + new_scale_fill()
+
 
 # Heatmap 2: Origin/Source
-tmp <- gheatmap(
-    tmp1, 
-    org, 
+heatmap_ecoff_source <- gheatmap(
+    tmp, 
+    source, 
     colnames_angle = -90, 
     hjust          = 0,
     font.size      = 1.5,
@@ -149,27 +166,59 @@ tmp <- gheatmap(
     offset = 1
   )
 
-# Add Variant Labels to Tips
-variants <- select(t, isolate, variant)
-row.names(variants) <- variants$isolate
-vars <- variants %>% 
-  select(-isolate) %>% 
-  mutate(variant = factor(variant, levels = c('WT', paste0('v', 1:26)), ordered = TRUE)) 
+heatmap_ecoff_source_cyp51 = heatmap_ecoff_source + geom_tiplab(
+    aes(label = variant),     
+    offset = max(quick_tree$data$x) * 0.7,            
+    size = 2, 
+    hjust = -0.1,align = T,linesize = 0
+  )
 
-tmp1 <- tmp + new_scale_fill()
+
+
 ```
 ## View Plot
 ```{r visualize}
-tmp
+heatmap_ecoff_source_cyp51
 ```
 
 ## Save Plot
 ```{r}
 dir_path = here::here("plots")
-ggsave(plot = tmp, glue::glue('{dir_path}/Fig_3_tree.svg'), height = 8, width = 10)
+ggsave(plot = heatmap_ecoff_source_cyp51, glue::glue('{dir_path}/Fig_3_tree.svg'), height = 8, width = 10)
 
 ```
 
+
+## adding Clonal groups to the plot
+```{r}
+results_path = here::here("results")
+CG = read.csv(glue::glue('{results_path}/clonal_groups.csv')) %>% filter(strains_count > 4) %>% 
+  select(group_id,strain) %>% rename("clonal group" = group_id)
+
+
+row.names(CG) <- CG$strain
+CG     <-CG %>% select(-c(strain))
+
+tmp     <- heatmap_ecoff_source_cyp51 + new_scale_fill()
+
+heatmap_ecoff_source_cyp51_clonal_groups <- 
+  gheatmap(
+    tmp, 
+    CG, 
+    colnames_angle = -90, 
+    hjust          = 0,
+    font.size      = 1.5,
+    width          = 0.05,
+    offset         = max(quick_tree$data$x) * 0.8)+
+    scale_fill_manual(name = 'Clonal group (>4)', values  = viridis::plasma(7), na.value = 'white') 
+
+heatmap_ecoff_source_cyp51_clonal_groups
+
+
+ 
+
+
+```
 
 ## SessionInfo
 ```{r}
