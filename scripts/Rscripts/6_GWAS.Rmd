@@ -16,27 +16,30 @@ This script builds manhattan plots for all the GWAS and FST analyses
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
 subdir_name <- "Rscripts/6_GWAS"
-library(tidyverse)
-library(janitor)
-library(here)
-library(data.table)
-library(ggplot2)
-library(scales) # Required for label_number
-library(fuzzyjoin)
-library(jsonlite)
 
+BiocManager::install("IRanges")
+library(IRanges)
+#install.packages('fuzzyjoin')
+pkgs = c('tidyverse','janitor','here','data.table','ggplot2','scales','fuzzyjoin','jsonlite','R.utils','qqman','patchwork')
+new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
+install.packages(new.pkgs, INSTALL_opts = '--no-lock', dependencies = TRUE)
+lapply(pkgs, require, character.only = TRUE)
 ```
 
-```{r knit, echo = F,eval=F,warning=F,include=F}
+#setup folders etc
+```{r}
 GWAS_data = here::here("data/GWAS")
 GWAS_results = here::here("results/GWAS")
 gff_data = here::here("data/seq_data/")
 fst_data = here::here("data/FST/")
-
-
 scripts = here::here("scripts")
 results = here::here("results")
-rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = glue::glue('{results}'))
+
+```
+
+```{r knit, eval=F, echo=F, warning=FALSE, include=F}
+
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = here('results'))
 ```
 
 # Project overview
@@ -178,9 +181,9 @@ filt_itc <- itc %>% filter(p_wald < 1e-5)
 filt_pos <- pos %>% filter(p_wald < 1e-5)
 filt_vrc <- vrc %>% filter(p_wald < 1e-5)
 
-gff3 = fread(glue::glue('{gff_data}/GCA_013340325.1_ASM1334032v1_genomic.gff'),fill = 12,skip = 7,comment.char = '#') %>% 
+gff3 = fread(glue::glue('{gff_data}/GCA_013340325.1_ASM1334032v1_genomic.gff'),fill = 12,skip = 7) %>% 
     mutate(chr = as.numeric(gsub("BLWE010000", "", V1))) %>% select(chr, everything()) %>% select(-V1) %>% 
-    rename(start= V4, end = V5)
+    dplyr::rename(start= V4, end = V5)
 
 feature_table <- download_data()
 
@@ -214,6 +217,7 @@ head(hi_over)
 
 
 # Perform sliding window approach
+Data generated with jupyter notebook. 
 ```{r sliding window,fig.width=10, fig.height=5, out.width="100%"}
 fst_rest_vs_sens = fread(glue::glue('{fst_data}/all_10k.windowed.weir.fst')) %>% clean_names()
 fst_clin_vs_env = fread(glue::glue('{fst_data}/env_cli_10k.windowed.weir.fst'))%>% clean_names() %>% 
@@ -231,7 +235,7 @@ top <- ggplot(df_slide_window) +
   geom_point(aes(x=bin_start, y=clinical_weighted_fst, color=chrom), size=0.5) + 
   facet_grid(cols=vars(chrom), scales="free", space="free") +
   theme_classic(base_size=14) + 
-  ylim(-0.01, 0.61) +
+  ylim(-0.04, 0.61) +
   geom_hline(aes(yintercept=0.3), lty=2, lwd=0.2) +
   theme(legend.position="none",
         panel.spacing=unit(0.01, "cm"),
@@ -253,7 +257,7 @@ bottom <- ggplot(df_slide_window) +
   geom_point(aes(x=bin_start, y=weighted_fst, color=chrom), size=0.5) + 
   facet_grid(cols=vars(chrom), scales="free", space="free") +
   theme_classic(base_size=14) + 
-  ylim(-0.01, 0.61) +
+  ylim(-0.04, 0.61) +
   geom_hline(aes(yintercept=0.3), lty=2, lwd=0.2) +
   theme(legend.position="none",
         panel.spacing = unit(0.01, "cm"),
@@ -273,7 +277,7 @@ combined_plot <- (top / bottom) +
   plot_layout(guides = "collect") & 
   theme(plot.margin = margin(5, 5, 5, 5))
 
-
+combined_plot
 ggsave(glue::glue('{GWAS_results}/fst_graph.svg'),plot = combined_plot, height = 4.5, width = 10)
 ```
 

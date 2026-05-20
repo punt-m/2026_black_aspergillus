@@ -86,7 +86,7 @@ get_genes_of_interest <- function(gw_results, annotations, p_threshold = 1e-5, b
     genome_inner_join(annot_buffered, 
                       by = c("chr", "ps" = "search_start", "ps" = "search_end")) %>%
     # 4. Clean up the duplicate chr columns
-    rename(chr = chr.x) %>%
+    dplyr::rename(chr = chr.x) %>%
     select(-chr.y) %>%
     # Move core columns to the front for readability
     select(chr, ps, p_wald, gene_id, start, end, everything())
@@ -100,6 +100,7 @@ download_data <- function(){
   # 2. Download the file
   download.file(ftp_path, destfile = "feature_table.txt.gz")
   # 3. Read it directly into R
-  feature_table <- fread("feature_table.txt.gz", sep = "\t", quote = "", fill = TRUE) %>% select(locus_tag,name) %>% filter(name != '') %>% rename(gene_id=locus_tag) %>% distinct()
+  feature_table <- fread("feature_table.txt.gz", sep = "\t", quote = "", fill = TRUE) %>% dplyr::select(locus_tag,name) %>%
+    dplyr::filter(name != '') %>% dplyr::rename(gene_id=locus_tag) %>% distinct()
   return(feature_table)
 }
