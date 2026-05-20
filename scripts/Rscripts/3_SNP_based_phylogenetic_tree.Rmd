@@ -18,16 +18,11 @@ This script generates a phylogenetic tree from the SNP data that was build using
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
 subdir_name <- "Rscripts/3_SNP_based_phylogenetic_tree"
-library(ape)
-library(ggtree)
-library(ggplot2)
-library(treeio)
-library(tidyverse)
-library(ggnewscale)
-library(janitor)
-library(phytools)
-library(openxlsx)
-library(here)
+
+pkgs = c('ape','ggtree','here','data.table','ggplot2','janitor','ggnewscale','tidyverse','phytools','openxlsx')
+new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
+install.packages(new.pkgs, INSTALL_opts = '--no-lock', dependencies = TRUE)
+lapply(pkgs, require, character.only = TRUE)
 ```
 
 # Project Overview

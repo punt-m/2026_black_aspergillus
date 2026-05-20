@@ -17,12 +17,11 @@ This script generates the MIC distribution plots
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
 subdir_name <- "Rscripts/1_MIC_distributions"
-library(here)
-library(tidyverse)
-library(janitor)
-library(knitr)
-library(ggplot2)
-library(patchwork)
+pkgs = c('here','data.table','ggplot2','janitor','knitr','tidyverse','phytools','reshape2','patchwork')
+new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
+install.packages(new.pkgs, INSTALL_opts = '--no-lock', dependencies = TRUE)
+lapply(pkgs, require, character.only = TRUE)
+
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
@@ -105,6 +104,53 @@ head(table_final)
 
 
 ```
+
+Making an overview of the correlation between MICs
+
+```{r}
+corr_df_anl = df %>% filter(species == 'aspergillus niger') %>% 
+  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ log2(as.numeric(gsub('>16','32',.x))))) %>% select(itc:pth)
+
+corr_df_atl = df %>% filter(species == 'aspergillus tubingensis') %>% 
+  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ log2(as.numeric(gsub('>16','32',.x))))) %>% select(itc:pth)
+
+get_lineage_matrix = function(lineage){
+  corr_matrix = round(cor(lineage,use = 'complete.obs'),2)
+  corr_matrix[upper.tri(corr_matrix, diag = TRUE)] <- NA
+  melted_corr <- reshape2::melt(corr_matrix, na.rm = TRUE)
+  return(melted_corr)
+}
+anl_matrix = get_lineage_matrix(corr_df_anl) %>% mutate(lineage = 'ANL')
+atl_matrix = get_lineage_matrix(corr_df_atl) %>% mutate(lineage = 'ATL')
+matrices = rbind(anl_matrix,atl_matrix)
+
+blue = hcl.colors(5, "Blues 3")[4]
+red  = rev(hcl.colors(5, "Reds 3"))[4]
+
+# 4. Plot with text labels
+corplot = ggplot(data = matrices, aes(x = Var1, y = Var2, fill = value)) + 
+  geom_tile(color = "white") + 
+  facet_grid(~lineage) +
+  
+  # Add this layer to show the values
+  geom_text(aes(label = value), color = "black", size = 3.5) + 
+  
+  scale_fill_gradient2( low = blue, mid = "white", high =red, 
+                       limit = c(-1,1), space = "Lab", midpoint = 0, 
+                       name="Pearson\nCorrelation") +
+  theme_minimal() + 
+  theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+    panel.grid.major = element_blank(), 
+    panel.grid.minor = element_blank()
+  ) +
+  coord_fixed() + 
+  labs(title = "Correlation Heatmap", x = "", y = "")
+
+corplot
+```
+
+
 
 Make an overview of the MICs of the agricultural azoles for ECOFFinder
 ```{r}
