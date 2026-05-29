@@ -145,9 +145,10 @@ corplot = ggplot(data = matrices, aes(x = Var1, y = Var2, fill = value)) +
     panel.grid.minor = element_blank()
   ) +
   coord_fixed() + 
-  labs(title = "Correlation Heatmap", x = "", y = "")
+  labs(title = "", x = "", y = "")
 
 corplot
+
 ```
 
 
@@ -205,6 +206,8 @@ dir_path = here::here("plots")
 dir_res = here::here("results")
 ggsave(filename = glue::glue("{dir_path}/Fig_1_mic_species_plots.svg"), plot = azole_species_plots,  width = 12,  height =6,   bg = "white")
 ggsave(filename = glue::glue("{dir_path}/Fig_2_mic_agri_plots.svg"), plot = azole_agri_plots,  width = 8,  height = 8,   bg = "white")
+ggsave(filename = glue::glue("{dir_path}/Fig_S2_correlation_plots.svg"), plot = corplot,  width = 7,  height =3.6,   bg = "white")
+
 openxlsx::write.xlsx(table_final, file = glue::glue("{dir_res}/NWT_overview.xlsx"))
 
 ```
