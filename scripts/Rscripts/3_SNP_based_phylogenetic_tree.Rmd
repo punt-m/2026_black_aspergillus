@@ -294,7 +294,7 @@ heatmap_ecoff_source_cyp51_cg =
 
  
 ggsave(plot = heatmap_ecoff_source_cyp51_cg, glue::glue('{dir_path}/Fig_4_tree_cg.svg'), height = 8, width = 10)
-
+heatmap_ecoff_source_cyp51_cg
 ```
 
 ## SessionInfo
