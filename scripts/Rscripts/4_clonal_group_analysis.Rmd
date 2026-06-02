@@ -140,8 +140,9 @@ write.csv(df_final, glue::glue('{dir_path}/clonal_groups.csv'), row.names = T)
 
 df_table4 <- df_final %>% 
   filter(group_id %in% c("CG1","CG2","CG3")) %>% 
-  select(group_id,strain, origin, year_of_isolation,specimen_types,variant, itc:pth)
-write.csv(df_table4, glue::glue('{dir_path}/table4_clonal_groups.csv'), row.names = T)
+  select(group_id,strain, origin, year_of_isolation,specimen_types,variant, itc:pth) %>% 
+  mutate(across(itc:pth, ~gsub("32", "> 16", .)))
+openxlsx::write.xlsx(df_table4, glue::glue('{dir_path}/table4_clonal_groups.xlsx'), rowNames =T)
 
 #library(openxlsx)
 #write.xlsx(df_final, glue::glue('{dir_path}/clonal_groups.xlsx'),rowNames = T)
