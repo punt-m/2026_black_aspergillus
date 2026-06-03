@@ -39,7 +39,7 @@ First, we clear the environment, load the necessary tidyverse libraries, and imp
 
 ```{r environmental, echo= F}
 # Load genomic distance data (PLINK)
-plink_df <- read.table(glue::glue("{data}/2.PLINK_atubingensis.genome"), header = TRUE) %>% 
+plink_df <- read.table(glue::glue("{data}/ATL.genome"), header = TRUE) %>% 
   mutate(SNP_dif = IBS0 + IBS1)
 
 # Load variant and metadata info
@@ -108,14 +108,16 @@ group_ranks <- clonal_groups %>%
   summarise(strains_count = n()) %>%
   # Sort by size descending, then assign new IDs 1, 2, 3...
   arrange(desc(strains_count)) %>%
-  mutate(new_cg_id = paste0("CG", row_number()))
+  mutate(new_cg_id = paste0("CG", row_number()),
+         order_id = row_number())
 
 # Merge everything back together
 df_final <- clonal_groups %>%
   left_join(group_ranks, by = "group_id") %>%
   left_join(t, by = "strain") %>% # Assuming 't' has the strain metadata
   select(
-    group_id = new_cg_id, # Use our new ranked ID
+    order_id,
+    group_id= new_cg_id, # Use our new ranked ID
     strains_count, 
     strain, 
     location, 
@@ -123,12 +125,27 @@ df_final <- clonal_groups %>%
     variant, 
     itc, 
     pos, 
-    vrc
+    vrc,
+    teb,
+    pro,
+    dif,
+    pth,
+    year_of_isolation,
+    specimen_types
   ) %>%
-  mutate( group_id = fct_reorder(group_id, strains_count, .desc = TRUE)) %>%   arrange(group_id, strain)
+  mutate( group_id = fct_reorder(group_id, order_id)) %>%   arrange(order_id, strain) %>% select(-order_id)
 # Export results
 dir_path = here::here("results")
 write.csv(df_final, glue::glue('{dir_path}/clonal_groups.csv'), row.names = T)
+
+df_table4 <- df_final %>% 
+  filter(group_id %in% c("CG1","CG2","CG3")) %>% 
+  select(group_id,strain, origin, year_of_isolation,specimen_types,variant, itc:pth) %>% 
+  mutate(across(itc:pth, ~gsub("32", "> 16", .)))
+openxlsx::write.xlsx(df_table4, glue::glue('{dir_path}/table4_clonal_groups.xlsx'), rowNames =T)
+
+#library(openxlsx)
+#write.xlsx(df_final, glue::glue('{dir_path}/clonal_groups.xlsx'),rowNames = T)
 
 
 ```
@@ -163,19 +180,22 @@ Finally, an overview of three plots is made with various x-axes to view cluster 
 
 ```{r plotting, echo = F, warning=F}
 
+filling ='#01689b'
+cols = '#01689b'
+alp = 0.8
 p1 =ggplot(plink_df) +
-  geom_histogram(aes(x=DST),bins=400) +
+  geom_histogram(aes(x=DST),bins=400,fill=filling, color = cols,alpha = alp) +
   theme_classic() +
   labs(x="Genetic Distance",y="Pairs")
 
 #now make plots
 p2 =ggplot(plink_df) +
-  geom_histogram(aes(x=DST),bins=400) + xlim(0.88,1) +
+  geom_histogram(aes(x=DST),bins=400,,fill=filling, color = cols ,alpha = alp) + xlim(0.88,1) +
   theme_classic() +
   labs(x="Genetic Distance",y="Pairs")
 
 p3 = ggplot(plink_df) +
-  geom_histogram(aes(x=DST),bins=400) + xlim(0.995,1) +
+  geom_histogram(aes(x=DST),bins=400,,fill=filling, color =cols ,alpha = alp) + xlim(0.995,1) +
   theme_classic() +
   geom_vline(aes(xintercept=0.998),lty=2)+
   labs(x="Genetic Distance",y="Pairs")
@@ -187,7 +207,7 @@ plots
 Saving plots:
 ```{r save plots}
 dir_path = here::here("plots")
-ggsave(filename =glue::glue("{dir_path}/S4_genetic_distances.svg"), plot = plots,  width = 8,  height = 12,   bg = "white")
+ggsave(filename =glue::glue("{dir_path}/S4_genetic_distances.svg"), plot = plots,  width = 8,  height = 6,   bg = "white")
 
 ```
 

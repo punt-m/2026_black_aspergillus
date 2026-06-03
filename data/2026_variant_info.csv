@@ -110,7 +110,7 @@
 "109","V072-57","WT","REFERENCE","no","REFERENCE",32,2,0.25,"Clinical","Sputum"
 "110","V080-81","WT","REFERENCE","no","REFERENCE",1,0.25,1,"Clinical","Other nonrespiratory"
 "111","V085-63","WT","REFERENCE","no","REFERENCE",2,0.25,2,"Clinical","Sputum"
-"112","V087-12","WT","REFERENCE","no","REFERENCE",4,1,4,"Clinical","Other nonrespiratory"
+"112","V087-12","WT","REFERENCE","no","REFERENCE",4,1,4,"Environmental","Environmental"
 "113","V113-51","WT","REFERENCE","no","REFERENCE",2,0.5,4,"Clinical","Other respiratory"
 "114","V118-67","WT","REFERENCE","no","REFERENCE",2,0.5,4,"Clinical","Other respiratory"
 "115","V123-37","WT","REFERENCE","no","REFERENCE",1,0.5,2,"Clinical","Other respiratory"

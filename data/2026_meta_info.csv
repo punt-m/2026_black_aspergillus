@@ -236,7 +236,7 @@
 "235","M084-28","aspergillus tubingensis","256","2","0.125","2","4","2","8","8","Clinical","NA","2023","The Netherlands","abdomen","Other nonrespiratory","MAT1-2"
 "236","M099-13","aspergillus niger","256","1","0.125","1","NA","NA","NA","NA","Clinical","NA","2023","The Netherlands","schimmel","Other nonrespiratory","MAT1-1"
 "237","M152-38","aspergillus tubingensis","256","16","1","32","32","32","16","32","Clinical","NA","2025","The Netherlands","NA","Other nonrespiratory","MAT1-2"
-"238","V087-12","aspergillus tubingensis","256","4","1","4","2","1","8","2","Clinical","NA","NA","The Netherlands","air sampling","Other nonrespiratory","MAT1-2"
+"238","V087-12","aspergillus tubingensis","256","4","1","4","2","1","8","2","Environmental","NA","NA","The Netherlands","air sampling","Environmental","MAT1-2"
 "239","V153-15","aspergillus tubingensis","256","1","0.5","1","NA","NA","NA","NA","Clinical","NA","2013","The Netherlands","NA","Other nonrespiratory","MAT1-2"
 "240","V163-42","aspergillus tubingensis","256","32","2","16","32","1","32","16","Clinical","NA","2014","The Netherlands","ear","Ear","MAT1-2"
 "241","V190-66","aspergillus niger","256","1","0.25","1","NA","NA","NA","NA","Clinical","NA","2015","The Netherlands","UI oor","Ear","MAT1-1"

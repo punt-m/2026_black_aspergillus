@@ -21,3 +21,24 @@ make_mic_plot <- function(input_data,col,colors, label, lvls, breakpoint = NULL,
   return(p)
 }
 
+
+
+getIsolates <- function(nodes, tree) {
+  # Initialize a list or vector to collect isolates from all provided nodes
+  all_groups <- list()
+  for (node in nodes) {
+    all_descendants <- phytools::getDescendants(tree, node)
+    num_tips <- length(tree$tip.label)
+    tip_indices <- all_descendants[all_descendants <= num_tips]
+    
+    node_tips <- tree$tip.label[tip_indices]
+    all_groups[[as.character(node)]] <- node_tips
+  }
+  
+  # If they only asked for 1 node, unlist it to return a clean vector
+  if (length(nodes) == 1) {
+    return(unname(unlist(all_groups)))
+  }
+  
+  return(all_groups)
+}

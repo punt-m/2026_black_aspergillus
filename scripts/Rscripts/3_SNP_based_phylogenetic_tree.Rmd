@@ -15,14 +15,24 @@ output:
 ---
 This script generates a phylogenetic tree from the SNP data that was build using RAxML (GTR+G model of evolution was used with Lewis’s ascertainment bias correction [GTR+G+ASC_LEWIS]).
 
-```{r setup, include=FALSE, message=F}
-knitr::opts_chunk$set(echo = TRUE)
+```{r init, include=FALSE, message=F}
 subdir_name <- "Rscripts/3_SNP_based_phylogenetic_tree"
 
-pkgs = c('ape','ggtree','here','data.table','ggplot2','janitor','ggnewscale','tidyverse','phytools','openxlsx')
+# this is needed to force install ggplot2 3.5 as otherwise we get an error on the new_scale_fill()
+#install.packages(
+#  "https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.2.tar.gz", 
+#  repos = NULL, 
+#  type = "source",
+#  INSTALL_opts = '--no-lock'
+#)
+library(ggplot2)
+packageVersion('ggplot2')
+
+pkgs = c('ape','here','data.table','janitor','tidyverse','phytools','openxlsx','ggtree','treeio','ggnewscale','viridis')
 new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
 install.packages(new.pkgs, INSTALL_opts = '--no-lock', dependencies = TRUE)
 lapply(pkgs, require, character.only = TRUE)
+
 ```
 
 # Project Overview
@@ -32,13 +42,28 @@ subdir_name <- "Rscripts/3_SNP_based_phylogenetic_tree"
 rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
 ```
 
+# Set-up parameters
+```{r functions}
+source(here("src", "theme.R"))
+source(here("src", "MIC_plot_functions.R"))
+```
+
+
 ## Load and Root Phylogenetic Tree
 ```{r environmental, echo= T}
 # Import the Newick file and apply midpoint rooting
 data = here::here("data")
 tree_raw= read.newick(file = glue::glue('{data}/tree_data/asptu.raxml.tree'))
 tree_midpoint <- midpoint.root(tree_raw)
+
+p = as.phylo(tree_raw)
+node_al = getMRCA(p, tip = c('G1A','112'))
+node_av = getMRCA(p, tip = c('1422','1002'))
+alu = getIsolates(node_al,p)
+ava = getIsolates(node_av,p)
+
 ```
+
 
 ## Data Import and Cleaning
 ```{r data import}
@@ -59,7 +84,15 @@ wang_etal_MIC <- read.table(glue::glue('{data}/1.Wang_etal_MIC.txt'), header =T)
 total_dataset <- full_join(info_df, wang_etal_MIC) %>% 
   left_join(variant_info, by = 'isolate') %>% 
   mutate(species = gsub('aspergillus','Aspergillus',species)) %>% 
-  mutate(species = case_when(location == 'California' ~ species, TRUE ~ 'This study')) 
+  mutate(species = gsub('aspergillus','Aspergillus',species)) %>%
+  mutate(study = case_when(location == 'California' ~ 'Wang et al. 2025', TRUE ~ 'This study'),
+         species = case_when(location == 'California' ~ species,
+                    isolate %in% ava ~ 'Aspergillus vadensis',
+                    isolate %in% alu ~ 'Aspergillus luchuensis',
+                    TRUE ~ 'Aspergillus tubingensis' ),
+         origin = case_when(isolate == 'V087-12' ~ 'Environmental', T ~ origin))
+
+
 
 rm(variant_info,info_df,wang_etal_MIC)  
 write.csv(x = total_dataset, file = glue::glue('{data}/2026_MIC_combined.csv'))
@@ -102,16 +135,23 @@ source      <- origins %>% select(-c(isolate, location))
 
 # Base tree plot (Fan layout)
 open_angle <- 30
-quick_tree <- ggtree(tree_midpoint, layout = 'fan', open.angle = open_angle) + 
-  geom_tiplab(size = 1, align = FALSE, offset = max(tree_midpoint$edge.length) / 20)
+quick_tree <- 
+    ggtree(tree_midpoint,layout = 'fan', open.angle = open_angle) + 
+    geom_tree() + 
+    geom_tiplab(size = 1, align = FALSE, offset = max(tree_midpoint$edge.length) / 20)
 
 # get number of branches to adjust scale on the branchsize
 branches <- length(unique(quick_tree$data$label)) - 1
 
+
+
 # Attach species data to tree
 tree_data <- quick_tree %<+% total_dataset + 
-  geom_tippoint(aes(color = species)) + 
-  scale_color_discrete(name = 'Species')
+  geom_tippoint(aes(color = study),size = 0.75) + 
+  scale_color_discrete(name = 'Study') #+ 
+  #scale_shape_manual(values=c(3, 5))
+
+
 
 Log2MICs = sort(unique(as.vector(ECOFF_heatmap)))
 res_MICs  = length(which(Log2MICs > 0)) # Counts number of values above ECOFF in total
@@ -166,7 +206,25 @@ heatmap_ecoff_source_cyp51 = heatmap_ecoff_source + geom_tiplab(
     offset = max(quick_tree$data$x) * 0.7,            
     size = 2, 
     hjust = -0.1,align = T,linesize = 0
-  )
+  ) + 
+  geom_cladelab(node = node_al,
+                  label = 'A. luchuensis',
+                  angle = 0,
+                  align = T,
+                  horizontal = T,
+                  offset.text = 0.05,
+                  offset =  max(quick_tree$data$x) * 1,
+                  fontsize = 3,
+                  textcolor='red', barcolor='red'
+                  ) +
+    geom_cladelab(node = node_av,
+                  label = 'A. vadensis',
+                  angle = 0,
+                  align = T,
+                  offset.text = 0.05,
+                  offset =  max(quick_tree$data$x) * 1,
+                  textcolor='blue', barcolor='blue',
+                  fontsize = 3)
 
 
 
@@ -179,7 +237,7 @@ heatmap_ecoff_source_cyp51
 ## Save Plot
 ```{r}
 dir_path = here::here("plots")
-ggsave(plot = heatmap_ecoff_source_cyp51, glue::glue('{dir_path}/Fig_3_tree.svg'), height = 8, width = 10)
+ggsave(plot = heatmap_ecoff_source_cyp51, glue::glue('{dir_path}/Fig_4_tree.svg'), height = 8, width = 10)
 
 ```
 
@@ -194,9 +252,9 @@ CG = read.csv(glue::glue('{results_path}/clonal_groups.csv')) %>% filter(strains
 row.names(CG) <- CG$strain
 CG     <-CG %>% select(-c(strain))
 
-tmp     <- heatmap_ecoff_source_cyp51 + new_scale_fill()
+tmp     <- heatmap_ecoff_source + new_scale_fill()
 
-heatmap_ecoff_source_cyp51_clonal_groups <- 
+heatmap_ecoff_source_cyp51_cg = 
   gheatmap(
     tmp, 
     CG, 
@@ -204,15 +262,39 @@ heatmap_ecoff_source_cyp51_clonal_groups <-
     hjust          = 0,
     font.size      = 1.5,
     width          = 0.05,
-    offset         = max(quick_tree$data$x) * 0.8)+
-    scale_fill_manual(name = 'Clonal group (>4)', values  = viridis::plasma(7), na.value = 'white') 
+    offset         = max(quick_tree$data$x) * 0.7)+
+    scale_fill_manual(name = 'Clonal group (>4)', values  = viridis::plasma(8), na.value = 'white')  + 
+  geom_tiplab(
+    aes(label = variant),     
+    offset = max(quick_tree$data$x) * 0.85,            
+    size = 2, 
+    hjust = -0.1,align = T,linesize = 0
+  ) + 
+  geom_cladelab(node = node_al,
+                  label = 'A. luchuensis',
+                  angle = 0,
+                  align = T,
+                  horizontal = T,
+                  offset.text = 0.05,
+                  offset =  max(quick_tree$data$x) * 1,
+                  fontsize = 3,
+                  textcolor='red', barcolor='red'
+                  ) +
+    geom_cladelab(node = node_av,
+                  label = 'A. vadensis',
+                  angle = 0,
+                  align = T,
+                  offset.text = 0.05,
+                  offset =  max(quick_tree$data$x) * 1,
+                  textcolor='blue', barcolor='blue',
+                  fontsize = 3)
 
-heatmap_ecoff_source_cyp51_clonal_groups
+
 
 
  
-
-
+ggsave(plot = heatmap_ecoff_source_cyp51_cg, glue::glue('{dir_path}/Fig_4_tree_cg.svg'), height = 8, width = 10)
+heatmap_ecoff_source_cyp51_cg
 ```
 
 ## SessionInfo

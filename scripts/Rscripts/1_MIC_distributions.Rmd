@@ -38,6 +38,16 @@ df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %
                              species == 'aspergillus tubingensis' ~ 'ATL',
                              species == 'aspergillus brasiliensis' ~ 'ABL',
                              T ~ NA))
+
+
+df_info <- df %>% select(strain, specimen_types) %>% 
+  mutate(specimen_types = case_when(strain == 'V087-12' ~ 'Environmental',
+                                    specimen_types == 'Lung' ~ 'Bronchial lavage',
+                                    T ~ specimen_types,
+                                    )) %>% 
+  group_by(specimen_types) %>% 
+  mutate(env = 78, clin = 243-78) %>% 
+  summarise(n(), n()/env, n()/clin) %>% distinct()
 ```
 
 # Set-up parameters
@@ -145,9 +155,10 @@ corplot = ggplot(data = matrices, aes(x = Var1, y = Var2, fill = value)) +
     panel.grid.minor = element_blank()
   ) +
   coord_fixed() + 
-  labs(title = "Correlation Heatmap", x = "", y = "")
+  labs(title = "", x = "", y = "")
 
 corplot
+
 ```
 
 
@@ -205,6 +216,8 @@ dir_path = here::here("plots")
 dir_res = here::here("results")
 ggsave(filename = glue::glue("{dir_path}/Fig_1_mic_species_plots.svg"), plot = azole_species_plots,  width = 12,  height =6,   bg = "white")
 ggsave(filename = glue::glue("{dir_path}/Fig_2_mic_agri_plots.svg"), plot = azole_agri_plots,  width = 8,  height = 8,   bg = "white")
+ggsave(filename = glue::glue("{dir_path}/Fig_3_correlation_plots.svg"), plot = corplot,  width = 7,  height =3.6,   bg = "white")
+
 openxlsx::write.xlsx(table_final, file = glue::glue("{dir_res}/NWT_overview.xlsx"))
 
 ```
