@@ -18,15 +18,9 @@ This script generates a phylogenetic tree from the SNP data that was build using
 ```{r init, include=FALSE, message=F}
 subdir_name <- "Rscripts/3_SNP_based_phylogenetic_tree"
 
-# this is needed to force install ggplot2 3.5 as otherwise we get an error on the new_scale_fill()
-#install.packages(
-#  "https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.5.2.tar.gz", 
-#  repos = NULL, 
-#  type = "source",
-#  INSTALL_opts = '--no-lock'
-#)
-library(ggplot2)
-packageVersion('ggplot2')
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+
+BiocManager::install(c("treeio", "ggtree"), update = FALSE, ask = FALSE)
 
 pkgs = c('ape','here','data.table','janitor','tidyverse','phytools','openxlsx','ggtree','treeio','ggnewscale','viridis')
 new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
@@ -213,7 +207,7 @@ heatmap_ecoff_source_cyp51 = heatmap_ecoff_source + geom_tiplab(
                   align = T,
                   horizontal = T,
                   offset.text = 0.05,
-                  offset =  max(quick_tree$data$x) * 1,
+                  offset =  max(quick_tree$data$x) * 1.1,
                   fontsize = 3,
                   textcolor='red', barcolor='red'
                   ) +
@@ -222,7 +216,7 @@ heatmap_ecoff_source_cyp51 = heatmap_ecoff_source + geom_tiplab(
                   angle = 0,
                   align = T,
                   offset.text = 0.05,
-                  offset =  max(quick_tree$data$x) * 1,
+                  offset =  max(quick_tree$data$x) * 1.1,
                   textcolor='blue', barcolor='blue',
                   fontsize = 3)
 
@@ -276,7 +270,7 @@ heatmap_ecoff_source_cyp51_cg =
                   align = T,
                   horizontal = T,
                   offset.text = 0.05,
-                  offset =  max(quick_tree$data$x) * 1,
+                  offset =  max(quick_tree$data$x) * 1.05,
                   fontsize = 3,
                   textcolor='red', barcolor='red'
                   ) +
@@ -285,7 +279,7 @@ heatmap_ecoff_source_cyp51_cg =
                   angle = 0,
                   align = T,
                   offset.text = 0.05,
-                  offset =  max(quick_tree$data$x) * 1,
+                  offset =  max(quick_tree$data$x) * 1.05,
                   textcolor='blue', barcolor='blue',
                   fontsize = 3)
 

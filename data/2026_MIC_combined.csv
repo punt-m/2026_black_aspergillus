@@ -236,7 +236,7 @@
 "235","M084-28","Aspergillus tubingensis",256,2,0.125,2,4,2,8,8,"Clinical",NA,2023,"The Netherlands","abdomen","Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE","This study"
 "236","M099-13","Aspergillus tubingensis",256,1,0.125,1,NA,NA,NA,NA,"Clinical",NA,2023,"The Netherlands","schimmel","Other nonrespiratory","MAT1-1",NA,NA,NA,NA,"This study"
 "237","M152-38","Aspergillus tubingensis",256,16,1,32,32,32,16,32,"Clinical",NA,2025,"The Netherlands",NA,"Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE","This study"
-"238","V087-12","Aspergillus tubingensis",256,4,1,4,2,1,8,2,"Environmental",NA,NA,"The Netherlands","air sampling","Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE","This study"
+"238","V087-12","Aspergillus tubingensis",256,4,1,4,2,1,8,2,"Environmental",NA,NA,"The Netherlands","air sampling","Environmental","MAT1-2","WT","REFERENCE","no","REFERENCE","This study"
 "239","V153-15","Aspergillus tubingensis",256,1,0.5,1,NA,NA,NA,NA,"Clinical",NA,2013,"The Netherlands",NA,"Other nonrespiratory","MAT1-2","WT","REFERENCE","no","REFERENCE","This study"
 "240","V163-42","Aspergillus tubingensis",256,32,2,16,32,1,32,16,"Clinical",NA,2014,"The Netherlands","ear","Ear","MAT1-2","v4","V17A","no","REFERENCE","This study"
 "241","V190-66","Aspergillus tubingensis",256,1,0.25,1,NA,NA,NA,NA,"Clinical",NA,2015,"The Netherlands","UI oor","Ear","MAT1-1",NA,NA,NA,NA,"This study"

@@ -1,0 +1,144 @@
+"","group_id","strains_count","strain","location","origin","variant","itc","pos","vrc","teb","pro","dif","pth","year_of_isolation","specimen_types"
+"1","CG1",14,"10-12-11-40","The Netherlands","Clinical","v1",8,0.5,1,16,2,16,32,2019,"Sputum"
+"2","CG1",14,"115","California","Clinical","v1",4,1,0.38,NA,NA,NA,NA,NA,NA
+"3","CG1",14,"1454","California","Clinical","v1",32,0.75,2,NA,NA,NA,NA,NA,NA
+"4","CG1",14,"1829","California","Clinical","v1",12,0.75,0.75,NA,NA,NA,NA,NA,NA
+"5","CG1",14,"1832","California","Clinical","v1",6,0.75,0.75,NA,NA,NA,NA,NA,NA
+"6","CG1",14,"226","California","Clinical","v1.1",0.5,1,1,NA,NA,NA,NA,NA,NA
+"7","CG1",14,"ASFU-7154","Belgium","Clinical","v1.2",4,0.25,4,4,8,8,32,2021,"Bronchial lavage"
+"8","CG1",14,"M057-50","The Netherlands","Clinical","v1",32,1,4,1,1,8,2,2022,"Ear"
+"9","CG1",14,"V154-65","The Netherlands","Clinical","v1",32,1,4,16,1,8,16,2013,"Bronchial lavage"
+"10","CG1",14,"V155-06","The Netherlands","Clinical","v1",32,1,8,16,2,8,16,2013,"Other respiratory"
+"11","CG1",14,"V155-13","The Netherlands","Clinical","v1",4,1,4,16,2,8,32,2013,"Sputum"
+"12","CG1",14,"V169-15","The Netherlands","Clinical","v1",4,0.5,4,16,2,8,8,2014,"Other respiratory"
+"13","CG1",14,"V172-61","The Netherlands","Clinical","v1",16,0.5,4,16,2,16,16,2014,"Other respiratory"
+"14","CG1",14,"V280-46","The Netherlands","Clinical","v1",16,0.5,4,4,2,8,4,2019,"Ear"
+"15","CG2",9,"230-D1","The Netherlands","Environmental","v18.1",32,1,32,32,16,16,32,2019,"Environmental"
+"16","CG2",9,"G1","The Netherlands","Environmental","v18.2",32,1,32,32,16,16,32,2025,"Environmental (hotspot)"
+"17","CG2",9,"G1A","The Netherlands","Environmental","v18.2",32,0.5,32,32,16,8,32,2025,"Environmental (hotspot)"
+"18","CG2",9,"G1C","The Netherlands","Environmental","v18.2",32,1,32,32,16,16,32,2025,"Environmental (hotspot)"
+"19","CG2",9,"G5-3","The Netherlands","Environmental","v18.2",32,1,32,32,32,32,32,2025,"Environmental (hotspot)"
+"20","CG2",9,"G5-4","The Netherlands","Environmental","v16",32,1,32,32,8,32,32,2025,"Environmental (hotspot)"
+"21","CG2",9,"G5-P","The Netherlands","Environmental","v18.2",32,2,32,32,16,32,32,2025,"Environmental (hotspot)"
+"22","CG2",9,"G5A","The Netherlands","Environmental","v18.2",32,2,32,32,16,16,32,2025,"Environmental (hotspot)"
+"23","CG2",9,"G5C","The Netherlands","Environmental","v18.2",32,2,32,32,32,32,32,2025,"Environmental (hotspot)"
+"24","CG3",8,"ASFU-9200","Belgium","Clinical","WT",0.25,0.5,0.5,2,4,4,8,2023,"Fluid"
+"25","CG3",8,"D444","The Netherlands","Environmental","WT",0.5,0.25,1,NA,NA,NA,NA,2019,"Environmental"
+"26","CG3",8,"D538-16","The Netherlands","Environmental","WT",1,0.25,1,NA,NA,NA,NA,2019,"Environmental"
+"27","CG3",8,"D538-21","The Netherlands","Environmental","WT",0.5,0.5,0.5,NA,NA,NA,NA,2019,"Environmental"
+"28","CG3",8,"D644","The Netherlands","Environmental","WT",1,0.25,1,4,1,4,2,2019,"Environmental"
+"29","CG3",8,"M039-60","The Netherlands","Environmental","WT",2,0.5,2,NA,NA,NA,NA,2021,"Environmental"
+"30","CG3",8,"M039-61","The Netherlands","Environmental","WT",2,0.25,2,NA,NA,NA,NA,2021,"Environmental"
+"31","CG3",8,"V141-45","The Netherlands","Clinical","WT",32,2,0.25,8,0.5,2,1,2012,"Bronchial lavage"
+"32","CG4",7,"1728","California","Clinical","v1",6,0.75,1,NA,NA,NA,NA,NA,NA
+"33","CG4",7,"ASFU-6087","Belgium","Clinical","v1",2,0.125,2,4,1,8,8,2019,"Bronchial lavage"
+"34","CG4",7,"M012-6","The Netherlands","Clinical","v1",2,0.25,2,NA,NA,NA,NA,2020,"Sputum"
+"35","CG4",7,"M039-49","The Netherlands","Environmental","v1",2,0.5,2,NA,NA,NA,NA,2021,"Environmental"
+"36","CG4",7,"M039-56","The Netherlands","Environmental","v1",2,0.5,2,NA,NA,NA,NA,2021,"Environmental"
+"37","CG4",7,"V095-70","The Netherlands","Clinical","v1",2,0.5,1,16,0.5,4,1,2010,"Other nonrespiratory"
+"38","CG4",7,"V294-47","The Netherlands","Clinical","v1.1",2,0.25,2,16,2,8,16,2019,"Bronchial lavage"
+"39","CG5",6,"ASFU-4167","Belgium","Clinical","WT",1,0.25,1,4,2,4,16,2016,"Other respiratory"
+"40","CG5",6,"ASFU-4189","Belgium","Clinical","WT",2,0.125,2,2,2,2,8,2016,"Tissue"
+"41","CG5",6,"ASFU-4191","Belgium","Clinical","WT",0.5,0.125,1,4,1,8,16,2016,"Fluid"
+"42","CG5",6,"ASFU-4192","Belgium","Clinical","WT",2,0.125,2,1,2,2,16,2016,"Tissue"
+"43","CG5",6,"ASFU-6060","Belgium","Clinical","WT",2,0.125,2,4,1,8,8,2019,"Bronchial lavage"
+"44","CG5",6,"DTO039-F9","Germany","Environmental","WT",2,1,1,NA,NA,NA,NA,NA,"Environmental"
+"45","CG6",5,"1417","California","Clinical","WT",6,0.38,0.75,NA,NA,NA,NA,NA,NA
+"46","CG6",5,"ASFU-4873","Belgium","Clinical","WT",1,0.25,1,8,0.5,4,8,2017,"Fluid"
+"47","CG6",5,"ASFU-4887","Belgium","Clinical","WT",1,0.5,1,4,2,8,16,2017,"Other respiratory"
+"48","CG6",5,"ASFU-4983","Belgium","Clinical","WT",1,0.5,1,4,2,8,16,2017,"Bronchial lavage"
+"49","CG6",5,"ASFU-4985","Belgium","Clinical","WT",1,0.125,0.5,4,2,8,16,2017,"Bronchial lavage"
+"50","CG7",5,"1425","California","Clinical","v7",12,0.38,0.75,NA,NA,NA,NA,NA,NA
+"51","CG7",5,"1427","California","Clinical","v7",12,1,1,NA,NA,NA,NA,NA,NA
+"52","CG7",5,"1779","California","Clinical","v7",6,1,0.25,NA,NA,NA,NA,NA,NA
+"53","CG7",5,"M086-29","The Netherlands","Clinical","v7",8,1,4,2,1,4,16,2023,"Bronchial lavage"
+"54","CG7",5,"V170-80","The Netherlands","Clinical","v7",2,0.5,4,NA,NA,NA,NA,2014,"Other respiratory"
+"55","CG8",5,"ASFU-10751","Belgium","Clinical","WT",1,0.5,4,8,4,8,32,2025,"Bronchial lavage"
+"56","CG8",5,"ASFU-5027","Belgium","Clinical","WT",1,0.5,1,4,8,16,16,2017,"Other respiratory"
+"57","CG8",5,"ASFU-5028","Belgium","Clinical","WT",1,0.5,1,4,8,16,32,2017,"Sputum"
+"58","CG8",5,"ASFU-9938","Belgium","Clinical","WT",0.5,0.25,1,4,4,4,32,2024,"Bronchial lavage"
+"59","CG8",5,"M096-4","The Netherlands","Clinical","WT",4,1,4,4,1,4,1,2023,"Bronchial lavage"
+"60","CG9",4,"1148","California","Clinical","WT",4,1,3,NA,NA,NA,NA,NA,NA
+"61","CG9",4,"1181","California","Clinical","WT",16,1,2,NA,NA,NA,NA,NA,NA
+"62","CG9",4,"1243","California","Clinical","WT",3,0.5,1,NA,NA,NA,NA,NA,NA
+"63","CG9",4,"1858","California","Clinical","WT",4,0.75,1,NA,NA,NA,NA,NA,NA
+"64","CG10",4,"M065-42","The Netherlands","Clinical","WT",4,1,2,8,1,4,2,2022,"Sputum"
+"65","CG10",4,"V113-51","The Netherlands","Clinical","WT",2,0.5,4,NA,NA,NA,NA,2001,"Other respiratory"
+"66","CG10",4,"V138-48","The Netherlands","Clinical","WT",1,1,2,NA,NA,NA,NA,2012,"Other respiratory"
+"67","CG10",4,"V155-50","The Netherlands","Clinical","WT",2,0.5,2,NA,NA,NA,NA,2013,"Other respiratory"
+"68","CG11",3,"08-46-04-49","The Netherlands","Clinical","WT",0.5,0.25,1,NA,NA,NA,NA,2017,"Sputum"
+"69","CG11",3,"V072-57","The Netherlands","Clinical","WT",32,2,0.25,8,0.5,4,1,NA,"Sputum"
+"70","CG11",3,"V085-63","The Netherlands","Clinical","WT",2,0.25,2,8,1,2,2,2009,"Sputum"
+"71","CG12",3,"10-11-09-35","The Netherlands","Clinical","WT",2,0.25,1,16,2,16,32,2018,"Ear"
+"72","CG12",3,"1413","California","Clinical","WT",8,1,1.5,NA,NA,NA,NA,NA,NA
+"73","CG12",3,"999","California","Clinical","WT",6,1.5,3,NA,NA,NA,NA,NA,NA
+"74","CG13",3,"10-11-11-03","The Netherlands","Clinical","WT",1,0.25,1,NA,NA,NA,NA,2019,"Ear"
+"75","CG13",3,"M039-52","The Netherlands","Environmental","WT",2,0.5,2,NA,NA,NA,NA,2021,"Environmental"
+"76","CG13",3,"V170-61","The Netherlands","Clinical","WT",2,0.5,2,NA,NA,NA,NA,2014,"Other respiratory"
+"77","CG14",3,"10-12-14-94","The Netherlands","Clinical","WT",1,0.25,1,NA,NA,NA,NA,2019,"Other nonrespiratory"
+"78","CG14",3,"ASFU-7117","Belgium","Clinical","WT",0.5,0.5,0.5,4,2,8,16,2021,"Bronchial lavage"
+"79","CG14",3,"V133-32","The Netherlands","Clinical","WT",1,0.25,1,NA,NA,NA,NA,2012,"Other respiratory"
+"80","CG15",3,"1184","California","Clinical","WT",3,0.5,0.75,NA,NA,NA,NA,NA,NA
+"81","CG15",3,"1220","California","Clinical","WT",3,0.5,1.5,NA,NA,NA,NA,NA,NA
+"82","CG15",3,"1662","California","Clinical","WT",3,0.38,0.5,NA,NA,NA,NA,NA,NA
+"83","CG16",3,"1399","California","Clinical","WT",3,0.75,0.75,NA,NA,NA,NA,NA,NA
+"84","CG16",3,"1467","California","Clinical","WT",8,1,0.75,NA,NA,NA,NA,NA,NA
+"85","CG16",3,"231","California","Clinical","WT",0.5,0.19,0.125,NA,NA,NA,NA,NA,NA
+"86","CG17",3,"1737","California","Clinical","WT",8,0.5,0.5,NA,NA,NA,NA,NA,NA
+"87","CG17",3,"M039-57","The Netherlands","Environmental","WT",2,0.25,2,NA,NA,NA,NA,2021,"Environmental"
+"88","CG17",3,"M044-36","The Netherlands","Clinical","WT",1,0.125,2,NA,NA,NA,NA,2021,"Other nonrespiratory"
+"89","CG18",3,"1861","California","Clinical","v1",4,0.75,0.5,NA,NA,NA,NA,NA,NA
+"90","CG18",3,"36","California","Clinical","v1",4,1,1,NA,NA,NA,NA,NA,NA
+"91","CG18",3,"V288-71","The Netherlands","Clinical","v1",2,0.125,2,NA,NA,NA,NA,2019,"Sputum"
+"92","CG19",3,"ASFU-4617","Belgium","Clinical","WT",0.25,0.5,1,4,4,8,16,2017,"Other respiratory"
+"93","CG19",3,"ASFU-7528","Belgium","Clinical","WT",0.25,0.5,2,2,4,4,16,2021,"Tissue"
+"94","CG19",3,"V087-12","The Netherlands","Environmental","WT",4,1,4,2,1,8,2,NA,"Environmental"
+"95","CG20",3,"ASFU-5335","Belgium","Clinical","WT",1,0.25,1,8,0.25,4,16,2018,"Bronchial lavage"
+"96","CG20",3,"ASFU-5337","Belgium","Clinical","WT",0.5,0.5,0.5,4,2,8,16,2018,"Bronchial lavage"
+"97","CG20",3,"ASFU-5456","Belgium","Clinical","WT",2,0.25,2,2,2,2,16,2018,"Other nonrespiratory"
+"98","CG21",3,"M039-51","The Netherlands","Environmental","WT",2,1,2,NA,NA,NA,NA,2021,"Environmental"
+"99","CG21",3,"M123-24","The Netherlands","Clinical","WT",1,0.25,1,NA,NA,NA,NA,2024,"Other respiratory"
+"100","CG21",3,"V275-24","The Netherlands","Clinical","WT",1,0.25,2,NA,NA,NA,NA,2018,"Other nonrespiratory"
+"101","CG22",3,"V028-64","The Netherlands","Clinical","v19.2",0.5,0.125,1,NA,NA,NA,NA,2004,"Bronchial wash"
+"102","CG22",3,"V075-24","The Netherlands","Clinical","v19.2",0.5,0.062,1,NA,NA,NA,NA,2008,"Bronchial lavage"
+"103","CG22",3,"V177-56","The Netherlands","Clinical","v19.2",0.5,0.125,1,NA,NA,NA,NA,2015,"Fluid"
+"104","CG23",2,"10-08-17-92","The Netherlands","Clinical","WT",1,0.25,1,NA,NA,NA,NA,2017,"Ear"
+"105","CG23",2,"ASFU-10696","Belgium","Clinical","WT",0.25,0.25,1,2,2,4,16,2025,"Tissue"
+"106","CG24",2,"10-11-09-69","The Netherlands","Clinical","WT",1,0.25,1,16,1,4,2,2018,"Ear"
+"107","CG24",2,"DTO084-D9","Germany","Environmental","WT",4,1,4,NA,NA,NA,NA,2008,"Environmental"
+"108","CG25",2,"10-11-12-95","The Netherlands","Clinical","WT",1,0.25,1,NA,NA,NA,NA,2019,"Other nonrespiratory"
+"109","CG25",2,"M039-54","The Netherlands","Environmental","WT",2,0.25,2,NA,NA,NA,NA,2021,"Environmental"
+"110","CG26",2,"10-12-19-19","The Netherlands","Clinical","WT",1,0.5,1,2,1,8,16,2020,"Ear"
+"111","CG26",2,"V139-52","The Netherlands","Clinical","WT",1,1,2,NA,NA,NA,NA,2012,"Bronchial lavage"
+"112","CG27",2,"1000","California","Clinical","WT",4,0.5,1.5,NA,NA,NA,NA,NA,NA
+"113","CG27",2,"356","California","Clinical","WT",3,1,1,NA,NA,NA,NA,NA,NA
+"114","CG28",2,"1485","California","Clinical","WT",2,0.38,0.5,NA,NA,NA,NA,NA,NA
+"115","CG28",2,"M074-80","The Netherlands","Clinical","WT",2,0.5,4,NA,NA,NA,NA,2023,"Ear"
+"116","CG29",2,"1496","California","Clinical","WT",6,0.75,0.38,NA,NA,NA,NA,NA,NA
+"117","CG29",2,"M083-46","The Netherlands","Clinical","WT",2,1,4,NA,NA,NA,NA,2023,"Ear"
+"118","CG30",2,"1497","California","Clinical","WT",2,0.38,0.25,NA,NA,NA,NA,NA,NA
+"119","CG30",2,"706","California","Clinical","WT",6,0.5,0.38,NA,NA,NA,NA,NA,NA
+"120","CG31",2,"1641","California","Clinical","v15",6,0.75,1.5,NA,NA,NA,NA,NA,NA
+"121","CG31",2,"602","California","Clinical","v15",4,0.75,0.75,NA,NA,NA,NA,NA,NA
+"122","CG32",2,"1675","California","Clinical","WT",1.5,0.38,0.38,NA,NA,NA,NA,NA,NA
+"123","CG32",2,"338","California","Clinical","v2",32,1.5,0.75,NA,NA,NA,NA,NA,NA
+"124","CG33",2,"1749","California","Clinical","WT",4,0.75,0.38,NA,NA,NA,NA,NA,NA
+"125","CG33",2,"905","California","Clinical","WT",8,0.75,2,NA,NA,NA,NA,NA,NA
+"126","CG34",2,"1764","California","Clinical","WT",4,1,1.75,NA,NA,NA,NA,NA,NA
+"127","CG34",2,"610","California","Clinical","WT",3,0.75,0.75,NA,NA,NA,NA,NA,NA
+"128","CG35",2,"1770","California","Clinical","WT",4,0.75,0.5,NA,NA,NA,NA,NA,NA
+"129","CG35",2,"M012-16","The Netherlands","Clinical","WT",2,0.25,2,NA,NA,NA,NA,2020,"Other nonrespiratory"
+"130","CG36",2,"1881","California","Clinical","WT",6,1,1,NA,NA,NA,NA,NA,NA
+"131","CG36",2,"539","California","Clinical","WT",6,0.5,2,NA,NA,NA,NA,NA,NA
+"132","CG37",2,"2516","The Netherlands","Clinical","v9",1,0.25,2,4,1,4,1,1994,"Ear"
+"133","CG37",2,"V193-77","The Netherlands","Clinical","v9",1,0.25,2,4,0.5,2,1,2016,"Other nonrespiratory"
+"134","CG38",2,"636","California","Clinical","WT",6,0.75,1,NA,NA,NA,NA,NA,NA
+"135","CG38",2,"638","California","Clinical","WT",6,0.5,1,NA,NA,NA,NA,NA,NA
+"136","CG39",2,"ASFU-8389","Belgium","Clinical","WT",1,0.25,1,8,2,4,32,2022,"Bronchial lavage"
+"137","CG39",2,"M004-62","The Netherlands","Clinical","WT",1,0.25,2,2,1,8,8,2020,"Other respiratory"
+"138","CG40",2,"ASFU-8783","Belgium","Clinical","WT",0.5,0.5,0.5,4,4,8,32,2022,"Ear"
+"139","CG40",2,"V217-61","The Netherlands","Clinical","WT",1,0.25,2,NA,NA,NA,NA,2017,"Bronchial lavage"
+"140","CG41",2,"ASFU-9954","Belgium","Clinical","WT",0.25,0.5,2,4,2,4,16,2024,"Tissue"
+"141","CG41",2,"M039-53","The Netherlands","Environmental","WT",2,0.5,2,8,1,2,1,2021,"Environmental"
+"142","CG42",2,"V123-37","The Netherlands","Clinical","WT",1,0.5,2,NA,NA,NA,NA,2011,"Other respiratory"
+"143","CG42",2,"V147-11","The Netherlands","Clinical","WT",1,0.5,2,8,0.5,2,1,2013,"Other respiratory"
