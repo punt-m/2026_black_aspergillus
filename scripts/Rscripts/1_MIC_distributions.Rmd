@@ -31,8 +31,9 @@ rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_di
 
 # Load data
 ```{r environmental, echo= F}
+
 df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %>% 
-  select(-1) %>%
+  select(-1)%>%
   mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ gsub('32','>16',.x))) %>% 
   mutate(lineage = case_when(species == 'aspergillus niger' ~ 'ANL',
                              species == 'aspergillus tubingensis' ~ 'ATL',
@@ -40,14 +41,22 @@ df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %
                              T ~ NA))
 
 
-df_info <- df %>% select(strain, specimen_types) %>% 
-  mutate(specimen_types = case_when(strain == 'V087-12' ~ 'Environmental',
-                                    specimen_types == 'Lung' ~ 'Bronchial lavage',
-                                    T ~ specimen_types,
-                                    )) %>% 
-  group_by(specimen_types) %>% 
-  mutate(env = 78, clin = 243-78) %>% 
-  summarise(n(), n()/env, n()/clin) %>% distinct()
+df_info <- df %>%
+  select(strain, specimen_types) %>%
+  mutate(
+    specimen_types = case_when(
+      specimen_types == 'Lung' ~ 'Bronchial lavage',
+      TRUE ~ specimen_types
+    )
+  ) %>%
+  group_by(specimen_types) %>%
+  mutate(env = 78, clin = 243 - 78) %>%
+  reframe(
+    count = n(),
+    prop_env = n() / env,
+    prop_clin = n() / clin
+  ) %>%
+  distinct()
 ```
 
 # Set-up parameters
