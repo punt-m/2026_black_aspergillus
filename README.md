@@ -1,4 +1,4 @@
-# Acquired azole resistance in series _Nigri_
+# Evidence for environmental azole resistance selection in _Aspergillus_ series _Nigri_
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
@@ -6,8 +6,7 @@ _Authors_: Maarten Punt <a href="https://orcid.org/0000-0001-6053-9073" target="
 _Contact_: maarten.punt@rivm.nl<br>
 _Date_: 10-Apr-2026<br>
 
-This code accompanies the manuscript 'Acquired azole resistance in series _Nigri_'. DOI:XXX
-How to cite this material: LINK ZENODO HERE
+This code accompanies the manuscript 'Evidence for environmental azole resistance selection in _Aspergillus_ series _Nigri_'. DOI:XXX
 
 ## Description
 This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) that use files from ([`data/`](data/)) to generate results ([`results/`](results/)). 
