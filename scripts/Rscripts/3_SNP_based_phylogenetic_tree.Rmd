@@ -20,7 +20,7 @@ subdir_name <- "Rscripts/3_SNP_based_phylogenetic_tree"
 
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 
-BiocManager::install(c("treeio", "ggtree"), update = FALSE, ask = FALSE)
+#BiocManager::install(c("treeio", "ggtree"), update = FALSE, ask = FALSE)
 
 pkgs = c('ape','here','data.table','janitor','tidyverse','phytools','openxlsx','ggtree','treeio','ggnewscale','viridis')
 new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
@@ -51,7 +51,7 @@ tree_raw= read.newick(file = glue::glue('{data}/tree_data/asptu.raxml.tree'))
 tree_midpoint <- midpoint.root(tree_raw)
 
 p = as.phylo(tree_raw)
-node_al = getMRCA(p, tip = c('G1A','112'))
+node_al = getMRCA(p, tip = c('NL25_AL_HS_01','112'))
 node_av = getMRCA(p, tip = c('1422','1002'))
 alu = getIsolates(node_al,p)
 ava = getIsolates(node_av,p)
@@ -62,12 +62,12 @@ ava = getIsolates(node_av,p)
 ## Data Import and Cleaning
 ```{r data import}
 variant_info <- read.csv(glue::glue('{data}/2026_variant_info.csv')) %>% select(isolate,variant,cyp51a,cyp51a_insert,cyp51b)
-info_df <- read.csv(glue::glue('{data}/2026_meta_info.csv')) %>% select(-1) %>% rename(isolate = strain)
+info_df <- read.csv(glue::glue('{data}/2026_meta_info.csv')) %>% select(-1) %>% dplyr::rename(isolate = strain)
 wang_etal_MIC <- read.table(glue::glue('{data}/1.Wang_etal_MIC.txt'), header =T) %>% 
    mutate_at(c('ITC', 'VOR', 'POS'), ~ gsub('>', '', .)) %>% 
   mutate_at(c('ITC', 'VOR', 'POS'), ~ as.numeric(.)) %>% 
   select(Species, ID, ITC, VOR, POS) %>% 
-  rename(isolate = ID, itc = ITC, pos = POS, vrc = VOR, species = Species) %>% 
+  dplyr::rename(isolate = ID, itc = ITC, pos = POS, vrc = VOR, species = Species) %>% 
   mutate(
     origin = 'Clinical', 
     location = 'California', 
@@ -83,13 +83,12 @@ total_dataset <- full_join(info_df, wang_etal_MIC) %>%
          species = case_when(location == 'California' ~ species,
                     isolate %in% ava ~ 'Aspergillus vadensis',
                     isolate %in% alu ~ 'Aspergillus luchuensis',
-                    TRUE ~ 'Aspergillus tubingensis' ),
-         origin = case_when(isolate == 'V087-12' ~ 'Environmental', T ~ origin))
+                    TRUE ~ 'Aspergillus tubingensis' ))
 
 
 
 rm(variant_info,info_df,wang_etal_MIC)  
-write.csv(x = total_dataset, file = glue::glue('{data}/2026_MIC_combined.csv'))
+#write.csv(x = total_dataset, file = glue::glue('{data}/2026_MIC_combined.csv'))
 
 
 ```
@@ -113,7 +112,8 @@ fd <- total_dataset %>%
   select(isolate, antifungal, ecoff_adj_log2)
 
 # Create matrix for gheatmap
-fd_long <- fd %>% pivot_wider(names_from = 'antifungal', values_from = 'ecoff_adj_log2')
+fd_long <- fd %>% pivot_wider(names_from = 'antifungal', values_from = 'ecoff_adj_log2') %>% 
+  dplyr::rename(ITC=itc,POS=pos,TEB=teb,PTH=pth,VRC=vrc,PRO=pro,DIF=dif)
 ECOFF_heatmap    <- as.matrix(fd_long[2:8])
 rownames(ECOFF_heatmap) <- fd_long$isolate
 
@@ -123,16 +123,18 @@ rm(fd,fd_long)
 ## Phylogenetic Visualization
 ```{R phylo_tree}
 # Prepare Source/Origin data
-origins  <- select(total_dataset, isolate, origin, location) %>% distinct()
+origins  <- select(total_dataset, isolate, origin,variant, location) %>% distinct()
 row.names(origins) <- origins$isolate
-source      <- origins %>% select(-c(isolate, location))
+source      <- origins %>% select(origin)
+variants    <- origins %>% select(variant)
+#tree_midpoint$tip.label  <- gsub('_','',tree_midpoint$tip.label)
 
 # Base tree plot (Fan layout)
 open_angle <- 30
 quick_tree <- 
     ggtree(tree_midpoint,layout = 'fan', open.angle = open_angle) + 
     geom_tree() + 
-    geom_tiplab(size = 1, align = FALSE, offset = max(tree_midpoint$edge.length) / 20)
+    geom_tiplab(size = 0.75, align = FALSE, offset = max(tree_midpoint$edge.length) / 20)
 
 # get number of branches to adjust scale on the branchsize
 branches <- length(unique(quick_tree$data$label)) - 1
@@ -186,7 +188,7 @@ heatmap_ecoff_source <- gheatmap(
     width          = 0.05,
     offset         = max(quick_tree$data$x) * 0.6
   ) + 
-  scale_fill_manual(name = 'Source', values = c('#8fcae7', '#777b00')) + 
+  scale_fill_manual(name = 'Source', values = c('#f092cd', '#777b00')) + 
   geom_treescale(
     x      = max(quick_tree$data$x) / 6, 
     y      = branches + 5,
@@ -195,6 +197,8 @@ heatmap_ecoff_source <- gheatmap(
     offset = 1
   )
 
+
+heatmap_ecoff_source@data$label = gsub('_','',heatmap_ecoff_source@data$label)
 heatmap_ecoff_source_cyp51 = heatmap_ecoff_source + geom_tiplab(
     aes(label = variant),     
     offset = max(quick_tree$data$x) * 0.7,            
@@ -240,7 +244,8 @@ ggsave(plot = heatmap_ecoff_source_cyp51, glue::glue('{dir_path}/Fig_4_tree.svg'
 ```{r}
 results_path = here::here("results")
 CG = read.csv(glue::glue('{results_path}/clonal_groups.csv')) %>% filter(strains_count > 4) %>% 
-  select(group_id,strain) %>% rename("clonal group" = group_id)
+  select(group_id,strain) %>% dplyr::rename("clonal group" = group_id) %>% 
+  mutate(strain = gsub('_','',strain))
 
 
 row.names(CG) <- CG$strain
@@ -257,7 +262,7 @@ heatmap_ecoff_source_cyp51_cg =
     font.size      = 1.5,
     width          = 0.05,
     offset         = max(quick_tree$data$x) * 0.7)+
-    scale_fill_manual(name = 'Clonal group (>4)', values  = viridis::plasma(8), na.value = 'white')  + 
+    scale_fill_manual(name = 'Clonal group (>4)', values  = viridis::plasma(8), na.value = 'white',na.translate = F)  + 
   geom_tiplab(
     aes(label = variant),     
     offset = max(quick_tree$data$x) * 0.85,            
@@ -281,8 +286,7 @@ heatmap_ecoff_source_cyp51_cg =
                   offset.text = 0.05,
                   offset =  max(quick_tree$data$x) * 1.05,
                   textcolor='blue', barcolor='blue',
-                  fontsize = 3)
-
+                  fontsize = 3) 
 
 
 

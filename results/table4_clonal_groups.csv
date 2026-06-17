@@ -1,32 +1,32 @@
 "","group_id","strain","origin","year_of_isolation","specimen_types","variant","itc","pos","vrc","teb","pro","dif","pth"
-"1","CG1","10-12-11-40","Clinical",2019,"Sputum","v1",8,0.5,1,16,2,16,32
-"2","CG1","115","Clinical",NA,NA,"v1",4,1,0.38,NA,NA,NA,NA
-"3","CG1","1454","Clinical",NA,NA,"v1",32,0.75,2,NA,NA,NA,NA
-"4","CG1","1829","Clinical",NA,NA,"v1",12,0.75,0.75,NA,NA,NA,NA
-"5","CG1","1832","Clinical",NA,NA,"v1",6,0.75,0.75,NA,NA,NA,NA
-"6","CG1","226","Clinical",NA,NA,"v1.1",0.5,1,1,NA,NA,NA,NA
-"7","CG1","ASFU-7154","Clinical",2021,"Bronchial lavage","v1.2",4,0.25,4,4,8,8,32
-"8","CG1","M057-50","Clinical",2022,"Ear","v1",32,1,4,1,1,8,2
-"9","CG1","V154-65","Clinical",2013,"Bronchial lavage","v1",32,1,4,16,1,8,16
-"10","CG1","V155-06","Clinical",2013,"Other respiratory","v1",32,1,8,16,2,8,16
-"11","CG1","V155-13","Clinical",2013,"Sputum","v1",4,1,4,16,2,8,32
-"12","CG1","V169-15","Clinical",2014,"Other respiratory","v1",4,0.5,4,16,2,8,8
-"13","CG1","V172-61","Clinical",2014,"Other respiratory","v1",16,0.5,4,16,2,16,16
-"14","CG1","V280-46","Clinical",2019,"Ear","v1",16,0.5,4,4,2,8,4
-"15","CG2","230-D1","Environmental",2019,"Environmental","v18.1",32,1,32,32,16,16,32
-"16","CG2","G1","Environmental",2025,"Environmental (hotspot)","v18.2",32,1,32,32,16,16,32
-"17","CG2","G1A","Environmental",2025,"Environmental (hotspot)","v18.2",32,0.5,32,32,16,8,32
-"18","CG2","G1C","Environmental",2025,"Environmental (hotspot)","v18.2",32,1,32,32,16,16,32
-"19","CG2","G5-3","Environmental",2025,"Environmental (hotspot)","v18.2",32,1,32,32,32,32,32
-"20","CG2","G5-4","Environmental",2025,"Environmental (hotspot)","v16",32,1,32,32,8,32,32
-"21","CG2","G5-P","Environmental",2025,"Environmental (hotspot)","v18.2",32,2,32,32,16,32,32
-"22","CG2","G5A","Environmental",2025,"Environmental (hotspot)","v18.2",32,2,32,32,16,16,32
-"23","CG2","G5C","Environmental",2025,"Environmental (hotspot)","v18.2",32,2,32,32,32,32,32
-"24","CG3","ASFU-9200","Clinical",2023,"Fluid","WT",0.25,0.5,0.5,2,4,4,8
-"25","CG3","D444","Environmental",2019,"Environmental","WT",0.5,0.25,1,NA,NA,NA,NA
-"26","CG3","D538-16","Environmental",2019,"Environmental","WT",1,0.25,1,NA,NA,NA,NA
-"27","CG3","D538-21","Environmental",2019,"Environmental","WT",0.5,0.5,0.5,NA,NA,NA,NA
-"28","CG3","D644","Environmental",2019,"Environmental","WT",1,0.25,1,4,1,4,2
-"29","CG3","M039-60","Environmental",2021,"Environmental","WT",2,0.5,2,NA,NA,NA,NA
-"30","CG3","M039-61","Environmental",2021,"Environmental","WT",2,0.25,2,NA,NA,NA,NA
-"31","CG3","V141-45","Clinical",2012,"Bronchial lavage","WT",32,2,0.25,8,0.5,2,1
+"1","CG1","115","Clinical",NA,NA,"v1",4,1,0.38,NA,NA,NA,NA
+"2","CG1","1454","Clinical",NA,NA,"v1",32,0.75,2,NA,NA,NA,NA
+"3","CG1","1829","Clinical",NA,NA,"v1",12,0.75,0.75,NA,NA,NA,NA
+"4","CG1","1832","Clinical",NA,NA,"v1",6,0.75,0.75,NA,NA,NA,NA
+"5","CG1","226","Clinical",NA,NA,"v1.1",0.5,1,1,NA,NA,NA,NA
+"6","CG1","BE21_AT_CL_02","Clinical",2021,"Bronchial lavage","v1.2",4,0.25,4,4,8,8,32
+"7","CG1","NL13_AT_CL_02","Clinical",2013,"Bronchial lavage","v1",32,1,4,16,1,8,16
+"8","CG1","NL13_AT_CL_03","Clinical",2013,"Other respiratory","v1",32,1,8,16,2,8,16
+"9","CG1","NL13_AT_CL_04","Clinical",2013,"Sputum","v1",4,1,4,16,2,8,32
+"10","CG1","NL14_AT_CL_02","Clinical",2014,"Other respiratory","v1",4,0.5,4,16,2,8,8
+"11","CG1","NL14_AT_CL_05","Clinical",2014,"Other respiratory","v1",16,0.5,4,16,2,16,16
+"12","CG1","NL19_AT_CL_07","Clinical",2019,"Sputum","v1",8,0.5,1,16,2,16,32
+"13","CG1","NL19_AT_CL_10","Clinical",2019,"Ear","v1",16,0.5,4,4,2,8,4
+"14","CG1","NL22_AT_CL_01","Clinical",2022,"Ear","v1",32,1,4,1,1,8,2
+"15","CG2","NL19_AL_EV_01","Environmental",2019,"Environmental","v18.1",32,1,32,32,16,16,32
+"16","CG2","NL25_AL_HS_01","Environmental",2025,"Environmental (hotspot)","v18.2",32,0.5,32,32,16,8,32
+"17","CG2","NL25_AL_HS_02","Environmental",2025,"Environmental (hotspot)","v18.2",32,1,32,32,16,16,32
+"18","CG2","NL25_AL_HS_03","Environmental",2025,"Environmental (hotspot)","v18.2",32,1,32,32,16,16,32
+"19","CG2","NL25_AL_HS_04","Environmental",2025,"Environmental (hotspot)","v18.2",32,1,32,32,32,32,32
+"20","CG2","NL25_AL_HS_05","Environmental",2025,"Environmental (hotspot)","v16",32,1,32,32,8,32,32
+"21","CG2","NL25_AL_HS_06","Environmental",2025,"Environmental (hotspot)","v18.2",32,2,32,32,16,16,32
+"22","CG2","NL25_AL_HS_07","Environmental",2025,"Environmental (hotspot)","v18.2",32,2,32,32,32,32,32
+"23","CG2","NL25_AL_HS_08","Environmental",2025,"Environmental (hotspot)","v18.2",32,2,32,32,16,32,32
+"24","CG3","BE23_AT_CL_01","Clinical",2023,"Fluid","WT",0.25,0.5,0.5,2,4,4,8
+"25","CG3","NL12_AT_CL_02","Clinical",2012,"Bronchial lavage","WT",32,2,0.25,8,0.5,2,1
+"26","CG3","NL19_AT_EV_01","Environmental",2019,"Environmental","WT",0.5,0.25,1,NA,NA,NA,NA
+"27","CG3","NL19_AT_EV_02","Environmental",2019,"Environmental","WT",1,0.25,1,NA,NA,NA,NA
+"28","CG3","NL19_AT_EV_03","Environmental",2019,"Environmental","WT",1,0.25,1,4,1,4,2
+"29","CG3","NL19_AT_EV_04","Environmental",2019,"Environmental","WT",0.5,0.5,0.5,NA,NA,NA,NA
+"30","CG3","NL21_AT_EV_11","Environmental",2021,"Environmental","WT",2,0.5,2,NA,NA,NA,NA
+"31","CG3","NL21_AT_EV_12","Environmental",2021,"Environmental","WT",2,0.25,2,NA,NA,NA,NA

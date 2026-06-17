@@ -43,9 +43,9 @@ plink_df <- read.table(glue::glue("{data}/ATL.core.genome"), header = TRUE) %>%
   mutate(SNP_dif = IBS0 + IBS1)
 
 # Load variant and metadata info
-variant_info <- read.csv(glue::glue("{data}/2026_variant_info.csv")) %>%
+variant_info <- read.csv(glue::glue("{data}/2026_variant_info.csv")) %>% select(-1) %>%
   select(isolate, variant) %>% 
-  rename(strain = isolate)
+  dplyr::rename(strain = isolate)
 
 info_df <- read.csv(glue::glue("{data}/2026_meta_info.csv")) %>% 
   select(-1)
@@ -55,7 +55,7 @@ calif_df <- read.table(glue::glue("{data}/1.Wang_etal_MIC.txt"), header = TRUE) 
   mutate_at(c('ITC', 'VOR', 'POS'), ~ gsub('>', '', .)) %>% 
   mutate_at(c('ITC', 'VOR', 'POS'), ~ as.numeric(.)) %>% 
   select(Species, ID, ITC, VOR, POS) %>% 
-  rename(strain = ID, itc = ITC, pos = POS, vrc = VOR, species = Species) %>% 
+  dplyr::rename(strain = ID, itc = ITC, pos = POS, vrc = VOR, species = Species) %>% 
   mutate(origin = 'Clinical', location = 'California', strain = as.character(strain)) %>% 
   mutate(across(c(species), ~ gsub('A.', 'aspergillus ', .x)))
 
@@ -74,12 +74,12 @@ We combine the California clinical data with the primary metadata and link it to
 # Create a matching table for join operations
 matching_df <- t %>% 
   select(strain, origin) %>% 
-  rename(match = strain, origin_match = origin)
+  dplyr::rename(match = strain, origin_match = origin)
 
 # Filter for high-similarity pairs (Clonal threshold: DST > 0.998)
 df <- plink_df %>% 
   filter(DST > 0.998) %>% 
-  rename(strain = FID1, match = FID2) %>% 
+  dplyr::rename(strain = FID1, match = FID2) %>% 
   left_join(t) %>% 
   select(strain, match, DST, origin, source, year_of_isolation, location) %>% 
   left_join(matching_df)
@@ -94,7 +94,7 @@ Using the igraph package, we treat isolates as nodes and high-similarity pairs a
 ```{r networking}
 edges <- df[, c("strain", "match")]
 g <- graph_from_data_frame(edges, directed = FALSE)
-clusters <- components(g)
+clusters <- clusters(g)
 
 # Create the initial lookup
 clonal_groups <- data.frame(
@@ -142,8 +142,8 @@ df_table4 <- df_final %>%
   filter(group_id %in% c("CG1","CG2","CG3")) %>% 
   select(group_id,strain, origin, year_of_isolation,specimen_types,variant, itc:pth)
 write.csv(df_table4, glue::glue('{dir_path}/table4_clonal_groups.csv'), row.names = T,dec = ',',sep = ';')
-#library(openxlsx)
-#write.xlsx(df_final, glue::glue('{dir_path}/clonal_groups.xlsx'),rowNames = T)
+library(openxlsx)
+write.xlsx(df_final, glue::glue('{dir_path}/clonal_groups.xlsx'),rowNames = T)
 
 
 ```

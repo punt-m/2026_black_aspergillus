@@ -43,6 +43,10 @@ df <- read.csv(glue::glue("{data}/2026_meta_info.csv")) %>%
                              species == 'aspergillus tubingensis' ~ 'ATL',
                              species == 'aspergillus brasiliensis' ~ 'ABL',
                              T ~ NA))
+
+
+df_info <- df %>% 
+  select(specimen_types) %>% group_by(specimen_types) %>% summarise(n(), n()/78,n()/165)
 ```
 
 # Set-up parameters

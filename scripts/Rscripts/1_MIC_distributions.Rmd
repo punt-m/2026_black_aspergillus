@@ -25,14 +25,15 @@ lapply(pkgs, require, character.only = TRUE)
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
-results_path = here::here("results")
+subdir_name = 'Rscripts/1_MIC_distributions'
+results_path = here::here('results')
 rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
 ```
 
 # Load data
 ```{r environmental, echo= F}
 
-df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %>% 
+df <- read.csv(here('data/2026_meta_info.csv')) %>% 
   select(-1)%>%
   mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ gsub('32','>16',.x))) %>% 
   mutate(lineage = case_when(species == 'aspergillus niger' ~ 'ANL',
@@ -128,10 +129,14 @@ Making an overview of the correlation between MICs
 
 ```{r}
 corr_df_anl = df %>% filter(species == 'aspergillus niger') %>% 
-  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ log2(as.numeric(gsub('>16','32',.x))))) %>% select(itc:pth)
+  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ log2(as.numeric(gsub('>16','32',.x))))) %>% select(itc:pth) %>% 
+    dplyr::rename(ITC=itc,POS=pos,TEB=teb,PTH=pth,VRC=vrc,PRO=pro,DIF=dif)
+
 
 corr_df_atl = df %>% filter(species == 'aspergillus tubingensis') %>% 
-  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ log2(as.numeric(gsub('>16','32',.x))))) %>% select(itc:pth)
+  mutate(across(c(itc,pos,vrc,dif,pth,teb,pro), ~ log2(as.numeric(gsub('>16','32',.x))))) %>% select(itc:pth) %>% 
+    dplyr::rename(ITC=itc,POS=pos,TEB=teb,PTH=pth,VRC=vrc,PRO=pro,DIF=dif)
+
 
 get_lineage_matrix = function(lineage){
   corr_matrix = round(cor(lineage,use = 'complete.obs'),2)

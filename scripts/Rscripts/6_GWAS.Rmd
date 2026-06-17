@@ -38,7 +38,7 @@ results = here::here("results")
 ```
 
 ```{r knit, eval=F, echo=F, warning=FALSE, include=F}
-
+subdir_name = "Rscripts/6_GWAS"
 rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = here('results'))
 ```
 

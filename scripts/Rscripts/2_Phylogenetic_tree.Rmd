@@ -29,7 +29,7 @@ library(here)
 ```
 
 ```{r knit, echo = F,eval=F,warning=F,include=F}
-results_path = here::here("results")
+results_path = here::here('results')
 rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
 ```
 
@@ -62,11 +62,11 @@ labels = data.frame(label = t1$tip.label) %>%
   tidyr::separate(label, sep = '\\|', into = c("species", "file_name"), fill = 'left') %>% 
   left_join(strain_names) %>% 
   # Clean up strain names and handle missing values
-  mutate(strain = case_when(is.na(strain) ~ file_name, TRUE ~ strain))
+  mutate(strain = case_when(is.na(strain) ~ species, TRUE ~ strain))
 
 # Update the tree object with finalized labels
 t1$tip.label <- labels$strain
-t1$tip.label <- gsub('Aspergillus', 'A.', t1$tip.label)
+t1$tip.label <- gsub('Aspergillus_', 'A. ', t1$tip.label)
 
 
 ## --- 2. Metadata Processing ---
@@ -94,7 +94,7 @@ p = groupOTU(t1, split(meta[1], meta$Origin), group_name = 'Origin')
 p1 = ggtree(t1)
 
 # Identify the Most Recent Common Ancestor (MRCA) for the two main species
-shared_node = MRCA(p1, c("A. tubingensis", "A. niger"))
+shared_node = MRCA(p1, c('A. niger', 'A. tubingensis'))
 groups = offspring(p1, shared_node, tiponly = FALSE) %>% 
   filter(parent == shared_node)
 

@@ -1,0 +1,267 @@
+---
+title: "sample_upload"
+author: "Maarten Punt"
+date: "`r Sys.time()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+This script is used to fill the submission form for NCBI SRA upload
+
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/0_sample_upload"
+pkgs = c('here','data.table','janitor','knitr','tidyverse','reshape2')
+new.pkgs <- pkgs[!(pkgs %in% installed.packages()[,"Package"])]
+install.packages(new.pkgs, INSTALL_opts = '--no-lock', dependencies = TRUE)
+lapply(pkgs, require, character.only = TRUE)
+
+```
+
+```{r knit, echo = F,eval=F,warning=F,include=F}
+results_path = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
+```
+
+# Load data
+```{r environmental, echo= F}
+df <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/2026_meta_info.csv') %>% 
+  rename(
+    X.sample_name = strain,
+    X.attribute_package = origin,
+    X.organism = species,
+    X.isolation_source = source,
+    X.geo_loc_name = location,
+    X.collection_date = year_of_isolation,
+    genotype = mating_type,
+    description = specimen_types,
+    itraconazole_mic = itc,
+    posaconazole_mic = pos,
+    voriconazole_mic = vrc,
+    prothioconazole_mic = pth,
+    prochloraz_mic = pro,
+    tebuconazole_mic = teb,
+    difenoconazole_mic = dif
+    ) %>% 
+  mutate(strain = X.sample_name) %>% 
+  select(-c(X, azole_history)) %>%  
+  mutate_at('X.collection_date' , as.character) %>% 
+  mutate(X.attribute_package = case_when(X.attribute_package == 'Clinical' ~ 'Pathogen.cl',
+                                         X.attribute_package == 'Environmental' ~ 'Pathogen.env')) %>% 
+  mutate(X.organism = case_when(strain %in% c('G1A',
+                                              'G5C',
+                                              'G5-3',
+                                              'G1',
+                                              'G5-4',
+                                              '230-D1',
+                                              'G1C',
+                                              'G5A',
+                                              'G5-P',
+                                              'M071-32',
+                                              '10-03-03-77',
+                                              'V177-56',
+                                              'V075-24',
+                                              'V028-64') ~ 'aspergillus luchuensis',
+                                T ~ X.organism)) %>% 
+  mutate(X.lat_lon = 'not collected') %>% 
+  mutate(X.collected_by = case_when(X.geo_loc_name == 'Belgium' ~'KU Leuven',
+                                    stringr::str_starts(strain,'DTO') ~'Westerdijk Institute',
+                                    stringr::str_starts(strain,'M') ~'RadboudMC',
+                                    stringr::str_starts(strain,'V') ~'RadboudMC',
+                                    !is.na(strain) & grepl("^[0-9]{4}$", strain)  ~'RadboudMC',
+                                    !is.na(strain) & grepl("^[0-9]{2}-[0-9]{2}", strain)  ~'CWZ',
+                                    !is.na(strain) & grepl("^D[0-9]{3}", strain)  ~'RIVM',
+                                    !is.na(strain) & grepl("230-D1", strain)  ~'RIVM',
+                                    !is.na(strain) & grepl("^G", strain)  ~'WUR',
+                                    T ~ 'missing',
+                                    )) %>% 
+  mutate(X.collection_date = case_when(is.na(X.collection_date) ~ 'missing', 
+                                       T ~ X.collection_date))%>% 
+  mutate(hos_tissue_sampled = case_when(X.attribute_package == 'Pathogen.cl' ~ description,
+                                        T ~ 'not applicable')) %>% 
+  mutate(new_name= paste0(
+    case_when(X.geo_loc_name == 'The Netherlands' ~ 'NL',
+              X.geo_loc_name == 'Indonesia' ~ 'ID',
+              X.geo_loc_name == 'Turkey' ~ 'TR',
+              X.geo_loc_name == 'Mexico' ~ 'MX',
+              X.geo_loc_name == 'South Africa' ~ 'ZA',
+              X.geo_loc_name == 'Thailand'     ~ 'TH',
+              X.geo_loc_name == 'Nigeria'      ~ 'NG',
+              X.geo_loc_name == 'Germany'      ~ 'DE',
+              X.geo_loc_name == 'Algeria'      ~ 'DZ',
+              X.geo_loc_name == 'Micronesia'   ~ 'FM',
+              X.geo_loc_name == 'Saudi Arabia' ~ 'SA',
+              X.geo_loc_name == 'Belgium'      ~ 'BE',
+              X.geo_loc_name == 'Canada'       ~ 'CA',
+              X.geo_loc_name == 'Hungary'      ~ 'HU'),
+    case_when(X.collection_date == 'missing'   ~ 'XX',
+              T ~ substr(X.collection_date, nchar(X.collection_date)-1, nchar(X.collection_date))),
+              '_',
+    case_when(X.organism == 'aspergillus niger' ~ 'AN',
+              X.organism == 'aspergillus tubingensis' ~ 'AT',
+              X.organism == 'aspergillus japonicus' ~ 'AJ',
+              X.organism == 'aspergillus luchuensis' ~ 'AL',
+              X.organism == 'aspergillus brasiliensis' ~ 'AB'),
+              '_',
+    case_when(X.attribute_package == 'Pathogen.cl' ~ 'CL',
+              X.attribute_package == 'Pathogen.env' & description != 'Environmental (hotspot)' ~ 'EV',
+              description == 'Environmental (hotspot)' ~ 'HS')
+    )) %>% 
+  group_by(X.geo_loc_name, X.collection_date, X.organism, X.attribute_package) %>% 
+  mutate(label2 = paste0(new_name, '_',sprintf("%02d", row_number()))) %>% ungroup ()
+
+df2 <- df %>% 
+  mutate(Iso_source2 = case_when(
+    X.isolation_source == 'uitstrijk oor' ~ 'ear',
+    X.isolation_source == 'Strawberry' ~ 'strawberry',
+    X.isolation_source == 'bloedproduct' ~ 'blood',
+    X.isolation_source == 'bulb waste(azole-containing)' ~ 'bulb waste',
+    X.isolation_source %in% c('Luchtmonster kruipruimte' , "Air sample (indoor air) " , "Indoor air, archive" , "Pinguïns/Indoor Artis" ,  "Indoor air, archive" ,
+      "hotel, room, air" , "Indoor" , "Indoor " , "Library indoor" , "Home, Indoor" , "Indoor environment", "Air in warehouse",'Indoor project','School, Indoor')  ~ 'air, indoor',
+    X.isolation_source == 'oor' ~ 'ear',
+    X.isolation_source %in%c('VI/P',NA,'n/a') ~ 'unknown',
+    X.isolation_source %in%c('CBS119557','CBS122588','schimmel','STAM') ~ 'isolate',
+    X.isolation_source == 'Filter flowkast CBS, 8-1' ~ 'airfilter',
+    X.isolation_source == 'air sampling' ~ 'air',
+    X.isolation_source == 'ROK' ~ 'lung',
+    X.isolation_source == 'House dust' ~ 'house dust',
+    X.isolation_source == 'House Dust' ~ 'house dust',
+    X.isolation_source == 'Groundnut' ~ 'groundnut',
+    X.isolation_source == 'Hyacint' ~ 'hyacinth',
+    X.isolation_source == 'Cowpea' ~ 'cowpea',
+    X.isolation_source == 'Grinded black pepper' ~ 'black pepper',
+    X.isolation_source == 'glasvocht' ~ 'vitreous humor',
+    X.isolation_source == 'punctievocht' ~ 'puncture fluid',
+    X.isolation_source == 'peritoneaalvocht' ~ 'peritoneal fluid',
+    X.isolation_source == 'oog' ~ 'eye',
+    X.isolation_source == 'bronchusaspiraat' ~ 'bronchial wash',
+    X.isolation_source == 'BA' ~ 'bronchial wash',
+    X.isolation_source == 'BL' ~ 'bronchial lavage',
+    X.isolation_source == 'BAL' ~ 'bronchoalveolar lavage',
+    X.isolation_source == 'BAL rok' ~ 'bronchoalveolar lavage',
+    X.isolation_source == 'BR' ~ 'bronchial secretion',
+    X.isolation_source == 'UI' ~ 'skin',
+    X.isolation_source == 'muco' ~ 'sputum',
+    X.isolation_source == 'F' ~ 'feces',
+    X.isolation_source == 'MK' ~ 'mouth/throat lavage',
+    X.isolation_source == 'S' ~ 'sputum',
+    X.isolation_source == 'UI/WD' ~ 'wound',
+    X.isolation_source == 'Carpet dust from school ' ~ 'carpet dust',
+    X.isolation_source == 'UI oor' ~ 'ear',
+    X.isolation_source == 'filter 230D1' ~ 'airfilter',
+    X.sample_name %in% c('ASFU-4192','ASFU-10696') ~ 'hip',
+    X.sample_name %in% c('ASFU-4189') ~ 'thorax skin',
+    X.sample_name %in% c('ASFU-7528') ~ 'synovium',
+    X.sample_name %in% c('ASFU-8336','ASFU-9954') ~ 'lung',
+    X.isolation_source == 'bal' ~ 'bronchoalveolar lavage',
+    T ~ X.isolation_source))
+
+df_out <- df2 %>% 
+  mutate(X.sample_name = label2,
+         X.isolation_source = Iso_source2) %>% 
+  select(-c(new_name,Iso_source2,label2))
+  
+
+
+
+
+ncbi <- read.csv('/rivm/s/puntm/2026_black_aspergillus/data/Pathogen.combined.1.0.tsv',
+                 skip =10,
+                 header = T,
+                 sep = '\t') %>% 
+  mutate_all(as.character) %>% right_join(df_out) %>% 
+  mutate(bioproject_accession = 'PRJNA1476117')
+
+  prefix = 'X.'
+  pattern <- paste0("^", prefix)
+  names(ncbi) <- sub(pattern, "", names(ncbi))
+
+
+
+```
+
+
+# Make SRA metafile
+```{r}
+input_data = here('data')
+
+SRA = read.csv(file = glue::glue('{input_data}/SRA_metadata.txt'),
+                 skip =0,
+                 header = T,nrows = 1,
+                 sep = '\t')
+
+file_names_old = read.csv(file = glue::glue('{input_data}/study_samples_2026.csv')) %>% select(strain,iRODS_Path,read) %>%
+  mutate(filename = basename(iRODS_Path)) %>%  select(-iRODS_Path) %>% left_join(df_out) %>% 
+  select(strain,X.sample_name,filename)%>%
+  rowwise() %>% 
+  mutate(filename_new = gsub("^(.*?)(_S[0-9]+.*)", paste0('',X.sample_name, "\\2"), filename)) %>% 
+  select(filename,filename_new)
+
+
+
+file_names = read.csv(file = glue::glue('{input_data}/study_samples_2026.csv')) %>% select(strain,iRODS_Path,read) %>%
+  mutate(filename = basename(iRODS_Path)) %>%  select(-iRODS_Path) %>%  pivot_wider(names_from = read, values_from = filename) %>%
+  rename(filename = R1, filename2 = R2) %>% left_join(df_out) %>% select(strain,filename,filename2,X.sample_name) %>%
+   rowwise() %>%
+  mutate(filename = gsub("^(.*?)(_S[0-9]+.*)", paste0(X.sample_name, "\\2"), filename),
+         filename2= gsub("^(.*?)(_S[0-9]+.*)", paste0(X.sample_name, "\\2"), filename2))
+         
+
+SRA_info = left_join(ncbi, file_names) %>% 
+  mutate(strain = X.sample_name) %>% select(-X.sample_name) %>% 
+  rename(library_ID = strain) %>% 
+  mutate(title = paste0('DNA-seq of ',organism,': ',description)) %>%
+  mutate(library_strategy= 'WGS',
+         library_source = 'GENOMIC',
+         library_selection = 'RANDOM',
+         library_layout ='paired',
+         platform = 'ILLUMINA',
+         instrument_model = 'NextSeq 2000',
+         design_description = 'Illumina DNA Prep kit was used for library preparation. Genomic DNA was fragmented and tagged with adapters via bead-linked tagmentation.DNA fragments were amplified using 5 cycles of PCR to introduce dual indexes. Libraries were sequenced on an Illumina NextSeq 2000 platform using a 2x150 bp paired-end configuration.',
+         filetype = 'fastq',
+         filename3 = '',
+         filename4 = '',
+         assembly = '',
+         fasta_file= '') %>% 
+  select(sample_name,library_ID, title, library_strategy, library_source,library_selection,library_layout,platform, instrument_model,design_description,filetype,filename,filename2,filename3,filename4,assembly,fasta_file) %>% 
+          mutate(design_description = gsub("[\r\n\t]", " ",design_description)) %>% 
+  mutate(library_ID = sample_name)
+  
+        
+
+subset <- SRA_info %>% slice(1)
+
+
+
+#  
+#file_names2 = read.csv(file = glue::glue('{input_data}/study_samples_2026.csv')) %>% select(iRODS_Path)
+
+```
+
+# Save the file
+```{r}
+dir_res = here::here("results")
+ncbi_out <- ncbi %>% mutate(strain = sample_name)
+
+write_tsv(ncbi_out,file = glue::glue("{dir_res}/ncbi_upload.tsv"))
+#write_tsv(ncbi_cross_ref,file = glue::glue("{dir_res}/ncbi_cross_ref.tsv"))
+openxlsx::write.xlsx(ncbi,file = glue::glue("{dir_res}/ncbi_cross_ref.xlsx"))
+write_tsv(SRA_info,file = glue::glue("{dir_res}/SRA_info.tsv"))
+write_tsv(subset,file = glue::glue("{dir_res}/subset.tsv"),append = F)
+write_tsv(file_names_old,file = glue::glue("{dir_res}/rename.tsv"),append = F)
+#write_tsv(file_names2,file = glue::glue("{dir_res}/sample_locations.txt"),append = F,col_names = F)
+
+
+```
+
+
+# SessionInfo
+```{r}
+sessionInfo()
+```
