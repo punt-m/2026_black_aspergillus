@@ -18,6 +18,7 @@ This script generates the phylogenetic tree from the UFCG output
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
 subdir_name <- "Rscripts/2_Phylogenetic_tree"
+#BiocManager::install("ggtree")
 library(ape)
 library(ggtree)
 library(ggplot2)
@@ -39,7 +40,7 @@ t= read.newick(file = glue::glue('{meta_data}/tree_data/UFCG_tree.nwk'))
 df <- read.csv(glue::glue('{meta_data}/2026_meta_info.csv')) %>% 
   select(-1) 
 
-strain_names = read.csv(file = glue::glue('{meta_data}/seq_data/study_samples_2026.csv')) %>% 
+strain_names = read.csv(file = glue::glue('{meta_data}/study_samples_2026.csv')) %>% 
   select(strain, file_name) %>% distinct()
 meta_data <- left_join(df, strain_names) %>% mutate(strain = case_when(is.na(strain) ~ file_name, T ~ strain ))
 
@@ -61,17 +62,7 @@ labels = data.frame(label = t1$tip.label) %>%
   tidyr::separate(label, sep = '\\|', into = c("species", "file_name"), fill = 'left') %>% 
   left_join(strain_names) %>% 
   # Clean up strain names and handle missing values
-  mutate(strain = case_when(is.na(strain) ~ file_name, TRUE ~ strain)) %>% 
-  mutate(strain = case_when(
-    strain %in% c('none', 'CBS141172', 'CBS_134.48', 'CBS_513.88') ~ species, 
-    TRUE ~ strain
-  )) %>% 
-  # Formatting strings: fix typos and abbreviations
-  mutate(
-    strain = gsub('_', ' ', strain),
-    strain = gsub('DTO-', 'DTO', strain),
-    strain = gsub('tubingenesis', 'tubingensis', strain)
-  )
+  mutate(strain = case_when(is.na(strain) ~ file_name, TRUE ~ strain))
 
 # Update the tree object with finalized labels
 t1$tip.label <- labels$strain
@@ -114,11 +105,11 @@ atub_node   = groups$node[which(groups$node %in% ancestor(p, p1$data$node[p1$dat
 # Final Plot: Assign highlight blocks and labels
 tree_df = data.frame(
   node = c(aniger_node, atub_node), 
-  species = c('A. niger', 'A. tubingensis')
+  lineage = c('A. niger', 'A. tubingensis')
 )
 
 p2 = p1 + 
-  geom_highlight(data = tree_df, aes(node = node, fill = species)) + 
+  geom_highlight(data = tree_df, aes(node = node, fill = lineage)) + 
   new_scale_fill() + 
   geom_tiplab(align = FALSE)
 
