@@ -7,9 +7,6 @@ bcftools view \
     /home/puntm/my_scratch_dir/2026_refbased/all_scaffolds.filteredSNPs.vcf.gz \
     -Oz -o /home/puntm/my_scratch_dir/2026_black_aspergillus/data/ATL_core.vcf.gz
 
-# Note: If you don't want to exclude those samples, just remove the "-S ^..." line completely.
-
-# 2. Next use plink to create table with pairwise comparisons:
 INPUT="/home/puntm/my_scratch_dir/2026_black_aspergillus/data/ATL_core.vcf.gz"
 
 plink \
