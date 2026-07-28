@@ -1,0 +1,95 @@
+---
+title: "Group analysis"
+author: "Maarten Punt"
+date: "`r Sys.time()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+    theme: paper
+    highlight: zenburn
+---
+
+This script generates the MIC distribution plots 
+
+```{r setup, include=FALSE, message=F}
+knitr::opts_chunk$set(echo = TRUE)
+subdir_name <- "Rscripts/8_mosdepth"
+library(here)
+library(data.table)
+library(tidyverse)
+library(janitor)
+library(ggplot2)
+library(patchwork)
+
+data = here::here("data")
+results_path = here::here("results")
+
+```
+
+```{r knit, echo = F,eval=F,warning=F,include=F}
+results_path = here::here("results")
+rmarkdown::render(input = here("scripts", str_c(subdir_name, ".Rmd")), output_dir = results_path)
+```
+
+# Load data
+```{r environmental, echo= F}
+# Pad naar jouw mosdepth-regions output
+bed_files <- list.files(glue::glue("{data}/mosdepth"),full.names = T)
+
+get_regions = function(region_file) {
+  df = fread(region_file,
+  col.names = c("chrom", "start", "end", "depth"))[, `:=`(
+  mid = (start + end) / 2,
+  sample = str_replace(basename(region_file),'\\.regions\\.bed\\.gz','')
+)] }
+
+regions = lapply(bed_files, get_regions)
+
+regions_all <- rbindlist(regions)
+depth_stats = regions_all[,.(mean_depth = mean(depth,na.rm=T)), by = sample]
+
+regions_all <- merge(
+  regions_all,
+  depth_stats,
+  by = "sample"
+)
+
+highlight_regions <- data.table(
+  chrom = c("BLWE01000008", "BLWE01000010"),
+  start = c(581899,  90551),
+  end   = c(585491,  94312)
+)
+regions_all[, depth_norm := depth / mean_depth]
+
+chrom_to_plot <- "BLWE01000008"
+
+dat_plot <- regions_all[chrom == chrom_to_plot]
+hl <- highlight_regions[chrom == chrom_to_plot]
+
+p0 = ggplot(dat_plot, aes(x = mid, y = depth_norm, colour = sample)) +
+  geom_line(alpha = 0.7) +
+  geom_rect(
+    data = hl,
+    aes(xmin = start, xmax = end, ymin = -Inf, ymax = Inf),
+    inherit.aes = FALSE,
+    fill = "red", alpha = 1
+  ) +
+  theme_bw() +
+  labs(
+    title = paste("Normalized coverage with highlight -", chrom_to_plot),
+    x = "Genomic position",
+    y = "Normalized depth"
+  )
+
+
+
+```
+
+
+# SessionInfo
+```{r}
+sessionInfo()
+```
