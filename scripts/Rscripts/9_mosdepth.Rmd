@@ -16,7 +16,7 @@ This script generates the MIC distribution plots
 
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
-subdir_name <- "Rscripts/8_mosdepth"
+subdir_name <- "Rscripts/9_mosdepth"
 library(here)
 library(data.table)
 library(tidyverse)
