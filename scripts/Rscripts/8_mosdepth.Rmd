@@ -12,11 +12,11 @@ output:
     highlight: zenburn
 ---
 
-This script generates the MIC distribution plots 
+This script generates an sequence coverage overview for each sample. Gives some insight in the sequencing quality. 
 
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
-subdir_name <- "Rscripts/9_mosdepth"
+subdir_name <- "Rscripts/8_mosdepth"
 library(here)
 library(data.table)
 library(tidyverse)

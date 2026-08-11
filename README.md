@@ -30,6 +30,10 @@ The markdown scripts to generate the figures presented in the article and the su
  - [`2_Phylogenetic_tree.Rmd`](scripts/Rscripts/2_Phylogenetic_tree.Rmd): Visualizes the phylogenetic tree generated with the UFCG data. 
  - [`3_SNP_based_phylogenetic_tree.Rmd`](scripts/Rscripts/3_SNP_based_phylogenetic_tree.Rmd): Build a SNP-based phylogenetic tree, annotated with MIC data and Cyp51 variant info.
  - [`4_clonal_group_analysis.Rmd`](scripts/Rscripts/4_clonal_group_analysis.Rmd): Identifying clonal groups within the _A. tubingensis_ isolates using the PLINK data.
+ - [`5_cyp51.Rmd`](scripts/Rscripts/5_cyp51.Rmd): extracts the cyp51 mutations found across all variants provided in the variant call file (.vcf.gz).
+ - [`6_GWAS.Rmd`](scripts/Rscripts/6_GWAS.Rmd): reads plink output to generate whole-genome manhattan plots and focus plots for the cyp51a/b genes. Also includes Fst 
+ - [`7_group_analysis.Rmd`](scripts/Rscripts/7_group_analysis.Rmd): Generates summary tables of the R/S split between specimens and fungal lineages.
+ - [`8_mosdepth.Rmd`](scripts/Rscripts/8_mosdepth.Rmd):
 
 The .html-output of all the scripts can be found the [`results`](results/)-folder.
 

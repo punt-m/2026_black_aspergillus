@@ -16,7 +16,7 @@ This script generates summary tables of the R/S split between specimens and fung
 
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
-subdir_name <- "Rscripts/8_group_analysis"
+subdir_name <- "Rscripts/7_group_analysis"
 library(here)
 library(tidyverse)
 library(janitor)
