@@ -6,7 +6,8 @@ _Authors_: Maarten Punt <a href="https://orcid.org/0000-0001-6053-9073" target="
 _Contact_: maarten.punt@rivm.nl<br>
 _Date_: 10-Apr-2026<br>
 
-This code accompanies the manuscript 'Evidence for environmental azole resistance selection in _Aspergillus_ series _Nigri_'. DOI:XXX
+This code accompanies the manuscript 'Azole resistance in _Aspergillus_ series _Nigri_ and possible link with environmental selection route'. DOI:XXX
+Part of the code here is not presented in the manuscript,
 
 ## Description
 This repository contains the bash scripts and Rmd-scripts ([`scripts/`](scripts/)) and functions ([`src/`](src/)) that use files from ([`data/`](data/)) to generate results ([`results/`](results/)). 
@@ -23,15 +24,15 @@ The below scripts were used to generate a phylogenetic trees and mutations profi
  - [`4_SNP_sites.sh`](scripts/4_SNP_sites.sh): Filter VCF data for core SNPs and use PLINK to calculate a pairwise identity-by-descent (IBD) genomic relationship matrix.
 
 
-### Visualization scripts
-The markdown scripts to generate the figures presented in the article and the supplementary data
+### Visualization and processing scripts
+The markdown scripts to generate the figures presented in the article and the supplementary data, script 1-5 and 7 are used in the manuscript.
 
  - [`1_MIC_distributions.Rmd`](scripts/Rscripts/1_MIC_distributions.Rmd): Used to generate the MIC distribution overviews.
  - [`2_Phylogenetic_tree.Rmd`](scripts/Rscripts/2_Phylogenetic_tree.Rmd): Visualizes the phylogenetic tree generated with the UFCG data. 
  - [`3_SNP_based_phylogenetic_tree.Rmd`](scripts/Rscripts/3_SNP_based_phylogenetic_tree.Rmd): Build a SNP-based phylogenetic tree, annotated with MIC data and Cyp51 variant info.
  - [`4_clonal_group_analysis.Rmd`](scripts/Rscripts/4_clonal_group_analysis.Rmd): Identifying clonal groups within the _A. tubingensis_ isolates using the PLINK data.
  - [`5_cyp51.Rmd`](scripts/Rscripts/5_cyp51.Rmd): extracts the cyp51 mutations found across all variants provided in the variant call file (.vcf.gz).
- - [`6_GWAS.Rmd`](scripts/Rscripts/6_GWAS.Rmd): reads plink output to generate whole-genome manhattan plots and focus plots for the cyp51a/b genes. Also includes Fst 
+ - [`6_GWAS.Rmd`](scripts/Rscripts/6_GWAS.Rmd): reads plink output to generate whole-genome manhattan plots and focus plots for the cyp51a/b genes. Also includes Fst analysis.
  - [`7_group_analysis.Rmd`](scripts/Rscripts/7_group_analysis.Rmd): Generates summary tables of the R/S split between specimens and fungal lineages.
  - [`8_mosdepth.Rmd`](scripts/Rscripts/8_mosdepth.Rmd): Generates an sequence coverage overview for each sample. Gives some insight in the sequencing quality. 
 
