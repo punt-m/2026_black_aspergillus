@@ -33,7 +33,7 @@ The markdown scripts to generate the figures presented in the article and the su
  - [`5_cyp51.Rmd`](scripts/Rscripts/5_cyp51.Rmd): extracts the cyp51 mutations found across all variants provided in the variant call file (.vcf.gz).
  - [`6_GWAS.Rmd`](scripts/Rscripts/6_GWAS.Rmd): reads plink output to generate whole-genome manhattan plots and focus plots for the cyp51a/b genes. Also includes Fst 
  - [`7_group_analysis.Rmd`](scripts/Rscripts/7_group_analysis.Rmd): Generates summary tables of the R/S split between specimens and fungal lineages.
- - [`8_mosdepth.Rmd`](scripts/Rscripts/8_mosdepth.Rmd):
+ - [`8_mosdepth.Rmd`](scripts/Rscripts/8_mosdepth.Rmd): Generates an sequence coverage overview for each sample. Gives some insight in the sequencing quality. 
 
 The .html-output of all the scripts can be found the [`results`](results/)-folder.
 
