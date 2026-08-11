@@ -12,11 +12,11 @@ output:
     highlight: zenburn
 ---
 
-This script generates the MIC distribution plots 
+This script generates summary tables of the R/S split between specimens and fungal lineages
 
 ```{r setup, include=FALSE, message=F}
 knitr::opts_chunk$set(echo = TRUE)
-subdir_name <- "Rscripts/7_group_analysis"
+subdir_name <- "Rscripts/8_group_analysis"
 library(here)
 library(tidyverse)
 library(janitor)
@@ -43,6 +43,10 @@ df <- read.csv(glue::glue("{data}/2026_meta_info.csv")) %>%
                              species == 'aspergillus tubingensis' ~ 'ATL',
                              species == 'aspergillus brasiliensis' ~ 'ABL',
                              T ~ NA))
+
+
+df_info <- df %>% 
+  select(specimen_types) %>% group_by(specimen_types) %>% summarise(n(), n()/78,n()/165)
 ```
 
 # Set-up parameters
@@ -128,7 +132,7 @@ vrc_sens <- df_sp %>% filter(vrc <= breakpoints['vrc'] & species =='aspergillus 
 
 # Save the files
 ```{r}
-dir_res = here::here("data/group_analysis")
+dir_res = here::here("results/group_analysis")
 writeLines(env_sp_tub, con = glue::glue("{dir_res}/env.txt"))
 writeLines(cli_sp_tub, con = glue::glue("{dir_res}/cli.txt"))
 
